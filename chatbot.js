@@ -1,74 +1,69 @@
 // ELEMENTS
-const form = document.getElementById('chat-form');
-const input = document.getElementById('user-input');
-const messagesDiv = document.getElementById('messages');
-const honeypot = document.getElementById('honeypot');
-const themeBtn = document.getElementById('toggle-theme');
-const langBtn = document.getElementById('toggle-lang');
+const form      = document.getElementById('chat-form');
+const input     = document.getElementById('user-input');
+const messages  = document.getElementById('messages');
+const honeypot  = document.getElementById('honeypot');
+const themeBtn  = document.getElementById('toggle-theme');
+const langBtn   = document.getElementById('toggle-lang');
 const speechBtn = document.getElementById('speech-btn');
 
 // STATE
 let currentLang = 'en';
-let theme = localStorage.getItem('theme') || 'light';
+let theme       = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-theme', theme);
 themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
-langBtn.textContent = 'ES';
+langBtn.textContent  = 'ES';
 
-// SANITIZER
-function sanitize(str) {
-  return str.replace(/[<>]/g, '');
+// SANITIZE
+const sanitize = str => str.replace(/[<>]/g, '');
+
+// RENDER
+function addMessage(txt, who) {
+  const el = document.createElement('div');
+  el.className = who === 'user' ? 'user-msg' : 'bot-msg';
+  el.textContent = txt;
+  messages.appendChild(el);
+  messages.scrollTop = messages.scrollHeight;
+  if (who === 'bot') speak(txt);
 }
 
-// MESSAGE RENDERER
-function addMessage(text, sender) {
-  const div = document.createElement('div');
-  div.className = sender === 'user' ? 'user-msg' : 'bot-msg';
-  div.textContent = text;
-  messagesDiv.appendChild(div);
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-  if (sender === 'bot') speak(text);
-}
-
-// SIMULATED FALLBACK
-function simulateReply(userText) {
-  const canned = [
-    'Interesting!',
+// FALLBACK
+function simulateReply() {
+  const options = [
+    'That’s cool!',
     'Tell me more…',
-    'I see. Go on.',
-    'How does that make you feel?',
-    'Can you clarify?'
+    'Absolutely.',
+    'Could you clarify?',
+    'I’m listening.'
   ];
   setTimeout(() => {
-    const reply = canned[Math.floor(Math.random() * canned.length)];
-    addMessage(reply, 'bot');
-  }, 800);
+    addMessage(options[Math.floor(Math.random()*options.length)], 'bot');
+  }, 700);
 }
 
-// FORM SUBMISSION
+// SUBMIT
 form.addEventListener('submit', e => {
   e.preventDefault();
-  if (honeypot.value) return; // bot detected
-  const text = sanitize(input.value.trim());
-  if (!text) return;
-  addMessage(text, 'user');
+  if (honeypot.value) return;
+  const txt = sanitize(input.value.trim());
+  if (!txt) return;
+  addMessage(txt, 'user');
   input.value = '';
 
-  // ReCAPTCHA v3 verification + Cloudflare Worker stub
   grecaptcha.ready(() => {
-    grecaptcha.execute('YOUR_SITE_KEY', {action: 'chat'}).then(token => {
+    grecaptcha.execute('YOUR_SITE_KEY', {action:'chat'}).then(token => {
       fetch('https://your-cloudflare-worker.example.com/chat', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({message: text, token})
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({message:txt, token})
       })
-      .then(r => r.json())
-      .then(data => addMessage(data.reply, 'bot'))
-      .catch(() => simulateReply(text));
+      .then(r=>r.json()).then(d=>addMessage(d.reply,'bot'))
+      .catch(simulateReply);
     });
   });
 });
 
-// SPEECH-TO-TEXT
+// STT
 let recognition;
 if ('webkitSpeechRecognition' in window) {
   recognition = new webkitSpeechRecognition();
@@ -78,36 +73,33 @@ if ('webkitSpeechRecognition' in window) {
     form.dispatchEvent(new Event('submit'));
   };
 }
-speechBtn.addEventListener('click', () => {
-  if (recognition) recognition.start();
-});
+speechBtn.addEventListener('click', ()=> recognition && recognition.start());
 
-// TEXT-TO-SPEECH
-function speak(text) {
+// TTS
+function speak(txt) {
   if ('speechSynthesis' in window) {
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = currentLang === 'en' ? 'en-US' : 'es-ES';
-    speechSynthesis.speak(utter);
+    const u = new SpeechSynthesisUtterance(txt);
+    u.lang = currentLang==='en'?'en-US':'es-ES';
+    speechSynthesis.speak(u);
   }
 }
 
 // THEME TOGGLE
 themeBtn.addEventListener('click', () => {
-  theme = theme === 'dark' ? 'light' : 'dark';
+  theme = theme==='dark'?'light':'dark';
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
-  themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  themeBtn.textContent = theme==='dark'?'☀️':'🌙';
 });
 
 // LANGUAGE TOGGLE
 langBtn.addEventListener('click', () => {
-  currentLang = currentLang === 'en' ? 'es' : 'en';
-  langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
-  // update placeholders/buttons
+  currentLang = currentLang==='en'?'es':'en';
+  langBtn.textContent = currentLang==='en'?'ES':'EN';
   document.querySelectorAll('[data-en]').forEach(el => {
     el.textContent = el.getAttribute(`data-${currentLang}`);
   });
   if (recognition) {
-    recognition.lang = currentLang === 'en' ? 'en-US' : 'es-ES';
+    recognition.lang = currentLang==='en'?'en-US':'es-ES';
   }
 });
