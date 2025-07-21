@@ -2,9 +2,9 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Chattia Chatbot</title>
-  <!-- Replace with your ReCAPTCHA v3 site key -->
+  <!-- ReCAPTCHA v3 -->
   <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
   <link rel="stylesheet" href="chatbot.css">
 </head>
@@ -22,15 +22,9 @@
           data-es="Escribe un mensaje"
         >
         <button type="submit" data-en="Send" data-es="Enviar">Send</button>
-        <!-- Honeypot field to trap bots -->
-        <input
-          type="text"
-          id="honeypot"
-          autocomplete="off"
-          tabindex="-1"
-          aria-hidden="true"
-          style="opacity:0;height:0;margin:0;padding:0;border:none;"
-        >
+        <!-- Honeypot field -->
+        <input type="text" id="honeypot" autocomplete="off" tabindex="-1" aria-hidden="true"
+               style="opacity:0;height:0;margin:0;padding:0;border:none;">
       </form>
       <button id="speech-btn" title="Speech to Text">🎤</button>
       <button id="toggle-theme" title="Toggle theme">🌙</button>
