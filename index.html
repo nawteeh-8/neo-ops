@@ -1,37 +1,43 @@
+<!-- chattia/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Enforce CSP: only our CSS + Vue CDN + our JS -->
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="#6A5ACD">
+
+  <!-- CSP: only self + Vue CDN + our API -->
   <meta charset="UTF-8">
   <meta http-equiv="Content-Security-Policy"
-        content="default-src 'none'; 
-                 script-src 'self' https://unpkg.com 'unsafe-eval';
-                 style-src 'self'; 
+        content="default-src 'none';
+                 script-src 'self' https://unpkg.com;
+                 style-src 'self';
                  connect-src 'self' https://api.yourdomain.com;">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Chattia AI Chatbot</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="chattia-app">
     <div class="chat-window">
-      <div class="messages" ref="msgs">
+      <div class="messages" ref="msgsEl">
         <div v-for="(m,i) in messages" :key="i" :class="['msg', m.from]">
           <span class="text">{{ m.text }}</span>
         </div>
       </div>
       <form @submit.prevent="sendMessage" class="input-area">
-        <input type="text" v-model="userInput" 
-               placeholder="Ask me anything…" 
-               required 
-               aria-label="Chat input">
-        <button type="submit">➤</button>
+        <input type="text"
+               v-model="userInput"
+               placeholder="Ask me anything…"
+               required
+               aria-label="Chat input"
+               autofocus>
+        <button type="submit" aria-label="Send message">➤</button>
       </form>
     </div>
   </div>
 
   <!-- Vue 3 global build -->
-  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js" 
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"
           integrity="" crossorigin="anonymous"></script>
   <script src="app.js"></script>
 </body>
