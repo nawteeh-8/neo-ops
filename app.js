@@ -1,45 +1,41 @@
+// chattia/app.js
 (() => {
-  const { createApp, ref, onMounted } = Vue;
+  const { createApp, ref, onMounted, watch, nextTick } = Vue;
 
   createApp({
     setup() {
       const messages  = ref([]);
       const userInput = ref('');
+      const msgsEl    = ref(null);
 
-      // Scroll to bottom on new message
-      const msgsEl = ref(null);
-      onMounted(() => {
-        watch(messages, () => {
-          nextTick(() => {
-            const el = msgsEl.value;
-            if (el) el.scrollTop = el.scrollHeight;
-          });
+      // Auto-scroll when new messages arrive
+      watch(messages, () => {
+        nextTick(() => {
+          const el = msgsEl.value;
+          if (el) el.scrollTop = el.scrollHeight;
         });
       });
 
-      // Send user message → fetch AI reply
+      // Send message & fetch AI response
       async function sendMessage() {
         const text = userInput.value.trim();
         if (!text) return;
-        // Append user msg
-        messages.value.push({ from:'user', text });
+
+        // Append user message
+        messages.value.push({ from: 'user', text });
         userInput.value = '';
-        
-        // Call your backend AI API (must be CORS-enabled & authenticated)
+
         try {
           const resp = await fetch('https://api.yourdomain.com/chat', {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: text })
           });
-          if (!resp.ok) throw new Error('Network error');
-          const data = await resp.json();
-          // Append bot reply
-          messages.value.push({ from:'bot', text: data.reply });
+          if (!resp.ok) throw new Error('Network response not ok');
+          const { reply } = await resp.json();
+          messages.value.push({ from: 'bot', text: reply });
         } catch (e) {
-          messages.value.push({ from:'bot', text: 'Oops, something went wrong.' });
+          messages.value.push({ from: 'bot', text: 'Oops, something went wrong.' });
           console.error(e);
         }
       }
@@ -49,7 +45,9 @@
     template: `
       <div class="chat-window">
         <div class="messages" ref="msgsEl">
-          <div v-for="(m,i) in messages" :key="i" :class="['msg', m.from]">
+          <div v-for="(m,i) in messages"
+               :key="i"
+               :class="['msg', m.from]">
             <span class="text">{{ m.text }}</span>
           </div>
         </div>
