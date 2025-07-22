@@ -34,6 +34,36 @@ closeCtrl.addEventListener('click', () => {
 });
 window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCtrl.click(); });
 
+/* === Dragging, Resizing, Positioning === */
+const chatbot = qs('#chatbot-container');
+const header  = qs('#chatbot-header');
+let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+function drag(e) {
+  e.preventDefault();
+  pos3 = e.clientX;
+  pos4 = e.clientY;
+  document.onmouseup = closeDrag;
+  document.onmousemove =- elementDrag;
+}
+
+function elementDrag(e) {
+  e.preventDefault();
+  pos1 = pos3 - e.clientX;
+  pos2 = pos4 - e.clientY;
+  pos3 = e.clientX;
+  pos4 = e.clientY;
+  chatbot.style.top = `${chatbot.offsetTop - pos2}px`;
+  chatbot.style.left = `${chatbot.offsetLeft - pos1}px`;
+}
+
+function closeDrag() {
+  document.onmouseup = null;
+  document.onmousemove = null;
+}
+
+header.addEventListener('mousedown', drag);
+
 /* === Chatbot Core === */
 const log          = qs('#chat-log');
 const form         = qs('#chatbot-input-row');
