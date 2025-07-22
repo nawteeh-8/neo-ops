@@ -1,61 +1,94 @@
-// chattia/app.js
-(() => {
-  const { createApp, ref, onMounted, watch, nextTick } = Vue;
+'use strict';
 
-  createApp({
-    setup() {
-      const messages  = ref([]);
-      const userInput = ref('');
-      const msgsEl    = ref(null);
+// Short selectors
+const qs = s => document.querySelector(s);
+const qsa = s => document.querySelectorAll(s);
 
-      // Auto-scroll when new messages arrive
-      watch(messages, () => {
-        nextTick(() => {
-          const el = msgsEl.value;
-          if (el) el.scrollTop = el.scrollHeight;
-        });
-      });
+/* === Transliteration & Theme Controls === */
+const langCtrl   = qs('#langCtrl');
+const transNodes = qsa('[data-en]');
+const phNodes    = qsa('[data-en-ph]');
+const humanLab   = qs('#human-label');
+const closeCtrl  = qs('#closeCtrl');
+const themeCtrl  = qs('#themeCtrl');
 
-      // Send message & fetch AI response
-      async function sendMessage() {
-        const text = userInput.value.trim();
-        if (!text) return;
+langCtrl.addEventListener('click', () => {
+  const toES = langCtrl.textContent === 'ES';
+  document.documentElement.lang = toES ? 'es' : 'en';
+  langCtrl.textContent = toES ? 'EN' : 'ES';
+  transNodes.forEach(n => n.textContent = toES ? n.dataset.es : n.dataset.en);
+  phNodes.forEach(n => n.placeholder = toES ? n.dataset.esPh : n.dataset.enPh);
+  humanLab.textContent = toES ? humanLab.dataset.es : humanLab.dataset.en;
+});
 
-        // Append user message
-        messages.value.push({ from: 'user', text });
-        userInput.value = '';
+themeCtrl.addEventListener('click', () => {
+  const isDark = themeCtrl.textContent === 'Dark';
+  document.body.classList.toggle('dark', isDark);
+  themeCtrl.textContent = isDark ? 'Light' : 'Dark';
+});
 
-        try {
-          const resp = await fetch('https://api.yourdomain.com/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text })
-          });
-          if (!resp.ok) throw new Error('Network response not ok');
-          const { reply } = await resp.json();
-          messages.value.push({ from: 'bot', text: reply });
-        } catch (e) {
-          messages.value.push({ from: 'bot', text: 'Oops, something went wrong.' });
-          console.error(e);
-        }
-      }
+// Close handler with fallback
+closeCtrl.addEventListener('click', () => {
+  if (history.length > 1) history.back();
+  else window.location.href = '/';
+});
+window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCtrl.click(); });
 
-      return { messages, userInput, sendMessage, msgsEl };
-    },
-    template: `
-      <div class="chat-window">
-        <div class="messages" ref="msgsEl">
-          <div v-for="(m,i) in messages"
-               :key="i"
-               :class="['msg', m.from]">
-            <span class="text">{{ m.text }}</span>
-          </div>
-        </div>
-        <form @submit.prevent="sendMessage" class="input-area">
-          <input v-model="userInput" placeholder="Ask me anything…" required>
-          <button type="submit">➤</button>
-        </form>
-      </div>
-    `
-  }).mount('#chattia-app');
-})();
+/* === Chatbot Core === */
+const log          = qs('#chat-log');
+const form         = qs('#chatbot-input-row');
+const input        = qs('#chatbot-input');
+const sendBtn      = qs('#chatbot-send');
+const humanCheckbox = qs('#human-check');
+
+// Enable send when human verified
+humanCheckbox.addEventListener('change', () => {
+  sendBtn.disabled = !humanCheckbox.checked;
+});
+
+// Sanitize and escape text
+function sanitize(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function addMsg(text, cls) {
+  const div = document.createElement('div');
+  div.className = `chat-msg ${cls}`;
+  div.innerHTML = sanitize(text);
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+}
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!humanCheckbox.checked) return;
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  addMsg(msg, 'user');
+  input.value = '';
+  sendBtn.disabled = true;
+  addMsg('…', 'bot');
+
+  try {
+    const response = await fetch('https://your-cloudflare-worker.example.com/chat', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'omit',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message: msg })
+    });
+    if (!response.ok) throw new Error(`Server error ${response.status}`);
+    const data = await response.json();
+    log.lastChild.textContent = data.reply || 'No reply.';
+  } catch (err) {
+    log.lastChild.textContent = `Error: ${sanitize(err.message)}`;
+  } finally {
+    sendBtn.disabled = false;
+  }
+});
