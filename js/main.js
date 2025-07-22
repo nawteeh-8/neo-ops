@@ -274,6 +274,9 @@
       document.body.classList.toggle('dark', theme==='dark');
       connector.emit('themeChange', t);
     }
+
+    connector.on('languageChange', setLang);
+    connector.on('themeChange', setTheme);
     document.getElementById('lang-toggle').onclick = ()=>{
       setLang(lang==="en" ? "es" : "en");
       document.getElementById('lang-toggle').textContent = lang==="en" ? "ES" : "EN";
