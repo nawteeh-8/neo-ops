@@ -227,9 +227,13 @@
     }
     // --- FAB HANDLERS ---
     function openContactModal() {
+      let root = document.getElementById('modal-root');
+      if (root.querySelector('.modal-contact')) { root.innerHTML = ''; return; }
       showModal('contact');
     }
     function openJoinModal() {
+      let root = document.getElementById('modal-root');
+      if (root.querySelector('.modal-join')) { root.innerHTML = ''; return; }
       showModal('join');
     }
     function openChatbot() {
@@ -299,7 +303,7 @@
       let root = document.getElementById('modal-root');
       root.innerHTML = '';
       let m = document.createElement('div');
-      m.className = 'modal-backdrop';
+      m.className = 'modal-backdrop modal-' + type;
       m.innerHTML = type==='contact' ? contactModalHTML() : joinModalHTML();
       root.appendChild(m);
       let modal = m.querySelector('.modal-content');
