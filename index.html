@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OPS Online Support</title>
+  <!-- CSP -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src https://cdnjs.cloudflare.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self';">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="components/modals/modal-styles.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPn0IhZ+8bWUE00v5Q"
+        crossorigin="anonymous">
+</head>
+<body>
+  <!-- Header -->
+  <header class="ops-nav" role="navigation">
+    <a href="index.html" class="ops-logo">OPS</a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="pages/business.html">Business Operations</a>
+      <a href="pages/contactcenter.html">Contact Center</a>
+      <a href="pages/itsupport.html">IT Support</a>
+      <a href="pages/professionals.html">Professionals</a>
+    </nav>
+    <div class="toggles">
+      <button id="lang-toggle">ES</button>
+      <button id="theme-toggle">Dark</button>
+    </div>
+  </header>
+
+  <!-- Main cards -->
+  <main class="grid-container" id="grid-container">
+    <!-- Services will be loaded here dynamically -->
+  </main>
+
+  <!-- Desktop FABs -->
+  <div id="fab-container">
+    <!-- FABs will be loaded here dynamically -->
+  </div>
+
+  <!-- Mobile Hamburger FAB -->
+  <button id="burger-fab" aria-label="Menu">
+    <i class="fas fa-bars"></i>
+  </button>
+  <!-- Mobile Bar Menu -->
+  <div id="mobile-bar">
+    <div class="bar-item" onclick="location.href='index.html'">
+      <i class="fas fa-home"></i><span>Home</span>
+    </div>
+    <div class="bar-item" data-modal="chatbotModal">
+      <i class="fas fa-comment-alt"></i><span data-en="Chat" data-es="Chat">Chat</span>
+    </div>
+    <div class="bar-item" id="bar-services">
+      <i class="fas fa-cogs"></i><span data-en="Services" data-es="Servicios">Services</span>
+      <div id="services-menu">
+        <a href="pages/business.html" data-en="Business Operations" data-es="Gestion">Business Ops</a>
+        <a href="pages/contactcenter.html" data-en="Contact Center" data-es="Centro de Contacto">Contact Center</a>
+        <a href="pages/itsupport.html" data-en="IT Support" data-es="Soporte IT">IT Support</a>
+        <a href="pages/professionals.html" data-en="Professionals" data-es="Profesionales">Professionals</a>
+      </div>
+    </div>
+    <div class="bar-item" id="lang-mobile">
+      <i class="fas fa-language"></i><span id="lang-label">ES</span>
+    </div>
+    <div class="bar-item" id="theme-mobile">
+      <i class="fas fa-adjust"></i><span id="theme-label">Dark</span>
+    </div>
+  </div>
+
+  <!-- Modals and scripts omitted for brevity -->
+  <script src="js/main.js"></script>
+  <script src="js/connector.js"></script>
+</body>
+</html>
