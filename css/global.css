@@ -101,14 +101,15 @@ body {
     }
     .toggle-btn:hover { background: var(--clr-accent); }
     /* CARDS */
-    .grid-container {
-      width: min(75rem, 100%);
-      margin-inline: auto;
-      margin-top: 2.8rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-      gap: 1.5rem;
-    }
+.grid-container {
+  width: min(75rem, 100%);
+  margin-inline: auto;
+  margin-left: -10px;
+  margin-top: 2.8rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.5rem;
+}
     .card {
       --grad: var(--clr-primary), var(--clr-accent);
       padding: 1.7rem;
