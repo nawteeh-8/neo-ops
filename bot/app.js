@@ -105,7 +105,7 @@ form.addEventListener('submit', async e => {
 
   try {
     // Replace with your actual Cloudflare worker URL
-    const response = await fetch('./worker.js', {
+    const response = await fetch('worker.js', {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
