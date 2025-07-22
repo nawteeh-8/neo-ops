@@ -1,44 +1,55 @@
-<!-- chattia/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Theme color for mobile browsers -->
-  <meta name="theme-color" content="#6A5ACD">
-
-  <!-- CSP: only self + Vue CDN + our API -->
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>OPS AI Chatbot</title>
+  <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy"
-        content="default-src 'none';
-                 script-src 'self' https://unpkg.com;
-                 style-src 'self';
-                 connect-src 'self' https://api.yourdomain.com;">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Chattia AI Chatbot</title>
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src https://your-cloudflare-worker.example.com; font-src https://use.fontawesome.com;">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css"
+        integrity="sha384-pQqaawzMjYw6pnI/geZqNk93UDXeqp72xVf42hUJgqaBvE1sWBau+XcIIL2uZ2Xa"
+        crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="chattia-app">
-    <div class="chat-window">
-      <div class="messages" ref="msgsEl">
-        <div v-for="(m,i) in messages" :key="i" :class="['msg', m.from]">
-          <span class="text">{{ m.text }}</span>
-        </div>
-      </div>
-      <form @submit.prevent="sendMessage" class="input-area">
-        <input type="text"
-               v-model="userInput"
-               placeholder="Ask me anything…"
-               required
-               aria-label="Chat input"
-               autofocus>
-        <button type="submit" aria-label="Send message">➤</button>
-      </form>
+
+<!-- ---------- CHATBOT HTML ---------- -->
+<div id="chatbot-container" role="dialog" aria-modal="true" aria-labelledby="title">
+  <div id="chatbot-header">
+    <span id="title" data-en="OPS AI Chatbot" data-es="Chatbot OPS AI">OPS AI Chatbot</span>
+    <div>
+      <span id="langCtrl" class="ctrl" aria-label="Toggle Language">ES</span>
+      &nbsp;|&nbsp;
+      <span id="themeCtrl" class="ctrl" aria-label="Toggle Theme">Dark</span>
+      &nbsp;|&nbsp;
+      <button id="closeCtrl" class="ctrl" aria-label="Close Chatbot">&times;</button>
     </div>
   </div>
 
-  <!-- Vue 3 global build -->
-  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"
-          integrity="" crossorigin="anonymous"></script>
-  <script src="app.js"></script>
+  <div id="chat-log" aria-live="polite"></div>
+
+  <div id="chatbot-form-container">
+    <form id="chatbot-input-row" autocomplete="off" novalidate>
+      <input id="chatbot-input" type="text"
+             placeholder="Type your message..."
+             required maxlength="256"
+             data-en-ph="Type your message..."
+             data-es-ph="Escriba su mensaje..."/>
+      <button id="chatbot-send" type="submit" disabled aria-label="Send">
+        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+        <span class="visually-hidden">Send</span>
+      </button>
+    </form>
+    <label class="human-check">
+      <input type="checkbox" id="human-check" aria-required="true"/>
+      <span id="human-label" data-en="I am human" data-es="Soy humano">I am human</span>
+    </label>
+  </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
