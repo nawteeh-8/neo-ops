@@ -244,6 +244,10 @@ body {
     }
     .modal-x:focus, .close-modal:focus { outline: 2px solid var(--clr-accent); }
     /* --- FABs & Mobile --- */
+    .mobile-accordion-nav {
+      display: none;
+    }
+
     .fab-stack {
       position: fixed;
       bottom: 15px;
