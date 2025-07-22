@@ -13,17 +13,17 @@ const closeCtrl  = qs('#closeCtrl');
 const themeCtrl  = qs('#themeCtrl');
 
 langCtrl.addEventListener('click', () => {
-  const toES = langCtrl.textContent === 'ES';
-  document.documentElement.lang = toES ? 'es' : 'en';
-  langCtrl.textContent = toES ? 'EN' : 'ES';
-  transNodes.forEach(n => n.textContent = toES ? n.dataset.es : n.dataset.en);
-  phNodes.forEach(n => n.placeholder = toES ? n.dataset.esPh : n.dataset.enPh);
-  humanLab.textContent = toES ? humanLab.dataset.es : humanLab.dataset.en;
+  const isEn = document.documentElement.lang === 'en';
+  document.documentElement.lang = isEn ? 'es' : 'en';
+  langCtrl.textContent = isEn ? 'ES' : 'EN';
+  transNodes.forEach(n => n.textContent = isEn ? n.dataset.es : n.dataset.en);
+  phNodes.forEach(n => n.placeholder = isEn ? n.dataset.esPh : n.dataset.enPh);
+  humanLab.textContent = isEn ? humanLab.dataset.es : humanLab.dataset.en;
 });
 
 themeCtrl.addEventListener('click', () => {
-  const isDark = themeCtrl.textContent === 'Dark';
-  document.body.classList.toggle('dark', isDark);
+  const isDark = document.body.classList.contains('dark');
+  document.body.classList.toggle('dark');
   themeCtrl.textContent = isDark ? 'Light' : 'Dark';
 });
 

@@ -43,9 +43,17 @@ body.dark{--clr-bg:var(--clr-bg-dark);--clr-tx:var(--clr-tx-dark)}
   font-weight:600;
   font-size:1.1rem;
 }
+#chatbot-header > div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
 .ctrl{cursor:pointer;font-size:.75rem;font-weight:500;user-select:none;opacity:.85;}
 .ctrl:hover{opacity:1;}
 button.ctrl{background:transparent;border:none;color:inherit;padding:0;}
+#closeCtrl {
+  font-size: 1.5rem;
+}
 #chat-log{
   flex:1;
   overflow-y:auto;
