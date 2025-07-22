@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IT Support - OPS Modal</title>
+
+<style>
+  :root {
+    --clr-primary: #00c4ff;
+    --clr-accent: #ff3bdc;
+    --clr-glass: rgba(255,255,255,0.77);
+    --clr-card-shadow: 0 2px 28px #b6b9f7a8, -20px 20px 40px hsl(270 42% 45% / 0.18);
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--clr-glass);
+    color: #251541;
+  }
+  .modal-backdrop {
+    position: fixed;
+    z-index: 1999;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(44,26,73,0.31);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .ops-modal {
+    min-width: 310px;
+    max-width: 490px;
+    width: 96vw;
+    margin-top: 5vh;
+    background: #fff;
+    color: #1a1930;
+    border-radius: 2rem;
+    box-shadow: var(--clr-card-shadow);
+    padding: 2.1rem 2.2rem 1.3rem 2.2rem;
+    position: absolute;
+    left: 50%;
+    top: 12vh;
+    transform: translate(-50%, 0);
+    transition: box-shadow .17s;
+    cursor: default;
+    z-index: 2222;
+    outline: none;
+  }
+  .modal-header {
+    display: flex;
+    gap: 1.3em;
+    align-items: center;
+    margin-bottom: 1em;
+    cursor: move;
+  }
+  .modal-header img.modal-img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 1.2em;
+    border: 2px solid #f5e0ff;
+  }
+  .modal-title {
+    font-size: 1.16em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .modal-content-body {
+    margin-bottom: 1.1em;
+    font-size: 1.05em;
+    line-height: 1.4;
+  }
+  .modal-video {
+    background: #f7f4fb;
+    color: #ab8adc;
+    border-radius: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: center;
+    font-style: italic;
+  }
+  .modal-actions {
+    display: flex;
+    gap: 0.8em;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-top: 1.4em;
+  }
+  .modal-btn {
+    border: none;
+    border-radius: 1.2em;
+    background: #eae6fc;
+    color: #4d1d79;
+    padding: 0.65em 1.4em;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 0.5em;
+    transition: background .17s;
+  }
+  .modal-btn.cta {
+    background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+    color: #fff;
+  }
+  .modal-btn:hover, .modal-btn:focus {
+    background: #f9d4fc;
+    outline: none;
+  }
+  .modal-btn.cta:hover {
+    background: linear-gradient(90deg, var(--clr-accent), var(--clr-primary));
+  }
+  .modal-x {
+    position: absolute;
+    top: 1.1em;
+    right: 1.7em;
+    font-size: 1.8rem;
+    color: var(--clr-accent);
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 3;
+  }
+  .modal-x:focus {
+    outline: 2px solid var(--clr-accent);
+  }
+  ul {
+    margin-bottom: 1.2em;
+    margin-left: 1.3em;
+  }
+  ul li {
+    margin-bottom: 0.4em;
+  }
+</style>
+</head>
+<body>
+  <div class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1" id="modal-root">
+    <div class="ops-modal" tabindex="0">
+      <button class="modal-x" aria-label="Close modal">&times;</button>
+      <div class="modal-header" id="modal-title">
+        <img class="modal-img" src="https://placehold.co/96x96?text=IT" alt="IT Support" />
+        <div><div class="modal-title">IT SUPPORT</div></div>
+      </div>
+      <div class="modal-content-body">
+        Our IT Support services deliver reliable, timely assistance to keep your systems running smoothly and securely: help desk, network monitoring, cybersecurity, and cloud infrastructure management.
+      </div>
+      <div class="modal-video">Video placeholder</div>
+      <ul>
+        <li>24/7 tech support & remote troubleshooting</li>
+        <li>Real-time network & system monitoring</li>
+        <li>Cybersecurity audits, patching, threat detection</li>
+        <li>Cloud infrastructure setup & maintenance</li>
+        <li>NIST, CISA, OPS Core CyberSec compliance</li>
+      </ul>
+      <div class="modal-actions">
+        <a class="modal-btn" href="itsupport.html" target="_blank" rel="noopener noreferrer">Learn More</a>
+        <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
+        <button class="modal-btn cta" id="contact-us-btn">Contact Us</button>
+        <button class="modal-btn cancel-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  (() => {
+    const modalRoot = document.getElementById('modal-root');
+    const modal = modalRoot.querySelector('.ops-modal');
+    const btnClose = modalRoot.querySelector('.modal-x');
+    const btnCancel = modalRoot.querySelector('.cancel-btn');
+    const btnAsk = modalRoot.querySelector('#ask-chattia-btn');
+    const btnContact = modalRoot.querySelector('#contact-us-btn');
+
+    modal.focus();
+
+    function closeModal() {
+      if(window.opener) {
+        window.close();
+      } else {
+        alert('Close logic not implemented for embedded usage.');
+      }
+    }
+
+    btnClose.addEventListener('click', closeModal);
+    btnCancel.addEventListener('click', closeModal);
+    modalRoot.addEventListener('click', e => {
+      if(e.target === modalRoot) closeModal();
+    });
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape') closeModal();
+    });
+
+    btnAsk.addEventListener('click', () => alert('Integrate with chatbot'));
+    btnContact.addEventListener('click', () => alert('Open contact form or modal'));
+
+    function makeDraggable(elem, dragHandle) {
+      let isDown = false, startX = 0, startY = 0;
+      dragHandle = dragHandle || elem;
+      dragHandle.style.cursor = "move";
+      dragHandle.onmousedown = function(e) {
+        isDown = true;
+        elem.classList.add("dragging");
+        startX = e.clientX - elem.getBoundingClientRect().left;
+        startY = e.clientY - elem.getBoundingClientRect().top;
+        document.onmousemove = function(e) {
+          if(!isDown) return;
+          let left = e.clientX - startX;
+          let top = e.clientY - startY;
+          left = Math.max(0, Math.min(left, window.innerWidth - elem.offsetWidth));
+          top = Math.max(0, Math.min(top, window.innerHeight - elem.offsetHeight));
+          elem.style.left = left + "px";
+          elem.style.top = top + "px";
+          elem.style.position = "fixed";
+          elem.style.transform = "none";
+        };
+        document.onmouseup = function() {
+          isDown = false;
+          elem.classList.remove("dragging");
+          document.onmousemove = null;
+          document.onmouseup = null;
+        };
+        return false;
+      };
+    }
+
+    makeDraggable(modal, modal.querySelector('.modal-header'));
+  })();
+</script>
+</body>
+</html>
