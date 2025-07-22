@@ -91,6 +91,7 @@ function addMsg(text, cls) {
   log.scrollTop = log.scrollHeight;
 }
 
+// [end user interaction and AI]
 form.addEventListener('submit', async e => {
   e.preventDefault();
   if (!humanCheckbox.checked) return;
@@ -103,7 +104,8 @@ form.addEventListener('submit', async e => {
   addMsg('…', 'bot');
 
   try {
-    const response = await fetch('https://your-cloudflare-worker.example.com/chat', {
+    // Replace with your actual Cloudflare worker URL
+    const response = await fetch('./worker.js', {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
@@ -122,3 +124,4 @@ form.addEventListener('submit', async e => {
     sendBtn.disabled = false;
   }
 });
+// [end user interaction and AI]
