@@ -24,3 +24,17 @@ class EventEmitter {
 }
 
 const connector = new EventEmitter();
+
+connector.on('langChange', lang => {
+  const iframe = document.querySelector('#chatbot-container iframe');
+  if (iframe) {
+    iframe.contentWindow.postMessage({ type: 'langChange', lang }, '*');
+  }
+});
+
+connector.on('themeChange', theme => {
+  const iframe = document.querySelector('#chatbot-container iframe');
+  if (iframe) {
+    iframe.contentWindow.postMessage({ type: 'themeChange', theme }, '*');
+  }
+});

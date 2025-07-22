@@ -12,32 +12,19 @@ const humanLab   = qs('#human-label');
 const closeCtrl  = qs('#closeCtrl');
 const themeCtrl  = qs('#themeCtrl');
 
-function updateLanguage(lang) {
-    const isEn = lang === 'en';
-    document.documentElement.lang = lang;
-    langCtrl.textContent = isEn ? 'ES' : 'EN';
+window.addEventListener('message', event => {
+  if (event.data.type === 'langChange') {
+    const isEn = event.data.lang === 'en';
+    document.documentElement.lang = isEn ? 'en' : 'es';
+    langCtrl.textContent = isEn ? 'EN' : 'ES';
     transNodes.forEach(n => n.textContent = isEn ? n.dataset.en : n.dataset.es);
     phNodes.forEach(n => n.placeholder = isEn ? n.dataset.enPh : n.dataset.esPh);
     humanLab.textContent = isEn ? humanLab.dataset.en : humanLab.dataset.es;
-}
-
-function updateTheme(theme) {
-    const isDark = theme === 'dark';
+  } else if (event.data.type === 'themeChange') {
+    const isDark = event.data.theme === 'dark';
     document.body.classList.toggle('dark', isDark);
-    themeCtrl.textContent = isDark ? 'Light' : 'Dark';
-}
-
-connector.on('languageChange', updateLanguage);
-connector.on('themeChange', updateTheme);
-
-langCtrl.addEventListener('click', () => {
-    const newLang = document.documentElement.lang === 'en' ? 'es' : 'en';
-    connector.emit('languageChange', newLang);
-});
-
-themeCtrl.addEventListener('click', () => {
-    const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
-    connector.emit('themeChange', newTheme);
+    themeCtrl.textContent = isDark ? 'Dark' : 'Light';
+  }
 });
 
 // Close handler with fallback

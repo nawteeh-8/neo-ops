@@ -233,49 +233,19 @@
       showModal('join');
     }
     function openChatbot() {
-        let existing = document.getElementById('chatbot-modal-backdrop');
-        if (existing) {
-            existing.remove();
-            return;
-        }
-        let c = document.createElement('div');
-        c.id = "chatbot-modal-backdrop";
-        document.body.appendChild(c);
-
-        fetch('bot/chatbot.html')
-            .then(response => response.text())
-            .then(html => {
-                c.innerHTML = html;
-                const chatbotContainer = c.querySelector('#chatbot-container');
-
-                // Load CSS
-                const link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = 'bot/style.css';
-                document.head.appendChild(link);
-
-                // Load JS
-                const script = document.createElement('script');
-                script.src = 'bot/app.js';
-                script.defer = true;
-                document.body.appendChild(script);
-
-                c.onclick = e => {
-                    if (e.target === c) c.remove();
-                };
-                c.querySelector('#closeCtrl').onclick = () => c.remove();
-                document.addEventListener('keydown', function esc(e) {
-                    if (e.key === "Escape") {
-                        c.remove();
-                        document.removeEventListener('keydown', esc);
-                    }
-                }, { once: true });
-                makeDraggable(chatbotContainer, c.querySelector("#chatbot-header"));
-
-                // Emit events to sync theme and language
-                connector.emit('themeChange', theme);
-                connector.emit('languageChange', lang);
-            });
+      let existing = document.getElementById('chatbot-modal-backdrop');
+      if(existing){ existing.remove(); return; }
+      let c = document.createElement('div');
+      c.id = "chatbot-modal-backdrop";
+      c.innerHTML = `
+        <div id="chatbot-container" tabindex="-1" role="dialog" aria-modal="true">
+          <iframe src="bot/chatbot.html" style="width: 100%; height: 100%; border: none;"></iframe>
+        </div>`;
+      document.body.appendChild(c);
+      let chatbotCont = c.querySelector('#chatbot-container');
+      c.onclick = e=>{if(e.target===c)c.remove();}
+      document.addEventListener('keydown', function esc(e) {if(e.key==="Escape"){c.remove();document.removeEventListener('keydown',esc);}}, {once:true});
+      makeDraggable(chatbotCont);
     }
     document.getElementById('fab-chat').onclick = openChatbot;
     document.getElementById('fab-join').onclick = openJoinModal;
@@ -294,20 +264,15 @@
     }, true);
     // Language/Theme (propagate)
     function setLang(l) {
-        lang = l;
-        renderCards();
-        document.getElementById('lang-toggle').textContent = lang === "en" ? "ES" : "EN";
-        document.getElementById('mobile-lang-toggle').textContent = lang === "en" ? "ES" : "EN";
-        connector.emit('languageChange', lang);
-        // Close all modals for sync
-        document.getElementById('modal-root').innerHTML = '';
+      lang = l;
+      renderCards();
+      connector.emit('langChange', l);
+      document.getElementById('modal-root').innerHTML='';
     }
     function setTheme(t) {
-        theme = t;
-        document.body.classList.toggle('dark', theme === 'dark');
-        document.getElementById('theme-toggle').textContent = theme === "light" ? "Dark" : "Light";
-        document.getElementById('mobile-theme-toggle').textContent = theme === "light" ? "Dark" : "Light";
-        connector.emit('themeChange', theme);
+      theme = t;
+      document.body.classList.toggle('dark', theme==='dark');
+      connector.emit('themeChange', t);
     }
 
     connector.on('languageChange', setLang);
