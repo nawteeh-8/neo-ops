@@ -232,26 +232,6 @@
     function openJoinModal() {
       showModal('join');
     }
-    function openChatbot() {
-      if (document.getElementById('chatbot-container')) return;
-      fetch('bot/chatbot.html')
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-          const chatbotContainer = doc.getElementById('chatbot-container');
-          document.body.appendChild(chatbotContainer);
-          const style = document.createElement('link');
-          style.rel = 'stylesheet';
-          style.href = 'bot/style.css';
-          document.head.appendChild(style);
-          const script = document.createElement('script');
-          script.src = 'bot/app.js';
-          script.defer = true;
-          document.body.appendChild(script);
-        });
-    }
-    document.getElementById('fab-chat').onclick = openChatbot;
     document.getElementById('fab-join').onclick = openJoinModal;
     document.getElementById('fab-contact').onclick = openContactModal;
     document.getElementById('mobile-fab-chat').onclick = openChatbot;

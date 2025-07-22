@@ -45,18 +45,58 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     fabs.forEach(fab => {
-        fetch(`fabs/${fab}.html`)
-            .then(response => response.text())
-            .then(html => {
-                const div = document.createElement('div');
-                div.innerHTML = html;
-                fabContainer.appendChild(div);
-                const script = div.querySelector('script');
-                if (script) {
-                    const newScript = document.createElement('script');
-                    newScript.src = script.src;
-                    document.body.appendChild(newScript);
-                }
-            });
+        if (fab === 'chatbot') {
+            const fabBtn = document.getElementById('fab-chat');
+            if (fabBtn) {
+                fabBtn.addEventListener('click', openChatbot);
+            }
+            const mobileFabBtn = document.getElementById('mobile-fab-chat');
+            if (mobileFabBtn) {
+                mobileFabBtn.addEventListener('click', openChatbot);
+            }
+        } else {
+            fetch(`fabs/${fab}.html`)
+                .then(response => response.text())
+                .then(html => {
+                    const div = document.createElement('div');
+                    div.innerHTML = html;
+                    fabContainer.appendChild(div);
+                    const script = div.querySelector('script');
+                    if (script) {
+                        const newScript = document.createElement('script');
+                        newScript.src = script.src;
+                        document.body.appendChild(newScript);
+                    }
+                });
+        }
     });
 });
+
+function openChatbot() {
+    if (document.getElementById('chatbot-container')) {
+        const chatbotContainer = document.getElementById('chatbot-container');
+        chatbotContainer.parentNode.removeChild(chatbotContainer);
+        return;
+    }
+
+    fetch('bot/chatbot.html')
+        .then(res => res.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const chatbotContainer = doc.getElementById('chatbot-container');
+            document.body.appendChild(chatbotContainer);
+
+            if (!document.querySelector('link[href="bot/style.css"]')) {
+                const style = document.createElement('link');
+                style.rel = 'stylesheet';
+                style.href = 'bot/style.css';
+                document.head.appendChild(style);
+            }
+
+            const script = document.createElement('script');
+            script.src = 'bot/app.js';
+            script.defer = true;
+            document.body.appendChild(script);
+        });
+}

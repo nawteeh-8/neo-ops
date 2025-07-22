@@ -27,24 +27,30 @@ themeCtrl.addEventListener('click', () => {
   themeCtrl.textContent = isDark ? 'Light' : 'Dark';
 });
 
-// Close handler with fallback
+// Close handler
 closeCtrl.addEventListener('click', () => {
-  if (history.length > 1) history.back();
-  else window.location.href = '/';
+    const chatbotContainer = qs('#chatbot-container');
+    if (chatbotContainer) {
+        chatbotContainer.parentNode.removeChild(chatbotContainer);
+    }
 });
-window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCtrl.click(); });
+window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        closeCtrl.click();
+    }
+});
 
 /* === Dragging, Resizing, Positioning === */
 const chatbot = qs('#chatbot-container');
-const header  = qs('#chatbot-header');
+const header = qs('#chatbot-header');
 let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
 function drag(e) {
-  e.preventDefault();
-  pos3 = e.clientX;
-  pos4 = e.clientY;
-  document.onmouseup = closeDrag;
-  document.onmousemove =- elementDrag;
+    e.preventDefault();
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDrag;
+    document.onmousemove = elementDrag;
 }
 
 function elementDrag(e) {
@@ -105,7 +111,7 @@ form.addEventListener('submit', async e => {
 
   try {
     // Replace with your actual Cloudflare worker URL
-    const response = await fetch('worker.js', {
+    const response = await fetch('bot/worker.js', {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
