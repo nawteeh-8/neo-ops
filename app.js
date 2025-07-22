@@ -13,17 +13,17 @@ const closeCtrl  = qs('#closeCtrl');
 const themeCtrl  = qs('#themeCtrl');
 
 langCtrl.addEventListener('click', () => {
-  const toES = langCtrl.textContent === 'ES';
-  document.documentElement.lang = toES ? 'es' : 'en';
-  langCtrl.textContent = toES ? 'EN' : 'ES';
-  transNodes.forEach(n => n.textContent = toES ? n.dataset.es : n.dataset.en);
-  phNodes.forEach(n => n.placeholder = toES ? n.dataset.esPh : n.dataset.enPh);
-  humanLab.textContent = toES ? humanLab.dataset.es : humanLab.dataset.en;
+  const isEn = document.documentElement.lang === 'en';
+  document.documentElement.lang = isEn ? 'es' : 'en';
+  langCtrl.textContent = isEn ? 'ES' : 'EN';
+  transNodes.forEach(n => n.textContent = isEn ? n.dataset.es : n.dataset.en);
+  phNodes.forEach(n => n.placeholder = isEn ? n.dataset.esPh : n.dataset.enPh);
+  humanLab.textContent = isEn ? humanLab.dataset.es : humanLab.dataset.en;
 });
 
 themeCtrl.addEventListener('click', () => {
-  const isDark = themeCtrl.textContent === 'Dark';
-  document.body.classList.toggle('dark', isDark);
+  const isDark = document.body.classList.contains('dark');
+  document.body.classList.toggle('dark');
   themeCtrl.textContent = isDark ? 'Light' : 'Dark';
 });
 
@@ -33,6 +33,36 @@ closeCtrl.addEventListener('click', () => {
   else window.location.href = '/';
 });
 window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCtrl.click(); });
+
+/* === Dragging, Resizing, Positioning === */
+const chatbot = qs('#chatbot-container');
+const header  = qs('#chatbot-header');
+let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+function drag(e) {
+  e.preventDefault();
+  pos3 = e.clientX;
+  pos4 = e.clientY;
+  document.onmouseup = closeDrag;
+  document.onmousemove =- elementDrag;
+}
+
+function elementDrag(e) {
+  e.preventDefault();
+  pos1 = pos3 - e.clientX;
+  pos2 = pos4 - e.clientY;
+  pos3 = e.clientX;
+  pos4 = e.clientY;
+  chatbot.style.top = `${chatbot.offsetTop - pos2}px`;
+  chatbot.style.left = `${chatbot.offsetLeft - pos1}px`;
+}
+
+function closeDrag() {
+  document.onmouseup = null;
+  document.onmousemove = null;
+}
+
+header.addEventListener('mousedown', drag);
 
 /* === Chatbot Core === */
 const log          = qs('#chat-log');
