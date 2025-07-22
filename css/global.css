@@ -25,10 +25,12 @@ body::before {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  width: 80%;
-  max-width: 1200px;
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
   z-index: 0;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 /* Glassmorphic card styling */
