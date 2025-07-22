@@ -1,78 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OPS Online Support</title>
-  <!-- CSP -->
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src https://cdnjs.cloudflare.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self';">
+  <title>OPS Unified Portal</title>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
   <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="components/modals/modal-styles.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPn0IhZ+8bWUE00v5Q"
-        crossorigin="anonymous">
+  <link rel="stylesheet" href="css/new-styles.css">
 </head>
 <body>
-  <!-- Header -->
-  <header class="ops-nav" role="navigation">
-    <a href="index.html" class="ops-logo">OPS</a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="pages/business.html">Business Operations</a>
-      <a href="pages/contactcenter.html">Contact Center</a>
-      <a href="pages/itsupport.html">IT Support</a>
-      <a href="pages/professionals.html">Professionals</a>
-    </nav>
+  <!-- NAV -->
+  <nav class="ops-nav" aria-label="OPS Navigation">
+    <span class="ops-logo">OPS</span>
+    <div class="nav-links">
+      <a class="nav-link" href="#">Business Operations</a>
+      <a class="nav-link" href="#">Contact Center</a>
+      <a class="nav-link" href="#">IT Support</a>
+      <a class="nav-link" href="#">Professionals</a>
+    </div>
     <div class="toggles">
-      <button id="lang-toggle">ES</button>
-      <button id="theme-toggle">Dark</button>
+      <button class="toggle-btn" id="lang-toggle">ES</button>
+      <button class="toggle-btn" id="theme-toggle">Dark</button>
     </div>
-  </header>
-
-  <!-- Main cards -->
-  <main class="grid-container" id="grid-container">
-    <!-- Services will be loaded here dynamically -->
-  </main>
-
-  <!-- Desktop FABs -->
-  <div id="fab-container">
-    <!-- FABs will be loaded here dynamically -->
+  </nav>
+  <!-- CARDS GRID -->
+  <div class="grid-container">
+    <div class="card" id="card-ops"></div>
+    <div class="card" id="card-cc"></div>
+    <div class="card" id="card-it"></div>
+    <div class="card" id="card-pro"></div>
   </div>
-
-  <!-- Mobile Hamburger FAB -->
-  <button id="burger-fab" aria-label="Menu">
-    <i class="fas fa-bars"></i>
-  </button>
-  <!-- Mobile Bar Menu -->
-  <div id="mobile-bar">
-    <div class="bar-item" onclick="location.href='index.html'">
-      <i class="fas fa-home"></i><span>Home</span>
-    </div>
-    <div class="bar-item" data-modal="chatbotModal">
-      <i class="fas fa-comment-alt"></i><span data-en="Chat" data-es="Chat">Chat</span>
-    </div>
-    <div class="bar-item" id="bar-services">
-      <i class="fas fa-cogs"></i><span data-en="Services" data-es="Servicios">Services</span>
-      <div id="services-menu">
-        <a href="pages/business.html" data-en="Business Operations" data-es="Gestion">Business Ops</a>
-        <a href="pages/contactcenter.html" data-en="Contact Center" data-es="Centro de Contacto">Contact Center</a>
-        <a href="pages/itsupport.html" data-en="IT Support" data-es="Soporte IT">IT Support</a>
-        <a href="pages/professionals.html" data-en="Professionals" data-es="Profesionales">Professionals</a>
-      </div>
-    </div>
-    <div class="bar-item" id="lang-mobile">
-      <i class="fas fa-language"></i><span id="lang-label">ES</span>
-    </div>
-    <div class="bar-item" id="theme-mobile">
-      <i class="fas fa-adjust"></i><span id="theme-label">Dark</span>
+  <!-- DESKTOP FABs -->
+  <div class="fab-stack">
+    <button class="fab-btn" id="fab-join" title="Join Us"><i class="fa-thin fa-user-plus"></i></button>
+    <button class="fab-btn" id="fab-contact" title="Contact Us"><i class="fa-thin fa-envelope"></i></button>
+    <button class="fab-btn" id="fab-chat" title="Chatbot"><i class="fa-thin fa-comment-alt"></i></button>
+  </div>
+  <!-- MOBILE ACCORDION NAV -->
+  <div class="mobile-accordion-nav">
+    <button class="mobile-accordion-btn" id="mobile-fab-join" title="Join Us"><i class="fa-thin fa-user-plus"></i></button>
+    <button class="mobile-accordion-btn" id="mobile-fab-contact" title="Contact Us"><i class="fa-thin fa-envelope"></i></button>
+    <button class="mobile-accordion-btn" id="mobile-fab-chat" title="Chatbot"><i class="fa-thin fa-comment-alt"></i></button>
+    <button class="mobile-accordion-btn" id="mobile-fab-services" title="Services"><i class="fa-thin fa-cogs"></i></button>
+    <div class="accordion-panel" id="mobile-panel-services">
+      <a href="#">Business Operations</a>
+      <a href="#">Contact Center</a>
+      <a href="#">IT Support</a>
+      <a href="#">Professionals</a>
+      <button id="mobile-fab-home" style="margin-top:0.8em;"><i class="fa-thin fa-home"></i> Home</button>
+      <button id="mobile-lang-toggle" style="margin-top:0.8em;">ES</button>
+      <button id="mobile-theme-toggle">Dark</button>
     </div>
   </div>
-
-  <!-- Modals and scripts omitted for brevity -->
+  <div id="modal-root"></div>
+  <footer>
+    © 2025 OPS Online Support
+  </footer>
   <script src="js/main.js"></script>
   <script src="js/connector.js"></script>
+  <script src="js/new-script.js"></script>
 </body>
 </html>

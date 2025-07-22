@@ -6,19 +6,6 @@ function sanitize(text) {
   return div.innerHTML;
 }
 
-// Toggle Language
-document.getElementById('lang-toggle').addEventListener('click', () => {
-  const toES = document.documentElement.lang !== 'es';
-  document.documentElement.lang = toES ? 'es' : 'en';
-  document.getElementById('lang-toggle').textContent = toES ? 'EN' : 'ES';
-});
-
-// Toggle Theme
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  const dark = document.body.classList.toggle('dark');
-  document.getElementById('theme-toggle').textContent = dark ? 'Light' : 'Dark';
-});
-
 // Modal handling
 document.addEventListener('click', e => {
   const btn = e.target.closest('[data-modal-target]');
