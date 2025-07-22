@@ -26,7 +26,7 @@ body::before {
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   width: 75%;
-  max-width: none;
+  max-width: 200px;
   margin: 0 auto;
   z-index: 0;
   padding: 0 1rem;
