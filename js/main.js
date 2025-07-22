@@ -239,73 +239,13 @@
       c.id = "chatbot-modal-backdrop";
       c.innerHTML = `
         <div id="chatbot-container" tabindex="-1" role="dialog" aria-modal="true">
-          <div id="chatbot-header">
-            <span id="title" data-en="OPS AI Chatbot" data-es="Chatbot OPS AI">${lang==="en"?"OPS AI Chatbot":"Chatbot OPS AI"}</span>
-            <span>
-              <span id="chatbot-lang" class="ctrl">${lang==="en"?"ES":"EN"}</span>
-              &nbsp;|&nbsp;
-              <span id="chatbot-theme" class="ctrl">${theme==="light"?"Dark":"Light"}</span>
-              <button id="chatbot-x" aria-label="Close">×</button>
-            </span>
-          </div>
-          <div id="chat-log" aria-live="polite"></div>
-          <div id="chatbot-form-container">
-            <form id="chatbot-input-row" autocomplete="off">
-              <input id="chatbot-input" type="text" placeholder="${lang==="en"?"Type your message...":"Escriba su mensaje..."}" required maxlength="256">
-              <button id="chatbot-send" type="submit" disabled aria-label="Send">
-                <i class="fas fa-paper-plane"></i>
-              </button>
-            </form>
-            <label class="human-check">
-              <input type="checkbox" id="human-check">
-              <span id="human-label" data-en="I am human" data-es="Soy humano">${lang==="en"?"I am human":"Soy humano"}</span>
-            </label>
-          </div>
+          <iframe src="bot/chatbot.html" style="width: 100%; height: 100%; border: none;"></iframe>
         </div>`;
       document.body.appendChild(c);
-      // Chatbot logic: language/theme propagation
-      let botThemeBtn = c.querySelector('#chatbot-theme');
-      let botLangBtn = c.querySelector('#chatbot-lang');
       let chatbotCont = c.querySelector('#chatbot-container');
       c.onclick = e=>{if(e.target===c)c.remove();}
-      c.querySelector('#chatbot-x').onclick = ()=>c.remove();
       document.addEventListener('keydown', function esc(e) {if(e.key==="Escape"){c.remove();document.removeEventListener('keydown',esc);}}, {once:true});
-      // Theme/Language inside chatbot
-      botThemeBtn.onclick = ()=>{
-        document.body.classList.toggle('dark');
-        theme = document.body.classList.contains('dark') ? "dark" : "light";
-        botThemeBtn.textContent = theme==="light"?"Dark":"Light";
-      };
-      botLangBtn.onclick = ()=>{
-        lang = lang==="en" ? "es" : "en";
-        botLangBtn.textContent = lang==="en" ? "ES" : "EN";
-        c.querySelector('#title').textContent = lang==="en"?"OPS AI Chatbot":"Chatbot OPS AI";
-        c.querySelector('#chatbot-input').placeholder = lang==="en"?"Type your message...":"Escriba su mensaje...";
-        c.querySelector('#human-label').textContent = lang==="en"?"I am human":"Soy humano";
-      };
-      // Chat logic (simulated; integrate backend as needed)
-      let log = c.querySelector('#chat-log');
-      let form = c.querySelector('#chatbot-input-row');
-      let input = c.querySelector('#chatbot-input');
-      let send = c.querySelector('#chatbot-send');
-      let guard = c.querySelector('#human-check');
-      guard.onchange = ()=> send.disabled = !guard.checked;
-      function addMsg(txt,cls){
-        let div = document.createElement('div');
-        div.className = 'chat-msg '+cls;
-        div.textContent = txt;
-        log.appendChild(div);
-        log.scrollTop = log.scrollHeight;
-      }
-      form.onsubmit = async e=>{
-        e.preventDefault();
-        if(!guard.checked)return;
-        let msg = input.value.trim();
-        if(!msg)return;
-        addMsg(msg,'user'); input.value=''; send.disabled=true; addMsg('…','bot');
-        setTimeout(()=>{ log.lastChild.textContent = (lang==="en"?"Simulated reply.":"Respuesta simulada."); send.disabled=false; },800);
-      };
-      makeDraggable(chatbotCont, c.querySelector("#chatbot-header"));
+      makeDraggable(chatbotCont);
     }
     document.getElementById('fab-chat').onclick = openChatbot;
     document.getElementById('fab-join').onclick = openJoinModal;
@@ -326,18 +266,13 @@
     function setLang(l) {
       lang = l;
       renderCards();
-      // propagate open modals/chat
-      let cb = document.getElementById('chatbot-modal-backdrop');
-      if(cb) cb.querySelector('#chatbot-lang').textContent = lang==="en"?"ES":"EN";
-      // Close all modals for sync
+      connector.emit('langChange', l);
       document.getElementById('modal-root').innerHTML='';
     }
     function setTheme(t) {
       theme = t;
       document.body.classList.toggle('dark', theme==='dark');
-      // propagate open chatbot
-      let cb = document.getElementById('chatbot-modal-backdrop');
-      if(cb) cb.querySelector('#chatbot-theme').textContent = theme==="light"?"Dark":"Light";
+      connector.emit('themeChange', t);
     }
     document.getElementById('lang-toggle').onclick = ()=>{
       setLang(lang==="en" ? "es" : "en");
