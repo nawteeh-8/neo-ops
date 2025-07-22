@@ -176,14 +176,13 @@ body {
       left: 0; top: 0; right: 0; bottom: 0;
       background: rgba(44,26,73,0.31);
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
     }
     .ops-modal, .modal-content, #chatbot-container {
       min-width: 310px;
       max-width: 490px;
       width: 96vw;
-      margin-top: 5vh;
       background: #fff;
       color: #1a1930;
       border-radius: 2rem;
@@ -191,8 +190,8 @@ body {
       padding: 2.1rem 2.2rem 1.3rem 2.2rem;
       position: absolute;
       left: 50%;
-      top: 1vh;
-      transform: translate(-50%, 0);
+      top: 50%;
+      transform: translate(-50%, -50%);
       transition: box-shadow .17s;
       cursor: default;
       z-index: 2222;
@@ -298,8 +297,8 @@ body {
       max-width: 490px;
       width: 96vw;
       height: 510px;
-      left: 50%; top: 12vh;
-      transform: translate(-50%, 0);
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
       overflow: hidden;
       display: flex;
       flex-direction: column;
