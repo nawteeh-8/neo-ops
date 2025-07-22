@@ -190,8 +190,8 @@ body {
       padding: 2.1rem 2.2rem 1.3rem 2.2rem;
       position: absolute;
       left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      top: 250px;
+      transform: translate(-50%, 0);
       transition: box-shadow .17s;
       cursor: default;
       z-index: 2222;
