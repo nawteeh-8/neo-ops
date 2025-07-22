@@ -12,19 +12,32 @@ const humanLab   = qs('#human-label');
 const closeCtrl  = qs('#closeCtrl');
 const themeCtrl  = qs('#themeCtrl');
 
+function updateLanguage(lang) {
+    const isEn = lang === 'en';
+    document.documentElement.lang = lang;
+    langCtrl.textContent = isEn ? 'ES' : 'EN';
+    transNodes.forEach(n => n.textContent = isEn ? n.dataset.en : n.dataset.es);
+    phNodes.forEach(n => n.placeholder = isEn ? n.dataset.enPh : n.dataset.esPh);
+    humanLab.textContent = isEn ? humanLab.dataset.en : humanLab.dataset.es;
+}
+
+function updateTheme(theme) {
+    const isDark = theme === 'dark';
+    document.body.classList.toggle('dark', isDark);
+    themeCtrl.textContent = isDark ? 'Light' : 'Dark';
+}
+
+connector.on('languageChange', updateLanguage);
+connector.on('themeChange', updateTheme);
+
 langCtrl.addEventListener('click', () => {
-  const isEn = document.documentElement.lang === 'en';
-  document.documentElement.lang = isEn ? 'es' : 'en';
-  langCtrl.textContent = isEn ? 'ES' : 'EN';
-  transNodes.forEach(n => n.textContent = isEn ? n.dataset.es : n.dataset.en);
-  phNodes.forEach(n => n.placeholder = isEn ? n.dataset.esPh : n.dataset.enPh);
-  humanLab.textContent = isEn ? humanLab.dataset.es : humanLab.dataset.en;
+    const newLang = document.documentElement.lang === 'en' ? 'es' : 'en';
+    connector.emit('languageChange', newLang);
 });
 
 themeCtrl.addEventListener('click', () => {
-  const isDark = document.body.classList.contains('dark');
-  document.body.classList.toggle('dark');
-  themeCtrl.textContent = isDark ? 'Light' : 'Dark';
+    const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+    connector.emit('themeChange', newTheme);
 });
 
 // Close handler with fallback
@@ -34,35 +47,6 @@ closeCtrl.addEventListener('click', () => {
 });
 window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCtrl.click(); });
 
-/* === Dragging, Resizing, Positioning === */
-const chatbot = qs('#chatbot-container');
-const header  = qs('#chatbot-header');
-let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-function drag(e) {
-  e.preventDefault();
-  pos3 = e.clientX;
-  pos4 = e.clientY;
-  document.onmouseup = closeDrag;
-  document.onmousemove =- elementDrag;
-}
-
-function elementDrag(e) {
-  e.preventDefault();
-  pos1 = pos3 - e.clientX;
-  pos2 = pos4 - e.clientY;
-  pos3 = e.clientX;
-  pos4 = e.clientY;
-  chatbot.style.top = `${chatbot.offsetTop - pos2}px`;
-  chatbot.style.left = `${chatbot.offsetLeft - pos1}px`;
-}
-
-function closeDrag() {
-  document.onmouseup = null;
-  document.onmousemove = null;
-}
-
-header.addEventListener('mousedown', drag);
 
 /* === Chatbot Core === */
 const log          = qs('#chat-log');
