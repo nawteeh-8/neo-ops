@@ -237,18 +237,16 @@
       showModal('join');
     }
     function openChatbot() {
-      let existing = document.getElementById('chatbot-modal-backdrop');
+      let existing = document.getElementById('chatbot-container');
       if(existing){ existing.remove(); return; }
-      let c = document.createElement('div');
-      c.id = "chatbot-modal-backdrop";
-      c.innerHTML = `
-        <div id="chatbot-container" tabindex="-1" role="dialog" aria-modal="true">
-          <iframe src="bot/chatbot.html" style="width: 100%; height: 100%; border: none;"></iframe>
-        </div>`;
-      document.body.appendChild(c);
-      let chatbotCont = c.querySelector('#chatbot-container');
-      c.onclick = e=>{if(e.target===c)c.remove();}
-      document.addEventListener('keydown', function esc(e) {if(e.key==="Escape"){c.remove();document.removeEventListener('keydown',esc);}}, {once:true});
+      let chatbotCont = document.createElement('div');
+      chatbotCont.id = "chatbot-container";
+      chatbotCont.setAttribute('tabindex','-1');
+      chatbotCont.setAttribute('role','dialog');
+      chatbotCont.setAttribute('aria-modal','true');
+      chatbotCont.innerHTML = `<iframe src="bot/chatbot.html" style="width:100%;height:100%;border:none;"></iframe>`;
+      document.body.appendChild(chatbotCont);
+      document.addEventListener('keydown', function esc(e){if(e.key==="Escape"){chatbotCont.remove();document.removeEventListener('keydown',esc);}}, {once:true});
       makeDraggable(chatbotCont);
     }
     document.getElementById('fab-chat').onclick = openChatbot;
