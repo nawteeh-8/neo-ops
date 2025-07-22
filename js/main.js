@@ -227,14 +227,10 @@
     }
     // --- FAB HANDLERS ---
     function openContactModal() {
-      let root = document.getElementById('modal-root');
-      if (root.querySelector('.modal-contact')) { root.innerHTML = ''; return; }
-      showModal('contact');
+      window.location.href = 'fabs/contact.html';
     }
     function openJoinModal() {
-      let root = document.getElementById('modal-root');
-      if (root.querySelector('.modal-join')) { root.innerHTML = ''; return; }
-      showModal('join');
+      window.location.href = 'fabs/join.html';
     }
     function openChatbot() {
       let existing = document.getElementById('chatbot-modal-backdrop');
@@ -252,11 +248,7 @@
       makeDraggable(chatbotCont);
     }
     document.getElementById('fab-chat').onclick = openChatbot;
-    document.getElementById('fab-join').onclick = openJoinModal;
-    document.getElementById('fab-contact').onclick = openContactModal;
     document.getElementById('mobile-fab-chat').onclick = openChatbot;
-    document.getElementById('mobile-fab-join').onclick = openJoinModal;
-    document.getElementById('mobile-fab-contact').onclick = openContactModal;
     // Accordion Services
     document.getElementById('mobile-fab-services').onclick = function() {
       document.getElementById('mobile-panel-services').classList.toggle('active');
