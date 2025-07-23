@@ -108,6 +108,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
   gap: 1.5rem;
   justify-content: center;
+  transform: translateX(-10px);
 }
     .card {
       --grad: var(--clr-primary), var(--clr-accent);
