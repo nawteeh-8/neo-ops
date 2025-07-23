@@ -18,7 +18,7 @@
               "Performance metric dashboards & analytics",
               "Remote training & Lean operations"
             ],
-            learn: "business-operations.html"
+            learn: "services/business.html"
           }
         },
         es: {
@@ -38,7 +38,7 @@
               "Cuadros de métricas de rendimiento y análisis",
               "Capacitación remota y operaciones Lean"
             ],
-            learn: "business-operations.html"
+            learn: "services/business.html"
           }
         }
       },
@@ -60,7 +60,7 @@
               "Social media engagement & sentiment tracking",
               "Customer experience analytics & quality monitoring"
             ],
-            learn: "contactcenter.html"
+            learn: "services/contactcenter.html"
           }
         },
         es: {
@@ -80,7 +80,7 @@
               "Interacción en redes sociales y seguimiento de sentimiento",
               "Análisis de experiencia del cliente y monitoreo de calidad"
             ],
-            learn: "contactcenter.html"
+            learn: "services/contactcenter.html"
           }
         }
       },
@@ -102,7 +102,7 @@
               "Cloud infrastructure setup & maintenance",
               "NIST, CISA, OPS Core CyberSec compliance"
             ],
-            learn: "itsupport.html"
+            learn: "services/itsupport.html"
           }
         },
         es: {
@@ -122,7 +122,7 @@
               "Configuración y mantenimiento de infraestructura en la nube",
               "Cumplimiento con NIST, CISA y políticas OPS Core CyberSec"
             ],
-            learn: "itsupport.html"
+            learn: "services/itsupport.html"
           }
         }
       },
@@ -145,7 +145,7 @@
               "OPS-vetted talent with NDA, compliance and role-specific training",
               "Ask AI"
             ],
-            learn: "professionals.html"
+            learn: "services/professionals.html"
           }
         },
         es: {
@@ -166,7 +166,7 @@
               "Talento validado por OPS con NDA, capacitación en cumplimiento y capacitación específica para el rol",
               "Preguntar AI"
             ],
-            learn: "professionals.html"
+            learn: "services/professionals.html"
           }
         }
       }
@@ -206,7 +206,7 @@
             ${data.features.map(i => `<li>${i}</li>`).join("")}
           </ul>
           <div class="modal-actions">
-            <a class="modal-btn" href="${data.learn}" target="_blank">${lang==="en"?"Learn More":"Más Información"}</a>
+            <a class="modal-btn" href="${data.learn}" target="_blank" rel="noopener noreferrer">${lang==="en"?"Learn More":"Más Información"}</a>
             <button class="modal-btn" onclick="alert('Integrate with chatbot')">${lang==="en"?"Ask Chattia":"Preguntar Chattia"}</button>
             <button class="modal-btn cta" id="modal-contact-btn">${lang==="en"?"Contact Us":"Contáctanos"}</button>
             <button class="modal-btn" id="cancel-btn">${lang==="en"?"Cancel":"Cancelar"}</button>
