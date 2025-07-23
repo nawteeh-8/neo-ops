@@ -194,7 +194,8 @@
     if(document.getElementById('card-ops')) {
       renderCards();
     }
-    // --- CARD MODALS (Draggable) ---
+
+// --- CARD MODALS (Draggable) ---
     Object.entries({ops:'ops',cc:'cc',it:'it',pro:'pro'}).forEach(([id,key])=>{
       let card = document.getElementById('card-'+id);
       if(card){
@@ -264,6 +265,7 @@
       document.addEventListener('keydown', function esc(e){if(e.key==="Escape"){chatbotCont.remove();document.removeEventListener('keydown',esc);}}, {once:true});
       makeDraggable(chatbotCont);
     }
+
     let fabChat = document.getElementById('fab-chat');
     if(fabChat) fabChat.onclick = openChatbot;
     let mobileFabChat = document.getElementById('mobile-fab-chat');
