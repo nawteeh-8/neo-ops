@@ -27,9 +27,45 @@
   }
   h1 {
     text-align: center;
-    margin-bottom: 1rem;
+    margin: 0;
     color: var(--clr-primary);
   }
+  .top-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .close-btn {
+    position: absolute;
+    left: 0;
+    font-size: 2rem;
+    line-height: 1;
+    text-decoration: none;
+    color: var(--clr-tx);
+    font-weight: bold;
+  }
+  .close-btn:hover { color: var(--clr-accent-dark); }
+  .btn-stack {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .toggle-btn {
+    background: var(--clr-primary);
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0.36em 0.86em;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.18s;
+  }
+  .toggle-btn:hover { background: var(--clr-accent-dark); }
   .inline-nav {
     display: flex;
     justify-content: center;
@@ -102,10 +138,32 @@
   button.submit-btn:hover {
     background: var(--clr-accent-dark);
   }
+  body.dark {
+    background: #1a1930;
+    color: #fafbfe;
+  }
+  body.dark form {
+    background: #2b2a3d;
+    border-color: #555;
+  }
+  body.dark input,
+  body.dark select,
+  body.dark textarea {
+    background: #1f1e30;
+    border-color: #555;
+    color: #fafbfe;
+  }
 </style>
 </head>
 <body>
-  <h1>Contact Us</h1>
+  <header class="top-header">
+    <a href="../index.html" class="close-btn" title="Exit">&times;</a>
+    <h1>Contact Us</h1>
+    <div class="btn-stack">
+      <button class="toggle-btn" id="langToggle">ES</button>
+      <button class="toggle-btn" id="themeToggle">Dark</button>
+    </div>
+  </header>
   <nav class="inline-nav">
     <a href="../index.html">Home</a>
     <a href="../services/business.html">Business Operations</a>
@@ -177,6 +235,21 @@
       e.preventDefault();
       alert('Contact form submitted!');
       contactForm.reset();
+    });
+
+    const langBtn = document.getElementById('langToggle');
+    const themeBtn = document.getElementById('themeToggle');
+    langBtn.textContent = document.documentElement.lang === 'en' ? 'ES' : 'EN';
+    themeBtn.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
+    langBtn.addEventListener('click', () => {
+      const current = document.documentElement.lang || 'en';
+      const next = current === 'en' ? 'es' : 'en';
+      document.documentElement.lang = next;
+      langBtn.textContent = next === 'en' ? 'ES' : 'EN';
+    });
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      themeBtn.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
     });
   });
 </script>
