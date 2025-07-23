@@ -59,7 +59,6 @@ closeCtrl.addEventListener('click', () => {
 });
 window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCtrl.click(); });
 
-
 /* === Chatbot Core === */
 const log          = qs('#chat-log');
 const form         = qs('#chatbot-input-row');

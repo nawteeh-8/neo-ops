@@ -251,6 +251,13 @@
     }
     document.getElementById('fab-chat').onclick = openChatbot;
     document.getElementById('mobile-fab-chat').onclick = openChatbot;
+    // Listen for close requests from chatbot iframe
+    window.addEventListener('message', event => {
+      if (event.data && event.data.type === 'closeChatbot') {
+        const cont = document.getElementById('chatbot-container');
+        if (cont) cont.remove();
+      }
+    });
     // Accordion Services
     document.getElementById('mobile-fab-services').onclick = function() {
       document.getElementById('mobile-panel-services').classList.toggle('active');
