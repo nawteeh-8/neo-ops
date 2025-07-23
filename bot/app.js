@@ -27,12 +27,12 @@ window.addEventListener('message', event => {
   }
 });
 
-// Close handler with fallback
-closeCtrl.addEventListener('click', () => {
-  if (history.length > 1) history.back();
-  else window.location.href = '/';
-});
-window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCtrl.click(); });
+// Close handler via parent message
+function closeChatbot() {
+  window.parent.postMessage({ type: 'closeChatbot' }, '*');
+}
+closeCtrl.addEventListener('click', closeChatbot);
+window.addEventListener('keydown', e => { if (e.key === 'Escape') closeChatbot(); });
 
 
 /* === Chatbot Core === */
