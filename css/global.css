@@ -104,8 +104,8 @@ body {
 .grid-container {
   width: min(75rem, 100%);
   margin-inline: auto;
-  margin-left: 80px;
-  margin-top: 250px;
+  margin-left: 70px;
+  margin-top: 150px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
   gap: 1.5rem;
