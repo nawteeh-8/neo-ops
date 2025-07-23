@@ -171,8 +171,16 @@
         }
       }
     };
-    let lang = "en";
-    let theme = "light";
+    let lang = localStorage.getItem('ops-lang') || "en";
+    let theme = localStorage.getItem('ops-theme') || "light";
+
+    document.documentElement.setAttribute('lang', lang);
+
+    function applyTheme() {
+      document.body.classList.toggle('dark', theme === 'dark');
+    }
+
+    applyTheme();
     function renderCards() {
       Object.entries({ops:'ops',cc:'cc',it:'it',pro:'pro'}).forEach(([id, key]) => {
         let c = svc[key][lang];
@@ -183,11 +191,16 @@
         `;
       });
     }
-    renderCards();
+    if(document.getElementById('card-ops')) {
+      renderCards();
+    }
     // --- CARD MODALS (Draggable) ---
     Object.entries({ops:'ops',cc:'cc',it:'it',pro:'pro'}).forEach(([id,key])=>{
-      document.getElementById('card-'+id).onclick = ()=>openModal(key);
-      document.getElementById('card-'+id).onkeydown = e=>{if(e.key==="Enter"||e.key===" ")openModal(key);}
+      let card = document.getElementById('card-'+id);
+      if(card){
+        card.onclick = ()=>openModal(key);
+        card.onkeydown = e=>{if(e.key==="Enter"||e.key===" ")openModal(key);};
+      }
     });
     function openModal(key) {
       let data = svc[key][lang].modal;
@@ -213,6 +226,7 @@
           </div>
         </div>`;
       let root = document.getElementById('modal-root');
+      if(!root) return;
       root.innerHTML = '';
       root.appendChild(m);
       let modal = m.querySelector('.ops-modal');
@@ -245,48 +259,74 @@
       document.addEventListener('keydown', function esc(e){if(e.key==="Escape"){chatbotCont.remove();document.removeEventListener('keydown',esc);}}, {once:true});
       makeDraggable(chatbotCont);
     }
-    document.getElementById('fab-chat').onclick = openChatbot;
-    document.getElementById('mobile-fab-chat').onclick = openChatbot;
+    let fabChat = document.getElementById('fab-chat');
+    if(fabChat) fabChat.onclick = openChatbot;
+    let mobileFabChat = document.getElementById('mobile-fab-chat');
+    if(mobileFabChat) mobileFabChat.onclick = openChatbot;
     // Accordion Services
-    document.getElementById('mobile-fab-services').onclick = function() {
-      document.getElementById('mobile-panel-services').classList.toggle('active');
-    };
-    document.body.addEventListener('click', function(e) {
-      if (!e.target.closest('.mobile-accordion-btn') && !e.target.closest('.accordion-panel')) {
-        document.getElementById('mobile-panel-services').classList.remove('active');
-      }
-    }, true);
+    let mobileFabServices = document.getElementById('mobile-fab-services');
+    let mobilePanelServices = document.getElementById('mobile-panel-services');
+    if(mobileFabServices && mobilePanelServices){
+      mobileFabServices.onclick = function() {
+        mobilePanelServices.classList.toggle('active');
+      };
+      document.body.addEventListener('click', function(e) {
+        if (!e.target.closest('.mobile-accordion-btn') && !e.target.closest('.accordion-panel')) {
+          mobilePanelServices.classList.remove('active');
+        }
+      }, true);
+    }
     // Language/Theme (propagate)
     function setLang(l) {
       lang = l;
-      renderCards();
+      if(document.getElementById('card-ops')) renderCards();
+      document.documentElement.setAttribute('lang', lang);
+      localStorage.setItem('ops-lang', l);
       connector.emit('langChange', l);
-      document.getElementById('modal-root').innerHTML='';
+      let modalRoot = document.getElementById('modal-root');
+      if(modalRoot) modalRoot.innerHTML='';
     }
     function setTheme(t) {
       theme = t;
-      document.body.classList.toggle('dark', theme==='dark');
+      applyTheme();
+      localStorage.setItem('ops-theme', t);
       connector.emit('themeChange', t);
     }
 
     connector.on('languageChange', setLang);
     connector.on('themeChange', setTheme);
-    document.getElementById('lang-toggle').onclick = ()=>{
-      setLang(lang==="en" ? "es" : "en");
-      document.getElementById('lang-toggle').textContent = lang==="en" ? "ES" : "EN";
-    };
-    document.getElementById('theme-toggle').onclick = ()=>{
-      setTheme(theme==="light" ? "dark" : "light");
-      document.getElementById('theme-toggle').textContent = theme==="light" ? "Dark" : "Light";
-    };
-    document.getElementById('mobile-lang-toggle').onclick = ()=>{
-      setLang(lang==="en" ? "es" : "en");
-      document.getElementById('mobile-lang-toggle').textContent = lang==="en" ? "ES" : "EN";
-    };
-    document.getElementById('mobile-theme-toggle').onclick = ()=>{
-      setTheme(theme==="light" ? "dark" : "light");
-      document.getElementById('mobile-theme-toggle').textContent = theme==="light" ? "Dark" : "Light";
-    };
+    let langToggle = document.getElementById('lang-toggle');
+    if(langToggle){
+      langToggle.textContent = lang==="en" ? "ES" : "EN";
+      langToggle.onclick = ()=>{
+        setLang(lang==="en" ? "es" : "en");
+        langToggle.textContent = lang==="en" ? "ES" : "EN";
+      };
+    }
+    let themeToggle = document.getElementById('theme-toggle');
+    if(themeToggle){
+      themeToggle.textContent = theme==="light" ? "Dark" : "Light";
+      themeToggle.onclick = ()=>{
+        setTheme(theme==="light" ? "dark" : "light");
+        themeToggle.textContent = theme==="light" ? "Dark" : "Light";
+      };
+    }
+    let mobileLangToggle = document.getElementById('mobile-lang-toggle');
+    if(mobileLangToggle){
+      mobileLangToggle.textContent = lang==="en" ? "ES" : "EN";
+      mobileLangToggle.onclick = ()=>{
+        setLang(lang==="en" ? "es" : "en");
+        mobileLangToggle.textContent = lang==="en" ? "ES" : "EN";
+      };
+    }
+    let mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    if(mobileThemeToggle){
+      mobileThemeToggle.textContent = theme==="light" ? "Dark" : "Light";
+      mobileThemeToggle.onclick = ()=>{
+        setTheme(theme==="light" ? "dark" : "light");
+        mobileThemeToggle.textContent = theme==="light" ? "Dark" : "Light";
+      };
+    }
 
     // --- MODALS: JOIN/CONTACT (Basic, Draggable) ---
     function showModal(type) {
