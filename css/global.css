@@ -126,7 +126,7 @@ body {
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      min-height: 170px;
+      min-height: 150px;
       font-size: 0.93em;
     }
     .card:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 4px 32px #ff3bdc22; }
