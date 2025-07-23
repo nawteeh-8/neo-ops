@@ -238,7 +238,7 @@
       modal.querySelector('#cancel-btn').onclick = close;
       document.addEventListener('keydown', function esc(e) {if(e.key==="Escape"){close();document.removeEventListener('keydown',esc);}}, {once:true});
       modal.querySelector('#modal-contact-btn').onclick = ()=>{openContactModal();close();}
-      makeDraggable(modal);
+      makeDraggable(modal, modal.querySelector('.modal-header'));
     }
     // --- FAB HANDLERS ---
     function openContactModal() {
@@ -351,7 +351,7 @@
       let cancelBtn = modal.querySelector('.submit-button.cancel');
       if(cancelBtn) cancelBtn.onclick = close;
       document.addEventListener('keydown', function esc(e) {if(e.key==="Escape"){close();document.removeEventListener('keydown',esc);}}, {once:true});
-      makeDraggable(modal);
+      makeDraggable(modal, modal.querySelector('.modal-header'));
     }
     // --- Join Modal HTML
     function joinModalHTML() {
