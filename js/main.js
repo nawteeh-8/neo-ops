@@ -222,7 +222,7 @@
           <div class="modal-actions">
             <a class="modal-btn" href="${data.learn}" target="_blank" rel="noopener noreferrer">${lang==="en"?"Learn More":"Más Información"}</a>
             <button class="modal-btn" onclick="alert('Integrate with chatbot')">${lang==="en"?"Ask Chattia":"Preguntar Chattia"}</button>
-            <button class="modal-btn cta" id="modal-contact-btn">${lang==="en"?"Contact Us":"Contáctanos"}</button>
+            <button class="modal-btn cta" id="modal-contact-btn"><i class="fa fa-envelope" aria-hidden="true"></i> ${lang==="en"?"Contact Us":"Contáctanos"}</button>
             <button class="modal-btn" id="cancel-btn">${lang==="en"?"Cancel":"Cancelar"}</button>
           </div>
         </div>`;
@@ -358,7 +358,7 @@
       return `
       <div class="modal-content" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-header">
-          <h3>${lang==="en"?"Join Us":"Únete a Nosotros"}</h3>
+          <h3><i class="fa fa-user-plus" aria-hidden="true"></i> ${lang==="en"?"Join Us":"Únete a Nosotros"}</h3>
           <button class="close-modal" aria-label="Close">&times;</button>
         </div>
         <form id="join-form">
@@ -387,7 +387,7 @@
       return `
       <div class="modal-content" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-header">
-          <h3>${lang==="en"?"Contact Us":"Contáctenos"}</h3>
+          <h3><i class="fa fa-envelope" aria-hidden="true"></i> ${lang==="en"?"Contact Us":"Contáctenos"}</h3>
           <button class="close-modal" aria-label="Close">&times;</button>
         </div>
         <form id="contact-form">
