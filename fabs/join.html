@@ -31,6 +31,25 @@
     margin-bottom: 1rem;
     color: var(--clr-primary);
   }
+  .inline-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: -2px 0 1rem;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .inline-nav a {
+    color: var(--clr-tx);
+    text-decoration: none;
+    padding: 0.2em 0.4em;
+    transition: color 0.2s;
+  }
+  .inline-nav a:hover,
+  .inline-nav a:focus {
+    color: var(--clr-accent-dark);
+    outline: none;
+  }
   form {
     background: #f9f9fd;
     padding: 1.5rem;
@@ -136,7 +155,13 @@
 </head>
 <body>
   <h1>Join Us</h1>
-  <a href="../index.html">Home</a>
+  <nav class="inline-nav">
+    <a href="../index.html">Home</a>
+    <a href="../services/business.html">Business Operations</a>
+    <a href="../services/contactcenter.html">Contact Center</a>
+    <a href="../services/itsupport.html">IT Support</a>
+    <a href="../services/professionals.html">Professionals</a>
+  </nav>
   <form id="joinForm" autocomplete="off" novalidate>
     <div class="form-pairs">
       <div>
@@ -237,7 +262,13 @@
 
     <div class="modal-footer">
       <button type="submit" class="submit-btn">Submit</button>
-      <a href="../index.html" style="margin-left:1rem;">Home</a>
+      <nav class="inline-nav" style="margin-top:1rem;">
+        <a href="../index.html">Home</a>
+        <a href="../services/business.html">Business Operations</a>
+        <a href="../services/contactcenter.html">Contact Center</a>
+        <a href="../services/itsupport.html">IT Support</a>
+        <a href="../services/professionals.html">Professionals</a>
+      </nav>
     </div>
   </form>
 
