@@ -103,12 +103,11 @@ body {
     /* CARDS */
 .grid-container {
   width: min(75rem, 100%);
-  margin-inline: auto;
-  margin-left: 70px;
-  margin-top: 150px;
+  margin: 150px auto 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
   gap: 1.5rem;
+  justify-content: center;
 }
     .card {
       --grad: var(--clr-primary), var(--clr-accent);
@@ -188,10 +187,10 @@ body {
       border-radius: 2rem;
       box-shadow: 0 6px 60px #5e24bb25, 0 0 0 2px #fff1;
       padding: 2.1rem 2.2rem 1.3rem 2.2rem;
-      position: absolute;
+      position: fixed;
       left: 50%;
-      top: 250px;
-      transform: translate(-50%, 0);
+      top: 50%;
+      transform: translate(-50%, -50%);
       transition: box-shadow .17s;
       cursor: default;
       z-index: 2222;
