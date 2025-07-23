@@ -195,7 +195,7 @@
       renderCards();
     }
 
-    // --- CARD MODALS (Draggable) ---
+// --- CARD MODALS (Draggable) ---
     Object.entries({ops:'ops',cc:'cc',it:'it',pro:'pro'}).forEach(([id,key])=>{
       let card = document.getElementById('card-'+id);
       if(card){
