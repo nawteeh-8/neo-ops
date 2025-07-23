@@ -18,7 +18,8 @@ async function handleRequest(request) {
   return new Response(JSON.stringify(response), {
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*', // Allow requests from any origin
+      // Limit CORS to the production domain for security
+      'Access-Control-Allow-Origin': 'https://example.com',
     },
   })
 }

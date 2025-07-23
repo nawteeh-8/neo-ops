@@ -15,4 +15,3 @@ The resulting base64 string is added as the value for the `integrity` attribute.
 ## Files
 - `bot/app.js`
 - `bot/chatbot.html`
-
