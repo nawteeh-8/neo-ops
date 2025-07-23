@@ -12,19 +12,44 @@ const humanLab   = qs('#human-label');
 const closeCtrl  = qs('#closeCtrl');
 const themeCtrl  = qs('#themeCtrl');
 
+let curLang = 'en';
+let curTheme = 'light';
+
 window.addEventListener('message', event => {
   if (event.data.type === 'langChange') {
-    const isEn = event.data.lang === 'en';
+    curLang = event.data.lang;
+    const isEn = curLang === 'en';
     document.documentElement.lang = isEn ? 'en' : 'es';
     langCtrl.textContent = isEn ? 'EN' : 'ES';
     transNodes.forEach(n => n.textContent = isEn ? n.dataset.en : n.dataset.es);
     phNodes.forEach(n => n.placeholder = isEn ? n.dataset.enPh : n.dataset.esPh);
     humanLab.textContent = isEn ? humanLab.dataset.en : humanLab.dataset.es;
   } else if (event.data.type === 'themeChange') {
-    const isDark = event.data.theme === 'dark';
+    curTheme = event.data.theme;
+    const isDark = curTheme === 'dark';
     document.body.classList.toggle('dark', isDark);
     themeCtrl.textContent = isDark ? 'Dark' : 'Light';
   }
+});
+
+// Toggle controls and notify parent
+langCtrl.addEventListener('click', () => {
+  curLang = curLang === 'en' ? 'es' : 'en';
+  window.parent.postMessage({ type: 'langChange', lang: curLang }, '*');
+  const isEn = curLang === 'en';
+  document.documentElement.lang = isEn ? 'en' : 'es';
+  langCtrl.textContent = isEn ? 'EN' : 'ES';
+  transNodes.forEach(n => n.textContent = isEn ? n.dataset.en : n.dataset.es);
+  phNodes.forEach(n => n.placeholder = isEn ? n.dataset.enPh : n.dataset.esPh);
+  humanLab.textContent = isEn ? humanLab.dataset.en : humanLab.dataset.es;
+});
+
+themeCtrl.addEventListener('click', () => {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  window.parent.postMessage({ type: 'themeChange', theme: curTheme }, '*');
+  const isDark = curTheme === 'dark';
+  document.body.classList.toggle('dark', isDark);
+  themeCtrl.textContent = isDark ? 'Dark' : 'Light';
 });
 
 // Close handler with fallback
