@@ -194,6 +194,7 @@
     if(document.getElementById('card-ops')) {
       renderCards();
     }
+
     // --- CARD MODALS (Draggable) ---
     Object.entries({ops:'ops',cc:'cc',it:'it',pro:'pro'}).forEach(([id,key])=>{
       let card = document.getElementById('card-'+id);
@@ -256,9 +257,15 @@
       chatbotCont.setAttribute('aria-modal','true');
       chatbotCont.innerHTML = `<iframe src="bot/chatbot.html" style="width:100%;height:100%;border:none;"></iframe>`;
       document.body.appendChild(chatbotCont);
+      const iframe = chatbotCont.querySelector('iframe');
+      iframe.addEventListener('load', () => {
+        connector.emit('langChange', lang);
+        connector.emit('themeChange', theme);
+      });
       document.addEventListener('keydown', function esc(e){if(e.key==="Escape"){chatbotCont.remove();document.removeEventListener('keydown',esc);}}, {once:true});
       makeDraggable(chatbotCont);
     }
+
     let fabChat = document.getElementById('fab-chat');
     if(fabChat) fabChat.onclick = openChatbot;
     let mobileFabChat = document.getElementById('mobile-fab-chat');
@@ -447,3 +454,11 @@ async function loadModal(id) {
     console.error('Modal load error:', err);
   }
 }
+
+// Initialize UI based on stored preferences
+setLang(lang);
+setTheme(theme);
+document.getElementById('lang-toggle').textContent = lang === 'en' ? 'ES' : 'EN';
+document.getElementById('mobile-lang-toggle').textContent = lang === 'en' ? 'ES' : 'EN';
+document.getElementById('theme-toggle').textContent = theme === 'light' ? 'Dark' : 'Light';
+document.getElementById('mobile-theme-toggle').textContent = theme === 'light' ? 'Dark' : 'Light';
