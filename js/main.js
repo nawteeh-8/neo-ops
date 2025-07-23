@@ -300,8 +300,18 @@
       connector.emit('themeChange', t);
     }
 
-    connector.on('languageChange', setLang);
-    connector.on('themeChange', setTheme);
+    connector.on('langChange', l => { if(l !== lang) setLang(l); });
+    connector.on('themeChange', t => { if(t !== theme) setTheme(t); });
+
+    // Receive updates from chatbot iframe
+    window.addEventListener('message', e => {
+      if(!e.data || !e.data.type) return;
+      if(e.data.type === 'langChange' && e.data.lang) {
+        if(e.data.lang !== lang) setLang(e.data.lang);
+      } else if(e.data.type === 'themeChange' && e.data.theme) {
+        if(e.data.theme !== theme) setTheme(e.data.theme);
+      }
+    });
     let langToggle = document.getElementById('lang-toggle');
     if(langToggle){
       langToggle.textContent = lang==="en" ? "ES" : "EN";
