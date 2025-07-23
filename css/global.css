@@ -201,7 +201,20 @@ body {
       color: #fafbfe;
     }
     .dragging { opacity: 0.98; cursor: move !important; transition: none !important; }
-    .modal-header { display: flex; gap: 1.3em; align-items: center; margin-bottom: 1em; }
+    .modal-header {
+      display: flex;
+      gap: 1.3em;
+      align-items: center;
+      margin: -2.1rem -2.2rem 1em -2.2rem;
+      padding: 1rem 2.2rem;
+      background: linear-gradient(180deg, #f5e8ff, #ececef);
+      border-radius: 2rem 2rem 0 0;
+      border-bottom: 1px solid #ddd;
+    }
+    body.dark .modal-header {
+      background: linear-gradient(180deg, #372559, #2c2b44);
+      border-bottom-color: #444;
+    }
     .modal-header img.modal-img { width: 72px; height: 72px; object-fit: cover; border-radius: 1.2em; border: 2px solid #f5e0ff; }
     .modal-title { font-size: 1.16em; font-weight: 700; text-transform: uppercase; }
     .modal-content-body { margin-bottom: 1.1em; font-size: 1.05em; }
