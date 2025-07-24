@@ -283,6 +283,11 @@
         }
       }, true);
     }
+    function updateNavLinkTexts(){
+      document.querySelectorAll('a[data-en][data-es]').forEach(a=>{
+        a.textContent = lang === 'en' ? a.getAttribute('data-en') : a.getAttribute('data-es');
+      });
+    }
     // Language/Theme (propagate)
     function setLang(l) {
       lang = l;
@@ -290,6 +295,7 @@
       document.documentElement.setAttribute('lang', lang);
       localStorage.setItem('ops-lang', l);
       connector.emit('langChange', l);
+      updateNavLinkTexts();
       let modalRoot = document.getElementById('modal-root');
       if(modalRoot) modalRoot.innerHTML='';
     }
