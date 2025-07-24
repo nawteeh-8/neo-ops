@@ -146,91 +146,98 @@
       <button class="modal-x" aria-label="Close modal">&times;</button>
       <div class="modal-header" id="modal-title">
         <img class="modal-img" src="https://placehold.co/96x96?text=IT" alt="IT Support" />
-        <div><div class="modal-title">IT SUPPORT</div></div>
+        <div><div class="modal-title" data-en="IT SUPPORT" data-es="SOPORTE IT">IT SUPPORT</div></div>
       </div>
-      <div class="modal-content-body">
+      <div class="modal-content-body" data-en="Our IT Support services deliver reliable, timely assistance to keep your systems running smoothly and securely: help desk, network monitoring, cybersecurity, and cloud infrastructure management." data-es="Nuestros servicios de Soporte de TI brindan asistencia confiable y oportuna para mantener sus sistemas funcionando sin problemas y de forma segura. Los servicios incluyen soporte de mesa de ayuda, monitoreo de red, servicios de ciberseguridad y gestión de infraestructura en la nube.">
         Our IT Support services deliver reliable, timely assistance to keep your systems running smoothly and securely: help desk, network monitoring, cybersecurity, and cloud infrastructure management.
       </div>
-      <div class="modal-video">Video placeholder</div>
+      <div class="modal-video" data-en="Video placeholder" data-es="Video placeholder">Video placeholder</div>
       <ul>
-        <li>24/7 tech support & remote troubleshooting</li>
-        <li>Real-time network & system monitoring</li>
-        <li>Cybersecurity audits, patching, threat detection</li>
-        <li>Cloud infrastructure setup & maintenance</li>
-        <li>NIST, CISA, OPS Core CyberSec compliance</li>
+        <li data-en="24/7 tech support & remote troubleshooting" data-es="Soporte técnico 24/7 y solución remota de problemas">24/7 tech support & remote troubleshooting</li>
+        <li data-en="Real-time network & system monitoring" data-es="Monitoreo en tiempo real de red y sistemas">Real-time network & system monitoring</li>
+        <li data-en="Cybersecurity audits, patching, threat detection" data-es="Auditorías de ciberseguridad, parches y detección de amenazas">Cybersecurity audits, patching, threat detection</li>
+        <li data-en="Cloud infrastructure setup & maintenance" data-es="Configuración y mantenimiento de infraestructura en la nube">Cloud infrastructure setup & maintenance</li>
+        <li data-en="NIST, CISA, OPS Core CyberSec compliance" data-es="Cumplimiento con NIST, CISA y políticas OPS Core CyberSec">NIST, CISA, OPS Core CyberSec compliance</li>
       </ul>
       <div class="modal-actions">
-        <a class="modal-btn" href="../services/itsupport.html" target="_blank" rel="noopener noreferrer">Learn More</a>
-        <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
-        <button class="modal-btn cta" id="contact-us-btn"><i class="fa fa-envelope" aria-hidden="true"></i> Contact Us</button>
-        <button class="modal-btn cancel-btn">Cancel</button>
+        <a class="modal-btn" href="../services/itsupport.html" target="_blank" rel="noopener noreferrer" data-en="Learn More" data-es="Más Información">Learn More</a>
+        <button class="modal-btn" id="ask-chattia-btn" data-en="Ask Chattia" data-es="Preguntar Chattia">Ask Chattia</button>
+        <button class="modal-btn cta" id="contact-us-btn" data-en="Contact Us" data-es="Contáctanos"><i class="fa fa-envelope" aria-hidden="true"></i> Contact Us</button>
+        <button class="modal-btn cancel-btn" data-en="Cancel" data-es="Cancelar">Cancel</button>
       </div>
     </div>
   </div>
 
 <script>
-  (() => {
-    const modalRoot = document.getElementById('modal-root');
-    const modal = modalRoot.querySelector('.ops-modal');
-    const btnClose = modalRoot.querySelector('.modal-x');
-    const btnCancel = modalRoot.querySelector('.cancel-btn');
-    const btnAsk = modalRoot.querySelector('#ask-chattia-btn');
-    const btnContact = modalRoot.querySelector('#contact-us-btn');
-
-    modal.focus();
-
-    function closeModal() {
-      if(window.opener) {
-        window.close();
-      } else {
-        alert('Close logic not implemented for embedded usage.');
-      }
+(() => {
+  const lang = localStorage.getItem('ops-lang') || 'en';
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const txt = lang === 'es' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+    if(el.placeholder !== undefined && el.hasAttribute('placeholder')) {
+      el.placeholder = txt;
+    } else {
+      el.textContent = txt;
     }
+  });
 
-    btnClose.addEventListener('click', closeModal);
-    btnCancel.addEventListener('click', closeModal);
-    modalRoot.addEventListener('click', e => {
-      if(e.target === modalRoot) closeModal();
-    });
-    document.addEventListener('keydown', e => {
-      if(e.key === 'Escape') closeModal();
-    });
+  const modalRoot = document.getElementById('modal-root');
+  const modal = modalRoot.querySelector('.ops-modal');
+  const btnClose = modalRoot.querySelector('.modal-x');
+  const btnCancel = modalRoot.querySelector('.cancel-btn');
+  const btnAsk = modalRoot.querySelector('#ask-chattia-btn');
+  const btnContact = modalRoot.querySelector('#contact-us-btn');
 
-    btnAsk.addEventListener('click', () => alert('Integrate with chatbot'));
-    btnContact.addEventListener('click', () => alert('Open contact form or modal'));
+  modal.focus();
 
-    function makeDraggable(elem, dragHandle) {
-      let isDown = false, startX = 0, startY = 0;
-      dragHandle = dragHandle || elem;
-      dragHandle.style.cursor = "move";
-      dragHandle.onmousedown = function(e) {
-        isDown = true;
-        elem.classList.add("dragging");
-        startX = e.clientX - elem.getBoundingClientRect().left;
-        startY = e.clientY - elem.getBoundingClientRect().top;
-        document.onmousemove = function(e) {
-          if(!isDown) return;
-          let left = e.clientX - startX;
-          let top = e.clientY - startY;
-          left = Math.max(0, Math.min(left, window.innerWidth - elem.offsetWidth));
-          top = Math.max(0, Math.min(top, window.innerHeight - elem.offsetHeight));
-          elem.style.left = left + "px";
-          elem.style.top = top + "px";
-          elem.style.position = "fixed";
-          elem.style.transform = "none";
-        };
-        document.onmouseup = function() {
-          isDown = false;
-          elem.classList.remove("dragging");
-          document.onmousemove = null;
-          document.onmouseup = null;
-        };
-        return false;
+  function closeModal() {
+    if (window.opener) {
+      window.close();
+    } else {
+      modalRoot.innerHTML = '';
+    }
+  }
+
+  btnClose.addEventListener('click', closeModal);
+  if(btnCancel) btnCancel.addEventListener('click', closeModal);
+  modalRoot.addEventListener('click', e => { if(e.target === modalRoot) closeModal(); });
+  document.addEventListener('keydown', function esc(e){ if(e.key === 'Escape'){ closeModal(); document.removeEventListener('keydown', esc); } });
+
+  if(btnAsk) btnAsk.addEventListener('click', () => alert('Integrate with chatbot'));
+  if(btnContact) btnContact.addEventListener('click', () => { window.location.href = '../fabs/contact.html'; });
+
+  function makeDraggable(elem, dragHandle) {
+    let isDown = false, startX = 0, startY = 0;
+    dragHandle = dragHandle || elem;
+    dragHandle.style.cursor = 'move';
+    dragHandle.onmousedown = function(e) {
+      isDown = true;
+      elem.classList.add('dragging');
+      startX = e.clientX - elem.getBoundingClientRect().left;
+      startY = e.clientY - elem.getBoundingClientRect().top;
+      document.onmousemove = function(e) {
+        if(!isDown) return;
+        let left = e.clientX - startX;
+        let top = e.clientY - startY;
+        left = Math.max(0, Math.min(left, window.innerWidth - elem.offsetWidth));
+        top = Math.max(0, Math.min(top, window.innerHeight - elem.offsetHeight));
+        elem.style.left = left + 'px';
+        elem.style.top = top + 'px';
+        elem.style.position = 'fixed';
+        elem.style.transform = 'none';
       };
-    }
+      document.onmouseup = function() {
+        isDown = false;
+        elem.classList.remove('dragging');
+        document.onmousemove = null;
+        document.onmouseup = null;
+      };
+      return false;
+    };
+  }
 
-    makeDraggable(modal, modal.querySelector('.modal-header'));
-  })();
+  makeDraggable(modal, modal.querySelector('.modal-header'));
+})();
 </script>
 </body>
 </html>
