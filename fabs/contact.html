@@ -219,6 +219,19 @@
 
       const langBtn = document.getElementById('langToggle');
       const themeBtn = document.getElementById('themeToggle');
+      const interestSelect = document.getElementById('interest');
+
+      // Preselect service from query parameter if valid
+      const serviceParam = new URLSearchParams(location.search).get('service');
+      if (serviceParam) {
+        const option = Array.from(interestSelect.options).find(
+          opt => opt.textContent.trim().toLowerCase() === serviceParam.trim().toLowerCase()
+        );
+        if (option) {
+          interestSelect.value = option.value || option.textContent;
+          contactForm.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
 
       function updateLang(lang) {
         document.querySelectorAll('[data-en]').forEach(el => {
