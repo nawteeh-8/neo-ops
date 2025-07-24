@@ -6,29 +6,26 @@ const qsa = s => document.querySelectorAll(s);
 
 /* === Transliteration & Theme Controls === */
 const langCtrl   = qs('#langCtrl');
-const transNodes = qsa('[data-en]');
-const phNodes    = qsa('[data-en-ph]');
 const humanLab   = qs('#human-label');
 const closeCtrl  = qs('#closeCtrl');
 const themeCtrl  = qs('#themeCtrl');
 
 let curLang = 'en';
 let curTheme = 'light';
+updateLanguage(curLang);
+themeCtrl.textContent = 'Light';
 
 window.addEventListener('message', event => {
   if (event.data.type === 'langChange') {
     curLang = event.data.lang;
-    const isEn = curLang === 'en';
-    document.documentElement.lang = isEn ? 'en' : 'es';
-    langCtrl.textContent = isEn ? 'EN' : 'ES';
-    transNodes.forEach(n => n.textContent = isEn ? n.dataset.en : n.dataset.es);
-    phNodes.forEach(n => n.placeholder = isEn ? n.dataset.enPh : n.dataset.esPh);
-    humanLab.textContent = isEn ? humanLab.dataset.en : humanLab.dataset.es;
+    updateLanguage(curLang);
+    langCtrl.textContent = curLang === 'en' ? 'EN' : 'ES';
+    humanLab.textContent = curLang === 'en' ? humanLab.dataset.en : humanLab.dataset.es;
   } else if (event.data.type === 'themeChange') {
     curTheme = event.data.theme;
-    const isDark = curTheme === 'dark';
-    document.body.classList.toggle('dark', isDark);
-    themeCtrl.textContent = isDark ? 'Dark' : 'Light';
+    if ((curTheme === 'dark') !== document.body.classList.contains('dark')) {
+      toggleTheme();
+    }
   }
 });
 
@@ -37,19 +34,15 @@ langCtrl.addEventListener('click', () => {
   curLang = curLang === 'en' ? 'es' : 'en';
   window.parent.postMessage({ type: 'langChange', lang: curLang }, '*');
   const isEn = curLang === 'en';
-  document.documentElement.lang = isEn ? 'en' : 'es';
+  updateLanguage(curLang);
   langCtrl.textContent = isEn ? 'EN' : 'ES';
-  transNodes.forEach(n => n.textContent = isEn ? n.dataset.en : n.dataset.es);
-  phNodes.forEach(n => n.placeholder = isEn ? n.dataset.enPh : n.dataset.esPh);
   humanLab.textContent = isEn ? humanLab.dataset.en : humanLab.dataset.es;
 });
 
 themeCtrl.addEventListener('click', () => {
   curTheme = curTheme === 'light' ? 'dark' : 'light';
   window.parent.postMessage({ type: 'themeChange', theme: curTheme }, '*');
-  const isDark = curTheme === 'dark';
-  document.body.classList.toggle('dark', isDark);
-  themeCtrl.textContent = isDark ? 'Dark' : 'Light';
+  toggleTheme();
 });
 
 // Close handler with fallback

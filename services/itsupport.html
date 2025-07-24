@@ -121,31 +121,11 @@
   </section>
 
   <script src="itsupport.js"></script>
+  <script src="../js/langthem.js"></script>
   <script>
-    (function() {
-      function setLanguage(lang) {
-        document.documentElement.lang = lang;
-        // Update <title>
-        var titleTag = document.querySelector('title');
-        document.title = titleTag.getAttribute('data-' + lang);
-        // Update all elements with data-en/data-es
-        document.querySelectorAll('[data-en]').forEach(function(el) {
-          var text = el.getAttribute('data-' + lang);
-          if (!text) return;
-          if (el.tagName.toLowerCase() === 'input') {
-            el.placeholder = text;
-          } else if (el.tagName.toLowerCase() === 'img') {
-            el.alt = text;
-          } else {
-            el.textContent = text;
-          }
-        });
-      }
-      document.getElementById('btn-en').addEventListener('click', function() { setLanguage('en'); });
-      document.getElementById('btn-es').addEventListener('click', function() { setLanguage('es'); });
-      // Default to English
-      setLanguage('en');
-    })();
+    document.getElementById('btn-en').addEventListener('click', function() { updateLanguage('en'); });
+    document.getElementById('btn-es').addEventListener('click', function() { updateLanguage('es'); });
+    updateLanguage('en');
   </script>
 </body>
 </html>
