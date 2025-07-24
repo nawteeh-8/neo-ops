@@ -24,10 +24,10 @@
       --clr-accent-dark: #e000be;
       --clr-bg: #ffffff;
       --clr-tx: #333333;
-      --clr-dark-bg: #1a1930;
-      --clr-dark-form: #2b2a3d;
-      --clr-dark-field: #1f1e30;
-      --clr-dark-text: #fafbfe;
+      --clr-dark-bg: #111;
+      --clr-dark-form: #1b1b1b;
+      --clr-dark-field: #000;
+      --clr-dark-text: #fff;
     }
     * {
       box-sizing: border-box;
@@ -214,13 +214,14 @@
     }
     body.dark form {
       background: var(--clr-dark-form);
-      border-color: #555;
+      border-color: #444;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
     }
     body.dark input,
     body.dark select,
     body.dark textarea {
       background: var(--clr-dark-field);
-      border-color: #555;
+      border-color: #444;
       color: var(--clr-dark-text);
     }
   </style>
@@ -343,6 +344,7 @@
   </nav>
   </div>
   </form>
+<script src="../js/theme.js"></script>
 <script src="../js/langthem.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -453,7 +455,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const initialLang = localStorage.getItem('ops-lang') || 'en';
   updateLanguage(initialLang);
   langBtn.textContent = initialLang === 'en' ? 'ES' : 'EN';
-  themeBtn.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
 });
 </script>
 </body>

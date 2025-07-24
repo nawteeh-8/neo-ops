@@ -4,9 +4,9 @@
   --clr-accent:#ff3bdb;
   --clr-accent-dark:#e000be;
   --clr-bg:#ffffff;
-  --clr-bg-dark:#121212;
+  --clr-bg-dark:#111111;
   --clr-tx:#333333;
-  --clr-tx-dark:#f0f0f0;
+  --clr-tx-dark:#ffffff;
 }
 body{
   margin:0;
@@ -28,7 +28,7 @@ body.dark{
 #chatbot-container{
   width:300px;
   height:540px;
-  background:#251541;
+  background:#111;
   border:2px solid var(--clr-accent);
   border-radius:18px;
   box-shadow:0 8px 32px #0006;

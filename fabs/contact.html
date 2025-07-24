@@ -24,10 +24,10 @@
       --clr-accent-dark: #e000be;
       --clr-bg: #fff;
       --clr-tx: #333;
-      --clr-dark-bg: #1a1930;
-      --clr-dark-form: #2b2a3d;
-      --clr-dark-input: #1f1e30;
-      --clr-dark-text: #fafbfe;
+      --clr-dark-bg: #111;
+      --clr-dark-form: #1b1b1b;
+      --clr-dark-input: #000;
+      --clr-dark-text: #fff;
     }
     * { box-sizing: border-box; }
     body {
@@ -135,13 +135,14 @@
     }
     body.dark form {
       background: var(--clr-dark-form);
-      border-color: #555;
+      border-color: #444;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
     }
     body.dark input,
     body.dark select,
     body.dark textarea {
       background: var(--clr-dark-input);
-      border-color: #555;
+      border-color: #444;
       color: var(--clr-dark-text);
     }
   </style>
@@ -213,9 +214,10 @@
       <button type="submit" class="submit-btn" data-i18n="contact-23">Send</button>
     </div>
   </form>
-
+  <script src="../js/theme.js"></script>
   <script src="../js/langthem.js"></script>
   <script>
+    
     document.addEventListener('DOMContentLoaded', () => {
       const contactForm = document.getElementById('contactForm');
       contactForm.addEventListener('submit', e => {
@@ -226,7 +228,6 @@
 
       const langBtn = document.getElementById('langToggle');
       const themeBtn = document.getElementById('themeToggle');
-
       langBtn.addEventListener('click', () => {
         const current = localStorage.getItem('ops-lang') || 'en';
         const next = current === 'en' ? 'es' : 'en';
@@ -234,12 +235,10 @@
         updateLanguage(next);
         langBtn.textContent = next === 'en' ? 'ES' : 'EN';
       });
-
       themeBtn.addEventListener('click', toggleTheme);
 
       // Initialize
-      updateLanguage(localStorage.getItem('ops-lang') || 'en');
-      themeBtn.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
+      updateLanguage(document.documentElement.lang || 'en');
     });
   </script>
 </body>

@@ -324,12 +324,5 @@
     });
   };
 
-  window.toggleTheme = function(){
-    const dark = document.body.classList.toggle('dark');
-    const txt = dark ? 'Light' : 'Dark';
-    ['themeToggle','theme-toggle','mobile-theme-toggle','themeCtrl'].forEach(id=>{
-      const btn = document.getElementById(id);
-      if(btn) btn.textContent = txt;
-    });
-  };
+  // theme toggling handled in theme.js
 })();
