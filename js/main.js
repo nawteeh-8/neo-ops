@@ -248,21 +248,37 @@
       window.location.href = 'fabs/join.html';
     }
     function openChatbot() {
-      let existing = document.getElementById('chatbot-container');
+      let existing = document.getElementById('chatbot-wrapper');
       if(existing){ existing.remove(); return; }
+      let wrapper = document.createElement('div');
+      wrapper.id = 'chatbot-wrapper';
+
       let chatbotCont = document.createElement('div');
       chatbotCont.id = "chatbot-container";
       chatbotCont.setAttribute('tabindex','-1');
       chatbotCont.setAttribute('role','dialog');
       chatbotCont.setAttribute('aria-modal','true');
       chatbotCont.innerHTML = `<iframe src="bot/chatbot.html" style="width:100%;height:100%;border:none;"></iframe>`;
-      document.body.appendChild(chatbotCont);
+      wrapper.appendChild(chatbotCont);
+      document.body.appendChild(wrapper);
+
       const iframe = chatbotCont.querySelector('iframe');
       iframe.addEventListener('load', () => {
         connector.emit('langChange', lang);
         connector.emit('themeChange', theme);
       });
-      document.addEventListener('keydown', function esc(e){if(e.key==="Escape"){chatbotCont.remove();document.removeEventListener('keydown',esc);}}, {once:true});
+
+      function close() {
+        wrapper.remove();
+        document.removeEventListener('keydown', esc);
+        window.removeEventListener('message', onMsg);
+      }
+      function esc(e){ if(e.key==="Escape") close(); }
+      document.addEventListener('keydown', esc);
+      wrapper.addEventListener('click', e => { if(e.target === wrapper) close(); });
+      function onMsg(e){ if(e.data && e.data.type === 'closeChatbot') close(); }
+      window.addEventListener('message', onMsg);
+
       makeDraggable(chatbotCont);
     }
 

@@ -52,12 +52,15 @@ themeCtrl.addEventListener('click', () => {
   themeCtrl.textContent = isDark ? 'Dark' : 'Light';
 });
 
-// Close handler with fallback
+// Close handler - notify parent
 closeCtrl.addEventListener('click', () => {
-  if (history.length > 1) history.back();
-  else window.location.href = '/';
+  window.parent.postMessage({ type: 'closeChatbot' }, '*');
 });
-window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCtrl.click(); });
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    window.parent.postMessage({ type: 'closeChatbot' }, '*');
+  }
+});
 
 /* === Chatbot Core === */
 const log          = qs('#chat-log');

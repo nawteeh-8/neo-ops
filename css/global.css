@@ -170,9 +170,20 @@ body {
     }
     body.dark .card .icon > i { filter: drop-shadow(0 0 2px #00c4ff55); }
     /* --- MODAL BASE --- */
-    .modal-backdrop {
+.modal-backdrop {
       position: fixed;
       z-index: 1999;
+      left: 0; top: 0; right: 0; bottom: 0;
+      background: rgba(44,26,73,0.31);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+
+    /* Backdrop for floating chatbot */
+    #chatbot-wrapper {
+      position: fixed;
+      z-index: 2899;
       left: 0; top: 0; right: 0; bottom: 0;
       background: rgba(44,26,73,0.31);
       display: flex;
@@ -305,8 +316,8 @@ body {
       max-width: 490px;
       width: 96vw;
       height: 510px;
-      background: #fff;
-      color: #1a1930;
+      background: #251541;
+      color: #fafbfe;
       border-radius: 2rem;
       box-shadow: 0 6px 60px #5e24bb25, 0 0 0 2px #fff1;
       padding: 2.1rem 2.2rem 1.3rem 2.2rem;
