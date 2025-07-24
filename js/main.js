@@ -362,6 +362,16 @@
       if(cancelBtn) cancelBtn.onclick = close;
       document.addEventListener('keydown', function esc(e) {if(e.key==="Escape"){close();document.removeEventListener('keydown',esc);}}, {once:true});
       makeDraggable(modal, modal.querySelector('.modal-header'));
+
+      // Attach submit handler for forms inside modal
+      const form = modal.querySelector('form');
+      if(form){
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+          alert(lang === 'en' ? 'Form submitted!' : '¡Formulario enviado!');
+          close();
+        });
+      }
     }
     // --- Join Modal HTML
     function joinModalHTML() {
