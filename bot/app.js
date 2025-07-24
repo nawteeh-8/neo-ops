@@ -1,13 +1,13 @@
 const qs=s=>document.querySelector(s),
       qsa=s=>[...document.querySelectorAll(s)];
 
-/* === Language toggle === */
-const langCtrl   = qs('#langCtrl');
-const humanLab   = qs('#human-label');
-
-/* === Transliteration & Theme Controls === */
-const closeCtrl  = qs('#closeCtrl');
-const themeCtrl  = qs('#themeCtrl');
+/* === Language & Theme Controls === */
+const langCtrl   = qs('#langCtrl'),
+      transNodes = qsa('[data-en]'),
+      phNodes    = qsa('[data-en-ph]'),
+      humanLab   = qs('#human-label'),
+      closeCtrl  = qs('#closeCtrl'),
+      themeCtrl  = qs('#themeCtrl');
 
 let curLang = 'en';
 let curTheme = 'light';
