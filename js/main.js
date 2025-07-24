@@ -173,6 +173,7 @@
     };
     let lang = localStorage.getItem('ops-lang') || "en";
     let theme = localStorage.getItem('ops-theme') || "light";
+    const ALLOWED_ORIGIN = window.location.origin;
 
     document.documentElement.setAttribute('lang', lang);
 
@@ -305,6 +306,7 @@
 
     // Receive updates from chatbot iframe
     window.addEventListener('message', e => {
+      if(e.origin !== ALLOWED_ORIGIN) return;
       if(!e.data || !e.data.type) return;
       if(e.data.type === 'langChange' && e.data.lang) {
         if(e.data.lang !== lang) setLang(e.data.lang);

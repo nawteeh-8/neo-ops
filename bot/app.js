@@ -1,5 +1,8 @@
 'use strict';
 
+// Expected parent origin
+const ALLOWED_ORIGIN = window.location.origin;
+
 // Short selectors
 const qs = s => document.querySelector(s);
 const qsa = s => document.querySelectorAll(s);
@@ -16,6 +19,7 @@ let curLang = 'en';
 let curTheme = 'light';
 
 window.addEventListener('message', event => {
+  if (event.origin !== ALLOWED_ORIGIN) return;
   if (event.data.type === 'langChange') {
     curLang = event.data.lang;
     const isEn = curLang === 'en';
@@ -35,7 +39,7 @@ window.addEventListener('message', event => {
 // Toggle controls and notify parent
 langCtrl.addEventListener('click', () => {
   curLang = curLang === 'en' ? 'es' : 'en';
-  window.parent.postMessage({ type: 'langChange', lang: curLang }, '*');
+  window.parent.postMessage({ type: 'langChange', lang: curLang }, ALLOWED_ORIGIN);
   const isEn = curLang === 'en';
   document.documentElement.lang = isEn ? 'en' : 'es';
   langCtrl.textContent = isEn ? 'EN' : 'ES';
@@ -46,7 +50,7 @@ langCtrl.addEventListener('click', () => {
 
 themeCtrl.addEventListener('click', () => {
   curTheme = curTheme === 'light' ? 'dark' : 'light';
-  window.parent.postMessage({ type: 'themeChange', theme: curTheme }, '*');
+  window.parent.postMessage({ type: 'themeChange', theme: curTheme }, ALLOWED_ORIGIN);
   const isDark = curTheme === 'dark';
   document.body.classList.toggle('dark', isDark);
   themeCtrl.textContent = isDark ? 'Dark' : 'Light';

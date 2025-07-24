@@ -1,5 +1,8 @@
 'use strict';
 
+// Expected origin for the chatbot iframe
+const ALLOWED_ORIGIN = window.location.origin;
+
 class EventEmitter {
     constructor() {
         if (EventEmitter.instance) {
@@ -28,13 +31,13 @@ const connector = new EventEmitter();
 connector.on('langChange', lang => {
   const iframe = document.querySelector('#chatbot-container iframe');
   if (iframe) {
-    iframe.contentWindow.postMessage({ type: 'langChange', lang }, '*');
+    iframe.contentWindow.postMessage({ type: 'langChange', lang }, ALLOWED_ORIGIN);
   }
 });
 
 connector.on('themeChange', theme => {
   const iframe = document.querySelector('#chatbot-container iframe');
   if (iframe) {
-    iframe.contentWindow.postMessage({ type: 'themeChange', theme }, '*');
+    iframe.contentWindow.postMessage({ type: 'themeChange', theme }, ALLOWED_ORIGIN);
   }
 });
