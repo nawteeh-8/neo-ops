@@ -345,6 +345,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const val = el.getAttribute(`data-${lang}`);
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
         el.placeholder = val;
+      } else if (el.tagName === 'IMG') {
+        el.alt = val;
       } else if (el.tagName === 'OPTION') {
         el.textContent = val;
       } else {
