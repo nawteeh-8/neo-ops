@@ -2,14 +2,10 @@ const qs=s=>document.querySelector(s),
       qsa=s=>[...document.querySelectorAll(s)];
 
 /* === Language toggle === */
-const langCtrl   = qs('#langCtrl'),
-      transNodes = qsa('[data-en]'),
-      phNodes    = qsa('[data-en-ph]'),
-      humanLab   = qs('#human-label');
-
-/* === Transliteration & Theme Controls === */
 const langCtrl   = qs('#langCtrl');
 const humanLab   = qs('#human-label');
+
+/* === Transliteration & Theme Controls === */
 const closeCtrl  = qs('#closeCtrl');
 const themeCtrl  = qs('#themeCtrl');
 
@@ -23,7 +19,6 @@ window.addEventListener('message', event => {
     curLang = event.data.lang;
     updateLanguage(curLang);
     langCtrl.textContent = curLang === 'en' ? 'EN' : 'ES';
-    humanLab.textContent = curLang === 'en' ? humanLab.dataset.en : humanLab.dataset.es;
   } else if (event.data.type === 'themeChange') {
     curTheme = event.data.theme;
     if ((curTheme === 'dark') !== document.body.classList.contains('dark')) {
@@ -39,7 +34,6 @@ langCtrl.addEventListener('click', () => {
   const isEn = curLang === 'en';
   updateLanguage(curLang);
   langCtrl.textContent = isEn ? 'EN' : 'ES';
-  humanLab.textContent = isEn ? humanLab.dataset.en : humanLab.dataset.es;
 });
 
 themeCtrl.addEventListener('click', () => {
