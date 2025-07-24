@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Expert services to help professionals thrive.">
+  <meta name="robots" content="index,follow">
   <title data-en="Professional Services | [Your Company]" data-es="Servicios Profesionales | [Su Empresa]">
     Professional Services | Ops Online Support
   </title>
@@ -111,32 +113,6 @@
     </form>
   </section>
 
-  <script src="professionals.js"></script>
-  <script>
-    (function() {
-      function setLanguage(lang) {
-        document.documentElement.lang = lang;
-        // Update <title>
-        var titleTag = document.querySelector('title');
-        document.title = titleTag.getAttribute('data-' + lang);
-        // Update all elements with data-en/data-es
-        document.querySelectorAll('[data-en]').forEach(function(el) {
-          var text = el.getAttribute('data-' + lang);
-          if (!text) return;
-          if (el.tagName.toLowerCase() === 'input') {
-            el.placeholder = text;
-          } else if (el.tagName.toLowerCase() === 'img') {
-            el.alt = text;
-          } else {
-            el.textContent = text;
-          }
-        });
-      }
-      document.getElementById('btn-en').addEventListener('click', function() { setLanguage('en'); });
-      document.getElementById('btn-es').addEventListener('click', function() { setLanguage('es'); });
-      // Default to English
-      setLanguage('en');
-    })();
-  </script>
+  <script src="../js/langTheme.js"></script>
 </body>
 </html>
