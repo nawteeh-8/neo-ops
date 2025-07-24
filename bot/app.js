@@ -7,30 +7,60 @@ const langCtrl   = qs('#langCtrl'),
       phNodes    = qsa('[data-en-ph]'),
       humanLab   = qs('#human-label');
 
-langCtrl.onclick = () => {
-  const toES = langCtrl.textContent === 'ES';
-  document.documentElement.lang = toES ? 'es' : 'en';
-  langCtrl.textContent = toES ? 'EN' : 'ES';
-  transNodes.forEach(node => node.textContent = toES ? node.dataset.es : node.dataset.en);
-  phNodes.forEach(node => node.placeholder  = toES ? node.dataset.esPh : node.dataset.enPh);
-  humanLab.textContent = toES ? humanLab.dataset.es : humanLab.dataset.en;
-};
+/* === Transliteration & Theme Controls === */
+const langCtrl   = qs('#langCtrl');
+const humanLab   = qs('#human-label');
+const closeCtrl  = qs('#closeCtrl');
+const themeCtrl  = qs('#themeCtrl');
 
-/* === Theme toggle === */
-const themeCtrl = qs('#themeCtrl');
-themeCtrl.onclick = () => {
-  const dark = themeCtrl.textContent === 'Dark';
-  document.body.classList.toggle('dark', dark);
-  themeCtrl.textContent = dark ? 'Light' : 'Dark';
-};
+let curLang = 'en';
+let curTheme = 'light';
+updateLanguage(curLang);
+themeCtrl.textContent = 'Light';
 
-/* === Chatbot core === */
-const log   = qs('#chat-log'),
-      form  = qs('#chatbot-input-row'),
-      input = qs('#chatbot-input'),
-      send  = qs('#chatbot-send'),
-      guard = qs('#human-check');
+window.addEventListener('message', event => {
+  if (event.data.type === 'langChange') {
+    curLang = event.data.lang;
+    updateLanguage(curLang);
+    langCtrl.textContent = curLang === 'en' ? 'EN' : 'ES';
+    humanLab.textContent = curLang === 'en' ? humanLab.dataset.en : humanLab.dataset.es;
+  } else if (event.data.type === 'themeChange') {
+    curTheme = event.data.theme;
+    if ((curTheme === 'dark') !== document.body.classList.contains('dark')) {
+      toggleTheme();
+    }
+  }
+});
 
+// Toggle controls and notify parent
+langCtrl.addEventListener('click', () => {
+  curLang = curLang === 'en' ? 'es' : 'en';
+  window.parent.postMessage({ type: 'langChange', lang: curLang }, '*');
+  const isEn = curLang === 'en';
+  updateLanguage(curLang);
+  langCtrl.textContent = isEn ? 'EN' : 'ES';
+  humanLab.textContent = isEn ? humanLab.dataset.en : humanLab.dataset.es;
+});
+
+themeCtrl.addEventListener('click', () => {
+  curTheme = curTheme === 'light' ? 'dark' : 'light';
+  window.parent.postMessage({ type: 'themeChange', theme: curTheme }, '*');
+  toggleTheme();
+});
+
+// Close handler with fallback
+closeCtrl.addEventListener('click', () => {
+  if (history.length > 1) history.back();
+  else window.location.href = '/';
+});
+window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCtrl.click(); });
+
+/* === Chatbot Core === */
+const log          = qs('#chat-log');
+const form         = qs('#chatbot-input-row');
+const input        = qs('#chatbot-input');
+const sendBtn      = qs('#chatbot-send');
+const humanCheckbox = qs('#human-check');
 guard.onchange = () => send.disabled = !guard.checked;
 
 function addMsg(txt,cls){

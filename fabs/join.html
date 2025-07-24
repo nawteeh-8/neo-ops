@@ -334,31 +334,12 @@
         <a href="../services/contactcenter.html" data-en="Contact Center" data-es="Centro de Contacto">Contact Center</a>
         <a href="../services/itsupport.html" data-en="IT Support" data-es="Soporte Técnico">IT Support</a>
         <a href="../services/professionals.html" data-en="Professionals" data-es="Profesionales">Professionals</a>
-      </nav>
-    </div>
+  </nav>
+  </div>
   </form>
+<script src="../js/langthem.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // Toggle language and update all elements with data-en/data-es
-  function updateLanguage(lang) {
-    document.querySelectorAll('[data-en]').forEach(el => {
-      const val = el.getAttribute(`data-${lang}`);
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = val;
-      } else if (el.tagName === 'OPTION') {
-        el.textContent = val;
-      } else {
-        el.textContent = val;
-      }
-    });
-  }
-
-  // Toggle dark/light theme
-  function toggleTheme() {
-    document.body.classList.toggle('dark');
-    document.getElementById('themeToggle').textContent =
-      document.body.classList.contains('dark') ? 'Light' : 'Dark';
-  }
 
   // Section lock/edit state handler
   function toggleSectionState(section, accepted) {
@@ -455,7 +436,6 @@ document.addEventListener('DOMContentLoaded', () => {
   langBtn.addEventListener('click', () => {
     const current = document.documentElement.lang || 'en';
     const next = current === 'en' ? 'es' : 'en';
-    document.documentElement.lang = next;
     updateLanguage(next);
     langBtn.textContent = next === 'en' ? 'ES' : 'EN';
   });
