@@ -123,6 +123,9 @@
   <script src="itsupport.js"></script>
   <script>
     (function() {
+      const storedLang = localStorage.getItem('ops-lang') || 'en';
+      const storedTheme = localStorage.getItem('ops-theme') || 'light';
+      if(storedTheme === 'dark') document.body.classList.add('dark');
       function setLanguage(lang) {
         document.documentElement.lang = lang;
         // Update <title>
@@ -140,11 +143,17 @@
             el.textContent = text;
           }
         });
+        localStorage.setItem('ops-lang', lang);
+        if(window.connector) connector.emit('langChange', lang);
       }
-      document.getElementById('btn-en').addEventListener('click', function() { setLanguage('en'); });
-      document.getElementById('btn-es').addEventListener('click', function() { setLanguage('es'); });
-      // Default to English
-      setLanguage('en');
+      document.getElementById('btn-en').addEventListener('click', function() {
+        setLanguage('en');
+      });
+      document.getElementById('btn-es').addEventListener('click', function() {
+        setLanguage('es');
+      });
+      setLanguage(storedLang);
+      if(window.connector) connector.emit('themeChange', storedTheme);
     })();
   </script>
 </body>

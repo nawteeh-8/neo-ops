@@ -339,6 +339,9 @@
   </form>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  const storedLang = localStorage.getItem('ops-lang') || 'en';
+  const storedTheme = localStorage.getItem('ops-theme') || 'light';
+  if(storedTheme === 'dark') document.body.classList.add('dark');
   // Toggle language and update all elements with data-en/data-es
   function updateLanguage(lang) {
     document.querySelectorAll('[data-en]').forEach(el => {
@@ -355,9 +358,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Toggle dark/light theme
   function toggleTheme() {
-    document.body.classList.toggle('dark');
-    document.getElementById('themeToggle').textContent =
-      document.body.classList.contains('dark') ? 'Light' : 'Dark';
+    const dark = document.body.classList.toggle('dark');
+    document.getElementById('themeToggle').textContent = dark ? 'Light' : 'Dark';
+    localStorage.setItem('ops-theme', dark ? 'dark' : 'light');
+    if(window.connector) connector.emit('themeChange', dark ? 'dark' : 'light');
   }
 
   // Section lock/edit state handler
@@ -453,20 +457,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const langBtn = document.getElementById('langToggle');
   const themeBtn = document.getElementById('themeToggle');
   langBtn.addEventListener('click', () => {
-    const current = document.documentElement.lang || 'en';
-    const next = current === 'en' ? 'es' : 'en';
+    const next = document.documentElement.lang === 'en' ? 'es' : 'en';
     document.documentElement.lang = next;
     updateLanguage(next);
     langBtn.textContent = next === 'en' ? 'ES' : 'EN';
+    localStorage.setItem('ops-lang', next);
+    if(window.connector) connector.emit('langChange', next);
   });
 
   themeBtn.addEventListener('click', toggleTheme);
 
   // Set defaults
-  const initialLang = document.documentElement.lang || 'en';
+  const initialLang = storedLang;
   updateLanguage(initialLang);
+  document.documentElement.lang = initialLang;
   langBtn.textContent = initialLang === 'en' ? 'ES' : 'EN';
-  themeBtn.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
+  themeBtn.textContent = storedTheme === 'dark' ? 'Light' : 'Dark';
+  if(window.connector) {
+    connector.emit('langChange', initialLang);
+    connector.emit('themeChange', storedTheme);
+  }
 });
 </script>
 </body>
