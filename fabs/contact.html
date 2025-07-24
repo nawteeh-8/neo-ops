@@ -20,7 +20,7 @@
       --clr-tx: #333;
       --clr-dark-bg: #1a1930;
       --clr-dark-form: #2b2a3d;
-      --clr-dark-field: #1f1e30;
+      --clr-dark-input: #1f1e30;
       --clr-dark-text: #fafbfe;
     }
     * { box-sizing: border-box; }
@@ -31,14 +31,10 @@
       margin: 0; padding: 1rem;
       width: 80%;
       max-width: 600px;
-      margin-left: auto; margin-right: auto;
+      margin-inline: auto;
       transition: background 0.3s, color 0.3s;
     }
-    h1 {
-      text-align: center;
-      margin: 0;
-      color: var(--clr-primary);
-    }
+    h1 { text-align: center; margin: 0; color: var(--clr-primary); }
     .top-header {
       position: relative;
       display: flex;
@@ -54,7 +50,6 @@
       color: var(--clr-tx);
       font-weight: bold;
     }
-    .close-btn:hover { color: var(--clr-accent-dark); }
     .btn-stack {
       position: absolute;
       right: 0;
@@ -71,27 +66,18 @@
       font-weight: bold;
       font-size: 0.9rem;
       cursor: pointer;
-      transition: background 0.18s;
     }
-    .toggle-btn:hover { background: var(--clr-accent-dark); }
     .inline-nav {
       display: flex;
       justify-content: center;
       gap: 1rem;
-      margin: -2px 0 1rem;
+      margin-bottom: 1rem;
       font-size: 0.9rem;
       flex-wrap: wrap;
     }
     .inline-nav a {
       color: var(--clr-tx);
       text-decoration: none;
-      padding: 0.2em 0.4em;
-      transition: color 0.2s;
-    }
-    .inline-nav a:hover,
-    .inline-nav a:focus {
-      color: var(--clr-accent-dark);
-      outline: none;
     }
     form {
       background: #f9f9fd;
@@ -118,13 +104,9 @@
       flex-wrap: wrap;
       gap: 1rem;
     }
-    .form-cell {
-      flex: 1 1 48%;
-    }
+    .form-cell { flex: 1 1 48%; }
     @media (max-width: 600px) {
-      .form-cell {
-        flex: 1 1 100%;
-      }
+      .form-cell { flex: 1 1 100%; }
     }
     .modal-footer {
       margin-top: 2rem;
@@ -140,11 +122,6 @@
       font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
-      box-shadow: 0 4px 8px #0004;
-      transition: background 0.3s;
-    }
-    button.submit-btn:hover {
-      background: var(--clr-accent-dark);
     }
     body.dark {
       background: var(--clr-dark-bg);
@@ -157,7 +134,7 @@
     body.dark input,
     body.dark select,
     body.dark textarea {
-      background: var(--clr-dark-field);
+      background: var(--clr-dark-input);
       border-color: #555;
       color: var(--clr-dark-text);
     }
@@ -195,8 +172,8 @@
 
     <div class="form-row">
       <div class="form-cell">
-        <label for="contactNumber" data-en="Contact Number" data-es="Número de Contacto">Contact Number</label>
-        <input id="contactNumber" type="tel" required placeholder="Enter your contact number" data-en="Enter your contact number" data-es="Ingresa tu número de contacto" />
+        <label for="contactNumber" data-en="Contact Number" data-es="Teléfono">Contact Number</label>
+        <input id="contactNumber" type="tel" required placeholder="Enter your contact number" data-en="Enter your contact number" data-es="Ingresa tu teléfono" />
       </div>
       <div class="form-cell">
         <label for="preferredDate" data-en="Preferred Date" data-es="Fecha Preferida">Preferred Date</label>
@@ -228,13 +205,6 @@
 
     <div class="modal-footer">
       <button type="submit" class="submit-btn" data-en="Send" data-es="Enviar">Send</button>
-      <nav class="inline-nav" style="margin-top:1rem;">
-        <a href="../index.html" data-en="Home" data-es="Inicio">Home</a>
-        <a href="../services/business.html" data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</a>
-        <a href="../services/contactcenter.html" data-en="Contact Center" data-es="Centro de Contacto">Contact Center</a>
-        <a href="../services/itsupport.html" data-en="IT Support" data-es="Soporte Técnico">IT Support</a>
-        <a href="../services/professionals.html" data-en="Professionals" data-es="Profesionales">Professionals</a>
-      </nav>
     </div>
   </form>
 
@@ -250,34 +220,35 @@
       const langBtn = document.getElementById('langToggle');
       const themeBtn = document.getElementById('themeToggle');
 
-      function setLang(lang) {
-        document.documentElement.lang = lang;
+      function updateLang(lang) {
         document.querySelectorAll('[data-en]').forEach(el => {
-          const text = el.getAttribute(`data-${lang}`);
-          if (el.placeholder !== undefined) {
-            el.placeholder = text;
+          const val = el.getAttribute(`data-${lang}`);
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = val;
+          } else if (el.tagName === 'OPTION') {
+            el.textContent = val;
           } else {
-            el.textContent = text;
+            el.textContent = val;
           }
         });
-        langBtn.textContent = lang === 'en' ? 'ES' : 'EN';
-      }
-
-      function setTheme() {
-        document.body.classList.toggle('dark');
-        themeBtn.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
       }
 
       langBtn.addEventListener('click', () => {
         const current = document.documentElement.lang || 'en';
-        setLang(current === 'en' ? 'es' : 'en');
+        const next = current === 'en' ? 'es' : 'en';
+        document.documentElement.lang = next;
+        updateLang(next);
+        langBtn.textContent = next === 'en' ? 'ES' : 'EN';
       });
 
-      themeBtn.addEventListener('click', setTheme);
+      themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        themeBtn.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
+      });
 
-      // Initial Sync
-      setLang(document.documentElement.lang || 'en');
-      setTheme();
+      // Initialize
+      updateLang(document.documentElement.lang || 'en');
+      themeBtn.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
     });
   </script>
 </body>
