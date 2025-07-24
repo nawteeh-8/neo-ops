@@ -2,52 +2,141 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Professional Services | [Your Company]</title>
+  <title data-en="Professional Services | [Your Company]" data-es="Servicios Profesionales | [Su Empresa]">
+    Professional Services | [Your Company]
+  </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="professionals.css">
 </head>
 <body style="font-family:sans-serif; color:#333; padding:20px;">
-  <header style="text-align:center;">
-    <h1>Unlock Expertise. Deliver Results.</h1>
-    <p>Our consultants bring decades of experience to your biggest business challenges.</p>
-    <a href="#form" style="background:#ff6600; color:#fff; padding:10px 20px; border-radius:6px;">Book Free Strategy Call</a>
+  <!-- Language Toggle -->
+  <div style="text-align:right; margin-bottom:20px;">
+    <button id="btn-en">EN</button>
+    <button id="btn-es">ES</button>
+  </div>
+
+  <!-- Card -->
+  <div class="card" data-modal-target="professionals-modal" tabindex="0">
+    <span class="icon">&#128100;</span>
+    <div class="title" data-en="Professionals" data-es="Profesionales">Professionals</div>
+    <div class="content"
+         data-en="Connect with our team of certified professionals."
+         data-es="Conéctese con nuestro equipo de profesionales certificados.">
+      Connect with our team of certified professionals.
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header style="text-align:center; padding-bottom:20px;">
+    <h1 data-en="Unlock Expertise. Deliver Results." data-es="Desbloquee Conocimientos. Obtenga Resultados.">
+      Unlock Expertise. Deliver Results.
+    </h1>
+    <p data-en="Our consultants bring decades of experience to your biggest business challenges."
+       data-es="Nuestros consultores aportan décadas de experiencia a sus mayores desafíos empresariales.">
+      Our consultants bring decades of experience to your biggest business challenges.
+    </p>
+    <a href="#form"
+       style="background:#ff6600; color:#fff; padding:10px 20px; border-radius:6px;"
+       data-en="Book Free Strategy Call"
+       data-es="Reserve Llamada de Estrategia Gratis">
+      Book Free Strategy Call
+    </a>
   </header>
 
+  <!-- We Specialize In -->
   <section>
-    <h2>We Specialize In:</h2>
+    <h2 data-en="We Specialize In:" data-es="Nos Especializamos En:">We Specialize In:</h2>
     <ul>
-      <li>Digital transformation & change management</li>
-      <li>Business continuity & risk planning</li>
-      <li>Revenue operations & analytics</li>
+      <li data-en="Digital transformation & change management" data-es="Transformación digital y gestión del cambio">
+        Digital transformation & change management
+      </li>
+      <li data-en="Business continuity & risk planning" data-es="Continuidad del negocio y planificación de riesgos">
+        Business continuity & risk planning
+      </li>
+      <li data-en="Revenue operations & analytics" data-es="Operaciones de ingresos y analítica">
+        Revenue operations & analytics
+      </li>
     </ul>
   </section>
 
+  <!-- Real Impact -->
   <section>
-    <h2>Real Impact</h2>
-    <blockquote>“Their team didn’t just advise — they executed. We hit 120% of our revenue goal within two quarters.”<br><strong>– CEO, B2B SaaS</strong></blockquote>
-    <img src="partner-logos.png" alt="Client logos" style="max-width:100%;">
+    <h2 data-en="Real Impact" data-es="Impacto Real">Real Impact</h2>
+    <blockquote
+      data-en="“Their team didn’t just advise — they executed. We hit 120% of our revenue goal within two quarters.”"
+      data-es="“Su equipo no solo aconsejó, sino que ejecutó. Alcanzamos el 120% de nuestra meta de ingresos en dos trimestres.”">
+      “Their team didn’t just advise — they executed. We hit 120% of our revenue goal within two quarters.”
+      <br>
+      <strong data-en="– CEO, B2B SaaS" data-es="– CEO, SaaS B2B">– CEO, B2B SaaS</strong>
+    </blockquote>
+    <img src="partner-logos.png"
+         alt=""
+         data-en="Client logos"
+         data-es="Logotipos de clientes"
+         style="max-width:100%;">
   </section>
 
+  <!-- Limited-Time Offer -->
   <section style="background:#f7f7f7; padding:20px;">
-    <h2>Limited-Time Offer</h2>
-    <p>Book by July 31 and get a free 90-minute ops strategy session (normally $650).</p>
-    <p><strong>Only 6 sessions left this month.</strong></p>
+    <h2 data-en="Limited-Time Offer" data-es="Oferta por Tiempo Limitado">Limited-Time Offer</h2>
+    <p data-en="Book by July 31 and get a free 90-minute ops strategy session (normally $650)."
+       data-es="Reserve antes del 31 de julio y obtenga una sesión de estrategia de operaciones gratuita de 90 minutos (normalmente $650).">
+      Book by July 31 and get a free 90-minute ops strategy session (normally $650).
+    </p>
+    <p data-en="Only 6 sessions left this month." data-es="Solo quedan 6 sesiones este mes.">
+      <strong>Only 6 sessions left this month.</strong>
+    </p>
   </section>
 
-  <section id="form">
-    <h2>Get Started Now</h2>
+  <!-- Get Started Now -->
+  <section id="form" style="padding-top:20px;">
+    <h2 data-en="Get Started Now" data-es="Comience Ahora">Get Started Now</h2>
     <form>
-      <input type="text" placeholder="Full Name" required><br>
-      <input type="email" placeholder="Business Email" required><br>
-      <button type="submit" style="background:#007acc; color:#fff; padding:10px 20px; border:none; border-radius:5px;">Book Session</button>
+      <input type="text"
+             placeholder="Full Name"
+             data-en="Full Name"
+             data-es="Nombre Completo"
+             required><br>
+      <input type="email"
+             placeholder="Business Email"
+             data-en="Business Email"
+             data-es="Correo Electrónico Empresarial"
+             required><br>
+      <button type="submit"
+              style="background:#007acc; color:#fff; padding:10px 20px; border:none; border-radius:5px;"
+              data-en="Book Session"
+              data-es="Reservar Sesión">
+        Book Session
+      </button>
     </form>
   </section>
+
+  <script src="professionals.js"></script>
+  <script>
+    (function() {
+      function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        // Update <title>
+        var titleTag = document.querySelector('title');
+        document.title = titleTag.getAttribute('data-' + lang);
+        // Update all elements with data-en/data-es
+        document.querySelectorAll('[data-en]').forEach(function(el) {
+          var text = el.getAttribute('data-' + lang);
+          if (!text) return;
+          if (el.tagName.toLowerCase() === 'input') {
+            el.placeholder = text;
+          } else if (el.tagName.toLowerCase() === 'img') {
+            el.alt = text;
+          } else {
+            el.textContent = text;
+          }
+        });
+      }
+      document.getElementById('btn-en').addEventListener('click', function() { setLanguage('en'); });
+      document.getElementById('btn-es').addEventListener('click', function() { setLanguage('es'); });
+      // Default to English
+      setLanguage('en');
+    })();
+  </script>
 </body>
 </html>
-
-<link rel="stylesheet" href="professionals.css">
-<div class="card" data-modal-target="professionals-modal" tabindex="0">
-  <span class="icon">&#128100;</span>
-  <div class="title">Professionals</div>
-  <div class="content">Conéctese con nuestro equipo de profesionales certificados.</div>
-</div>
-<script src="professionals.js"></script>
