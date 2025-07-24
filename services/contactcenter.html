@@ -99,7 +99,9 @@
     <h2 data-en="See What We Can Do for You" data-es="Vea Lo Que Podemos Hacer por Usted">
       See What We Can Do for You
     </h2>
-    <form>
+    <!-- Redirects to main contact page with service context -->
+    <form action="../fabs/contact.html" method="get">
+      <input type="hidden" name="service" value="Contact Center">
       <input type="text"
              data-en="Full Name" data-es="Nombre Completo"
              placeholder="Full Name"

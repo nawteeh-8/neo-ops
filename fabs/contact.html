@@ -190,10 +190,10 @@
         <label for="interest" data-en="What are you interested about?" data-es="¿Qué te interesa?">What are you interested about?</label>
         <select id="interest" required>
           <option value="" disabled selected>Select an option</option>
-          <option data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</option>
-          <option data-en="Contact Center" data-es="Centro de Contacto">Contact Center</option>
-          <option data-en="IT Support" data-es="Soporte Técnico">IT Support</option>
-          <option data-en="Professionals" data-es="Profesionales">Professionals</option>
+          <option value="Business Operations" data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</option>
+          <option value="Contact Center" data-en="Contact Center" data-es="Centro de Contacto">Contact Center</option>
+          <option value="IT Support" data-en="IT Support" data-es="Soporte Técnico">IT Support</option>
+          <option value="Professionals" data-en="Professionals" data-es="Profesionales">Professionals</option>
         </select>
       </div>
     </div>
@@ -219,6 +219,18 @@
 
       const langBtn = document.getElementById('langToggle');
       const themeBtn = document.getElementById('themeToggle');
+
+      // Preselect service from query string if provided
+      const params = new URLSearchParams(window.location.search);
+      const svc = params.get('service');
+      if (svc) {
+        const interestSelect = document.getElementById('interest');
+        const commentsField = document.getElementById('comments');
+        if (interestSelect) interestSelect.value = svc;
+        if (commentsField && !commentsField.value) {
+          commentsField.value = `Interested in ${svc}`;
+        }
+      }
 
       function updateLang(lang) {
         document.querySelectorAll('[data-en]').forEach(el => {

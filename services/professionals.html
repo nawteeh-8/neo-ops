@@ -91,7 +91,9 @@
   <!-- Get Started Now -->
   <section id="form" style="padding-top:20px;">
     <h2 data-en="Get Started Now" data-es="Comience Ahora">Get Started Now</h2>
-    <form>
+    <!-- Redirects to main contact page with service context -->
+    <form action="../fabs/contact.html" method="get">
+      <input type="hidden" name="service" value="Professionals">
       <input type="text"
              placeholder="Full Name"
              data-en="Full Name"

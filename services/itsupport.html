@@ -99,7 +99,9 @@
     <h2 data-en="Request Your Free IT Readiness Check" data-es="Solicite Su Revisión Gratuita de Preparación TI">
       Request Your Free IT Readiness Check
     </h2>
-    <form>
+    <!-- Redirects to main contact page with service context -->
+    <form action="../fabs/contact.html" method="get">
+      <input type="hidden" name="service" value="IT Support">
       <input type="text"
              placeholder="Your Name"
              data-en="Your Name" data-es="Su Nombre"
