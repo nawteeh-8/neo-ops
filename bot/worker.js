@@ -19,7 +19,7 @@ async function handleRequest(request) {
     headers: {
       'Content-Type': 'application/json',
       // Limit CORS to the production domain for security
-      'Access-Control-Allow-Origin': 'https://example.com',
+        'Access-Control-Allow-Origin': 'https://opsonlinesupport.com',
     },
   })
 }
