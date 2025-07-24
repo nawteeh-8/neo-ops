@@ -3,14 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Connect with OPS-vetted professionals for IT, project management, finance, or HR roles. This modal presents staffing options and compliance-trained experts."
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://cdnjs.cloudflare.com https://use.fontawesome.com; font-src 'self' https://cdnjs.cloudflare.com https://use.fontawesome.com; img-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Access-Control-Allow-Origin" content="https://opsonlinesupport.com">
+  <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Professionals - OPS Modal</title>
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  integrity="sha512-yHmh25n3xRh+2SmcvCyNMPIPqYvHv0JAS+oItFR0FoRcvMff9raM6vG+VubymQ9d0ERGLQHdXT9V2+IHX2+Fdg=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-yHmh25n3xRh+2SmcvCyNMPIPqYvHv0JAS+oItFR0FoRcvMff9raM6vG+VubymQ9d0ERGLQHdXT9V2+IHX2+Fdg=="
+      crossorigin="anonymous">
 
 <style>
   :root {
@@ -145,26 +149,26 @@
     <div class="ops-modal" tabindex="0">
       <button class="modal-x" aria-label="Close modal">&times;</button>
       <div class="modal-header" id="modal-title">
-        <img class="modal-img" src="https://placehold.co/96x96?text=PRO" alt="Professionals" />
-        <div><div class="modal-title">PROFESSIONALS</div></div>
+        <img class="modal-img" src="https://placehold.co/96x96?text=PRO" alt="Professionals" data-en="Professionals" data-es="Profesionales" />
+        <div><div class="modal-title" data-en="PROFESSIONALS" data-es="PROFESIONALES">PROFESSIONALS</div></div>
       </div>
-      <div class="modal-content-body">
+      <div class="modal-content-body" data-en="Access our network of highly qualified and experienced professionals for your project or long-term staffing. Experts in IT, project management, finance, HR. OPS-vetted, NDA, compliance trained." data-es="Acceda a nuestra red de profesionales altamente calificados y experimentados para su proyecto o personal a largo plazo. Expertos en TI, gestión de proyectos, finanzas y RR. HH. Validados por OPS, bajo NDA y con capacitación en cumplimiento.">
         Access our network of highly qualified and experienced professionals for your project or long-term staffing. Experts in IT, project management, finance, HR. OPS-vetted, NDA, compliance trained.
       </div>
-      <div class="modal-video">Video placeholder</div>
+      <div class="modal-video" data-en="Video placeholder" data-es="Marcador de video">Video placeholder</div>
       <ul>
-        <li>Remote IT professionals (SysAdmins, DevOps, Analysts)</li>
-        <li>Project managers & agile consultants</li>
-        <li>Finance and accounting professionals</li>
-        <li>HR and recruitment experts</li>
-        <li>OPS-vetted talent with NDA, compliance and role-specific training</li>
-        <li>Ask AI</li>
+        <li data-en="Remote IT professionals (SysAdmins, DevOps, Analysts)" data-es="Profesionales de TI remotos (SysAdmins, DevOps, Analistas)">Remote IT professionals (SysAdmins, DevOps, Analysts)</li>
+        <li data-en="Project managers & agile consultants" data-es="Gerentes de proyecto y consultores ágiles">Project managers & agile consultants</li>
+        <li data-en="Finance and accounting professionals" data-es="Profesionales de finanzas y contabilidad">Finance and accounting professionals</li>
+        <li data-en="HR and recruitment experts" data-es="Expertos en RR. HH. y reclutamiento">HR and recruitment experts</li>
+        <li data-en="OPS-vetted talent with NDA, compliance and role-specific training" data-es="Talento validado por OPS con NDA, cumplimiento y capacitación específica">OPS-vetted talent with NDA, compliance and role-specific training</li>
+        <li data-en="Ask AI" data-es="Preguntar a la IA">Ask AI</li>
       </ul>
       <div class="modal-actions">
-        <a class="modal-btn" href="../services/professionals.html" target="_blank" rel="noopener noreferrer">Learn More</a>
-        <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
-        <button class="modal-btn cta" id="contact-us-btn"><i class="fa fa-envelope" aria-hidden="true"></i> Contact Us</button>
-        <button class="modal-btn cancel-btn">Cancel</button>
+        <a class="modal-btn" href="../services/professionals.html" target="_blank" rel="noopener noreferrer" data-en="Learn More" data-es="Más Información">Learn More</a>
+        <button class="modal-btn" id="ask-chattia-btn" data-en="Ask Chattia" data-es="Preguntar a Chattia">Ask Chattia</button>
+        <button class="modal-btn cta" id="contact-us-btn"><i class="fa fa-envelope" aria-hidden="true"></i> <span data-en="Contact Us" data-es="Contáctanos">Contact Us</span></button>
+        <button class="modal-btn cancel-btn" data-en="Cancel" data-es="Cancelar">Cancel</button>
       </div>
     </div>
   </div>
@@ -230,8 +234,16 @@
       };
     }
 
-    makeDraggable(modal, modal.querySelector('.modal-header'));
-  })();
+  makeDraggable(modal, modal.querySelector('.modal-header'));
+})();
+</script>
+<script src="../js/langthem.js"></script>
+<script>
+  const lang = localStorage.getItem('ops-lang') || 'en';
+  updateLanguage(lang);
+  window.addEventListener('storage', e => {
+    if (e.key === 'ops-lang') updateLanguage(e.newValue);
+  });
 </script>
 </body>
 </html>

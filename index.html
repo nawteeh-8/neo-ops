@@ -3,13 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore the OPS Unified Portal for business operations, contact center and IT support solutions. Get service details, request help and connect with OPS experts."
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://cdnjs.cloudflare.com https://use.fontawesome.com; font-src 'self' https://cdnjs.cloudflare.com https://use.fontawesome.com; img-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Access-Control-Allow-Origin" content="https://opsonlinesupport.com">
+  <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="description" content="OPS Unified Portal for Business and IT services.">
   <meta name="robots" content="index, follow">
   <title>OPS Unified Portal</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-PLACEHOLDER" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-yHmh25n3xRh+2SmcvCyNMPIPqYvHv0JAS+oItFR0FoRcvMff9raM6vG+VubymQ9d0ERGLQHdXT9V2+IHX2+Fdg=="
+        crossorigin="anonymous">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/adaptablescreens.css" media="(max-width: 900px)">
   <link rel="manifest" href="manifest.json">
+  <script src="js/theme.js"></script>
 </head>
 <body>
   <!-- NAV -->
@@ -64,7 +75,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js');
+        navigator.serviceWorker.register('/sw.js?v=2');
       });
     }
   </script>
