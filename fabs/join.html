@@ -313,7 +313,7 @@
     <div class="form-section">
       <h2 data-en="What are you interested about?" data-es="¿Qué te interesa?">What are you interested about?</h2>
       <select id="jn-interest" required>
-        <option value="" disabled selected>Select an option</option>
+        <option value="" disabled selected data-en="Select an option" data-es="Selecciona una opci\u00f3n">Select an option</option>
         <option data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</option>
         <option data-en="Contact Center" data-es="Centro de Contacto">Contact Center</option>
         <option data-en="IT Support" data-es="Soporte Técnico">IT Support</option>
@@ -340,7 +340,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   // Toggle language and update all elements with data-en/data-es
-  function updateLanguage(lang) {
+  function updateLang(lang) {
     document.querySelectorAll('[data-en]').forEach(el => {
       const val = el.getAttribute(`data-${lang}`);
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const current = document.documentElement.lang || 'en';
     const next = current === 'en' ? 'es' : 'en';
     document.documentElement.lang = next;
-    updateLanguage(next);
+    updateLang(next);
     langBtn.textContent = next === 'en' ? 'ES' : 'EN';
   });
 
@@ -464,7 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Set defaults
   const initialLang = document.documentElement.lang || 'en';
-  updateLanguage(initialLang);
+  updateLang(initialLang);
   langBtn.textContent = initialLang === 'en' ? 'ES' : 'EN';
   themeBtn.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
 });
