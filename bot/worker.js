@@ -15,11 +15,14 @@ async function handleRequest(request) {
 
   const response = { reply }
 
-  return new Response(JSON.stringify(response), {
-    headers: {
-      'Content-Type': 'application/json',
-      // Limit CORS to the production domain for security
-      'Access-Control-Allow-Origin': 'https://example.com',
-    },
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': 'https://example.com',
+    'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
+    'X-Frame-Options': 'DENY',
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'same-origin'
   })
+
+  return new Response(JSON.stringify(response), { headers })
 }
