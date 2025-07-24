@@ -1,8 +1,14 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://cdnjs.cloudflare.com https://use.fontawesome.com; font-src 'self' https://cdnjs.cloudflare.com https://use.fontawesome.com; img-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Access-Control-Allow-Origin" content="https://opsonlinesupport.com">
+  <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <title data-en="Join Us - OPS • Chattia" data-es="Únete - OPS • Chattia">Join Us - OPS • Chattia</title>
   <link
     rel="stylesheet"
@@ -222,8 +228,8 @@
 </head>
 <body>
   <header class="top-header">
-    <a href="../index.html" class="close-btn" title="Exit">&times;</a>
-    <h1 data-en="Join Us" data-es="Únete a Nosotros"><i class="fa fa-user-plus"></i> Join Us</h1>
+    <a href="../index.html" class="close-btn" title="Exit">×</a>
+    <h1 data-i18n="join-2"><i class="fa fa-user-plus"></i> Join Us</h1>
     <div class="btn-stack">
       <button class="toggle-btn" id="langToggle">ES</button>
       <button class="toggle-btn" id="themeToggle">Dark</button>
@@ -231,110 +237,110 @@
   </header>
 
   <nav class="inline-nav">
-    <a href="../index.html" data-en="Home" data-es="Inicio">Home</a>
-    <a href="../services/business.html" data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</a>
-    <a href="../services/contactcenter.html" data-en="Contact Center" data-es="Centro de Contacto">Contact Center</a>
-    <a href="../services/itsupport.html" data-en="IT Support" data-es="Soporte Técnico">IT Support</a>
-    <a href="../services/professionals.html" data-en="Professionals" data-es="Profesionales">Professionals</a>
+    <a href="../index.html" data-i18n="join-3">Home</a>
+    <a href="../services/business.html" data-i18n="join-4">Business Operations</a>
+    <a href="../services/contactcenter.html" data-i18n="join-5">Contact Center</a>
+    <a href="../services/itsupport.html" data-i18n="join-6">IT Support</a>
+    <a href="../services/professionals.html" data-i18n="join-7">Professionals</a>
   </nav>
 
   <form id="joinForm" autocomplete="off">
     <div class="form-pairs">
       <div>
-        <label for="name" data-en="Name" data-es="Nombre">Name</label>
-        <input id="name" name="name" placeholder="Enter your name" data-en="Enter your name" data-es="Ingresa tu nombre" />
+        <label for="name" data-i18n="join-8">Name</label>
+        <input id="name" name="name" placeholder="Enter your name" data-i18n="join-9"/>
       </div>
       <div>
-        <label for="email" data-en="Email" data-es="Correo">Email</label>
-        <input id="email" type="email" name="email" placeholder="Enter your email" data-en="Enter your email" data-es="Ingresa tu correo" />
+        <label for="email" data-i18n="join-10">Email</label>
+        <input id="email" type="email" name="email" placeholder="Enter your email" data-i18n="join-11"/>
       </div>
       <div>
-        <label for="phone" data-en="Phone" data-es="Teléfono">Phone</label>
-        <input id="phone" type="tel" name="phone" placeholder="Enter your phone number" data-en="Enter your phone number" data-es="Ingresa tu teléfono" />
+        <label for="phone" data-i18n="join-12">Phone</label>
+        <input id="phone" type="tel" name="phone" placeholder="Enter your phone number" data-i18n="join-13"/>
       </div>
     </div>
 
-    <!-- SKILLS SECTION -->
+    
     <div class="form-section" data-section="Skills">
       <div class="section-header">
-        <h2 data-en="Skills" data-es="Habilidades">Skills</h2>
+        <h2 data-i18n="join-14">Skills</h2>
         <div>
           <button type="button" class="circle-btn add" title="Add field">+</button>
           <button type="button" class="circle-btn remove" title="Remove field">−</button>
         </div>
       </div>
       <div class="inputs"></div>
-      <button type="button" class="accept-btn" data-en="Accept" data-es="Aceptar">Accept</button>
-      <button type="button" class="edit-btn" style="display:none;" data-en="Edit" data-es="Editar">Edit</button>
+      <button type="button" class="accept-btn" data-i18n="join-15">Accept</button>
+      <button type="button" class="edit-btn" style="display:none;" data-i18n="join-16">Edit</button>
     </div>
 
-    <!-- EDUCATION SECTION -->
+    
     <div class="form-section" data-section="Education">
       <div class="section-header">
-        <h2 data-en="Education" data-es="Educación">Education</h2>
+        <h2 data-i18n="join-17">Education</h2>
         <div>
           <button type="button" class="circle-btn add" title="Add field">+</button>
           <button type="button" class="circle-btn remove" title="Remove field">−</button>
         </div>
       </div>
       <div class="inputs"></div>
-      <button type="button" class="accept-btn" data-en="Accept" data-es="Aceptar">Accept</button>
-      <button type="button" class="edit-btn" style="display:none;" data-en="Edit" data-es="Editar">Edit</button>
+      <button type="button" class="accept-btn" data-i18n="join-18">Accept</button>
+      <button type="button" class="edit-btn" style="display:none;" data-i18n="join-19">Edit</button>
     </div>
 
-    <!-- CERTIFICATION SECTION -->
+    
     <div class="form-section" data-section="Certification">
       <div class="section-header">
-        <h2 data-en="Certification" data-es="Certificaciones">Certification</h2>
+        <h2 data-i18n="join-20">Certification</h2>
         <div>
           <button type="button" class="circle-btn add" title="Add field">+</button>
           <button type="button" class="circle-btn remove" title="Remove field">−</button>
         </div>
       </div>
       <div class="inputs"></div>
-      <button type="button" class="accept-btn" data-en="Accept" data-es="Aceptar">Accept</button>
-      <button type="button" class="edit-btn" style="display:none;" data-en="Edit" data-es="Editar">Edit</button>
+      <button type="button" class="accept-btn" data-i18n="join-21">Accept</button>
+      <button type="button" class="edit-btn" style="display:none;" data-i18n="join-22">Edit</button>
     </div>
 
-    <!-- HOBBIES SECTION -->
+    
     <div class="form-section" data-section="Hobbies">
       <div class="section-header">
-        <h2 data-en="Hobbies" data-es="Pasatiempos">Hobbies</h2>
+        <h2 data-i18n="join-23">Hobbies</h2>
         <div>
           <button type="button" class="circle-btn add" title="Add field">+</button>
           <button type="button" class="circle-btn remove" title="Remove field">−</button>
         </div>
       </div>
       <div class="inputs"></div>
-      <button type="button" class="accept-btn" data-en="Accept" data-es="Aceptar">Accept</button>
-      <button type="button" class="edit-btn" style="display:none;" data-en="Edit" data-es="Editar">Edit</button>
+      <button type="button" class="accept-btn" data-i18n="join-24">Accept</button>
+      <button type="button" class="edit-btn" style="display:none;" data-i18n="join-25">Edit</button>
     </div>
 
-    <!-- INTEREST SECTION -->
+    
     <div class="form-section">
-      <h2 data-en="What are you interested about?" data-es="¿Qué te interesa?">What are you interested about?</h2>
+      <h2 data-i18n="join-26">What are you interested about?</h2>
       <select id="jn-interest" required>
         <option value="" disabled selected>Select an option</option>
-        <option data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</option>
-        <option data-en="Contact Center" data-es="Centro de Contacto">Contact Center</option>
-        <option data-en="IT Support" data-es="Soporte Técnico">IT Support</option>
-        <option data-en="Professionals" data-es="Profesionales">Professionals</option>
+        <option data-i18n="join-27">Business Operations</option>
+        <option data-i18n="join-28">Contact Center</option>
+        <option data-i18n="join-29">IT Support</option>
+        <option data-i18n="join-30">Professionals</option>
       </select>
     </div>
 
     <div class="form-section">
-      <h2 data-en="Tell us about yourself" data-es="Cuéntanos sobre ti">Tell us about yourself</h2>
-      <textarea id="about" rows="4" placeholder="Tell us about yourself..." data-en="Tell us about yourself..." data-es="Cuéntanos sobre ti..."></textarea>
+      <h2 data-i18n="join-31">Tell us about yourself</h2>
+      <textarea id="about" rows="4" placeholder="Tell us about yourself..." data-i18n="join-32"></textarea>
     </div>
 
     <div class="modal-footer">
-      <button type="submit" class="submit-btn" data-en="Submit" data-es="Enviar">Submit</button>
+      <button type="submit" class="submit-btn" data-i18n="join-33">Submit</button>
       <nav class="inline-nav" style="margin-top:1rem;">
-        <a href="../index.html" data-en="Home" data-es="Inicio">Home</a>
-        <a href="../services/business.html" data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</a>
-        <a href="../services/contactcenter.html" data-en="Contact Center" data-es="Centro de Contacto">Contact Center</a>
-        <a href="../services/itsupport.html" data-en="IT Support" data-es="Soporte Técnico">IT Support</a>
-        <a href="../services/professionals.html" data-en="Professionals" data-es="Profesionales">Professionals</a>
+        <a href="../index.html" data-i18n="join-34">Home</a>
+        <a href="../services/business.html" data-i18n="join-35">Business Operations</a>
+        <a href="../services/contactcenter.html" data-i18n="join-36">Contact Center</a>
+        <a href="../services/itsupport.html" data-i18n="join-37">IT Support</a>
+        <a href="../services/professionals.html" data-i18n="join-38">Professionals</a>
   </nav>
   </div>
   </form>
@@ -436,8 +442,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const langBtn = document.getElementById('langToggle');
   const themeBtn = document.getElementById('themeToggle');
   langBtn.addEventListener('click', () => {
-    const current = document.documentElement.lang || 'en';
+    const current = localStorage.getItem('ops-lang') || 'en';
     const next = current === 'en' ? 'es' : 'en';
+    localStorage.setItem('ops-lang', next);
     updateLanguage(next);
     langBtn.textContent = next === 'en' ? 'ES' : 'EN';
   });
@@ -445,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
   themeBtn.addEventListener('click', toggleTheme);
 
   // Set defaults
-  const initialLang = document.documentElement.lang || 'en';
+  const initialLang = localStorage.getItem('ops-lang') || 'en';
   updateLanguage(initialLang);
   langBtn.textContent = initialLang === 'en' ? 'ES' : 'EN';
 });

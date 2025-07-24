@@ -1,45 +1,48 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://cdnjs.cloudflare.com https://use.fontawesome.com; font-src 'self' https://cdnjs.cloudflare.com https://use.fontawesome.com; img-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Access-Control-Allow-Origin" content="https://opsonlinesupport.com">
+  <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <title>OPS AI Chatbot</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ---------- CHATBOT HTML ---------- -->
+
 <div id="chatbot-container" role="dialog" aria-modal="true">
   <div id="chatbot-header">
-    <span id="title" data-en="OPS AI Chatbot" data-es="Chatbot OPS AI">OPS AI Chatbot</span>
+    <span id="title" data-i18n="chatbot-1">OPS AI Chatbot</span>
 
-    <!-- tiny controls -->
+    
     <div>
       <span id="langCtrl" class="ctrl">ES</span>
-      &nbsp;|&nbsp;
+       | 
       <span id="themeCtrl" class="ctrl">Dark</span>
     </div>
   </div>
   <div id="chat-log" aria-live="polite"></div>
   <div id="chatbot-form-container">
     <form id="chatbot-input-row" autocomplete="off">
-      <input id="chatbot-input" type="text" placeholder="Type your message..." required maxlength="256"
-             data-en-ph="Type your message..." data-es-ph="Escriba su mensaje...">
+      <input id="chatbot-input" type="text" placeholder="Type your message..." required maxlength="256" data-i18n-ph="chatbot-ph-2">
       <button id="chatbot-send" type="submit" disabled aria-label="Send">
         <i class="fas fa-paper-plane"></i>
       </button>
     </form>
     <label class="human-check">
       <input type="checkbox" id="human-check">
-      <span id="human-label" data-en="I am human" data-es="Soy humano">I am human</span>
+      <span id="human-label" data-i18n="chatbot-3">I am human</span>
     </label>
   </div>
 </div>
 <script src="../js/theme.js"></script>
 <script src="../js/langthem.js"></script>
-<script src="app.js"
-        integrity="sha384-iN8j0v/FTQadFREqEAqazTeZkNjvuoG0rOeP27KnW00592cI9hRCJs9qnVrex5r7"
-        crossorigin="anonymous"></script>
+<script src="app.js" integrity="sha384-iN8j0v/FTQadFREqEAqazTeZkNjvuoG0rOeP27KnW00592cI9hRCJs9qnVrex5r7" crossorigin="anonymous"></script>
 </body>
 </html>
