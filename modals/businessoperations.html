@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Business Operations - OPS Modal</title>
+<title data-en="Business Operations - OPS Modal" data-es="Operaciones Empresariales - Modal de OPS">Business Operations - OPS Modal</title>
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -145,25 +145,25 @@
     <div class="ops-modal" tabindex="0">
       <button class="modal-x" aria-label="Close modal">&times;</button>
       <div class="modal-header" id="modal-title">
-        <img class="modal-img" src="https://placehold.co/96x96?text=OPS" alt="Business Operations" />
-        <div><div class="modal-title">BUSINESS OPERATIONS</div></div>
+        <img class="modal-img" src="https://placehold.co/96x96?text=OPS" alt="Business Operations" data-en="Business Operations" data-es="Operaciones Empresariales" />
+        <div><div class="modal-title" data-en="BUSINESS OPERATIONS" data-es="OPERACIONES EMPRESARIALES">BUSINESS OPERATIONS</div></div>
       </div>
-      <div class="modal-content-body">
+      <div class="modal-content-body" data-en="Detailed content about our Business Operations services. We help optimize your processes, boost efficiency, and drive growth through strategic operational support. Key areas: process optimization, supply chain management, quality assurance." data-es="Contenido detallado sobre nuestros servicios de Operaciones Empresariales. Ayudamos a optimizar sus procesos, aumentar la eficiencia y fomentar el crecimiento mediante soporte operativo estratégico. Áreas clave: optimización de procesos, gestión de la cadena de suministro, aseguramiento de la calidad.">
         Detailed content about our Business Operations services. We help optimize your processes, boost efficiency, and drive growth through strategic operational support. Key areas: process optimization, supply chain management, quality assurance.
       </div>
-      <div class="modal-video">Video placeholder</div>
+      <div class="modal-video" data-en="Video placeholder" data-es="Marcador de video">Video placeholder</div>
       <ul>
-        <li>Workflow digitization & automation</li>
-        <li>Logistics & inventory efficiency</li>
-        <li>Risk & compliance frameworks (NIST, ISO, CISA)</li>
-        <li>Performance metric dashboards & analytics</li>
-        <li>Remote training & Lean operations</li>
+        <li data-en="Workflow digitization & automation" data-es="Digitalización y automatización del flujo de trabajo">Workflow digitization & automation</li>
+        <li data-en="Logistics & inventory efficiency" data-es="Eficiencia logística y de inventario">Logistics & inventory efficiency</li>
+        <li data-en="Risk & compliance frameworks (NIST, ISO, CISA)" data-es="Marcos de riesgo y cumplimiento (NIST, ISO, CISA)">Risk & compliance frameworks (NIST, ISO, CISA)</li>
+        <li data-en="Performance metric dashboards & analytics" data-es="Tableros de métricas de rendimiento y analíticas">Performance metric dashboards & analytics</li>
+        <li data-en="Remote training & Lean operations" data-es="Capacitación remota y operaciones Lean">Remote training & Lean operations</li>
       </ul>
       <div class="modal-actions">
-        <a class="modal-btn" href="../services/business.html" target="_blank" rel="noopener noreferrer">Learn More</a>
-        <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
-        <button class="modal-btn cta" id="contact-us-btn"><i class="fa fa-envelope" aria-hidden="true"></i> Contact Us</button>
-        <button class="modal-btn cancel-btn">Cancel</button>
+        <a class="modal-btn" href="../services/business.html" target="_blank" rel="noopener noreferrer" data-en="Learn More" data-es="Más Información">Learn More</a>
+        <button class="modal-btn" id="ask-chattia-btn" data-en="Ask Chattia" data-es="Preguntar a Chattia">Ask Chattia</button>
+        <button class="modal-btn cta" id="contact-us-btn"><i class="fa fa-envelope" aria-hidden="true"></i> <span data-en="Contact Us" data-es="Contáctanos">Contact Us</span></button>
+        <button class="modal-btn cancel-btn" data-en="Cancel" data-es="Cancelar">Cancel</button>
       </div>
     </div>
   </div>
@@ -236,8 +236,16 @@
       };
     }
 
-    makeDraggable(modal, modal.querySelector('.modal-header'));
-  })();
+  makeDraggable(modal, modal.querySelector('.modal-header'));
+})();
+</script>
+<script src="../js/langthem.js"></script>
+<script>
+  const lang = localStorage.getItem('ops-lang') || 'en';
+  updateLanguage(lang);
+  window.addEventListener('storage', e => {
+    if (e.key === 'ops-lang') updateLanguage(e.newValue);
+  });
 </script>
 </body>
 </html>
