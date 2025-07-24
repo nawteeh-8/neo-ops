@@ -2,59 +2,150 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Contact Center Solutions | [Your Company]</title>
+  <title data-en="Contact Center Solutions | [Your Company]" data-es="Soluciones de Centro de Contacto | [Su Empresa]">
+    Contact Center Solutions | [Your Company]
+  </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="contact.css">
 </head>
 <body style="font-family:sans-serif; color:#333; padding:20px;">
-  <header style="text-align:center;">
-    <h1>Reliable, Empathetic Contact Center Services</h1>
-    <p>Deliver support that feels human — with efficiency and care, 24/7.</p>
-    <a href="#form" style="background:#ff6600; color:white; padding:10px 20px; border-radius:5px;">Request a Custom Quote</a>
+  <!-- Language Toggle -->
+  <div style="text-align:right; margin-bottom:20px;">
+    <button id="btn-en" style="margin-right:5px;">EN</button>
+    <button id="btn-es">ES</button>
+  </div>
+
+  <!-- Card -->
+  <div class="card" data-modal-target="contactcenter-modal" tabindex="0">
+    <span class="icon">&#128222;</span>
+    <div class="title" data-en="Contact Center" data-es="Centro de Contacto">Contact Center</div>
+    <div class="content"
+         data-en="Improve customer satisfaction with our expert support."
+         data-es="Mejore la satisfacción del cliente con nuestro soporte experto.">
+      Improve customer satisfaction with our expert support.
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header style="text-align:center; padding-bottom:20px;">
+    <h1 data-en="Reliable, Empathetic Contact Center Services"
+        data-es="Servicios de Centro de Contacto Confiables y Empáticos">
+      Reliable, Empathetic Contact Center Services
+    </h1>
+    <p data-en="Deliver support that feels human — with efficiency and care, 24/7."
+       data-es="Brinde soporte que se sienta humano — con eficiencia y atención, 24/7.">
+      Deliver support that feels human — with efficiency and care, 24/7.
+    </p>
+    <a href="#form"
+       style="background:#ff6600; color:white; padding:10px 20px; border-radius:5px;"
+       data-en="Request a Custom Quote"
+       data-es="Solicite una Cotización Personalizada">
+      Request a Custom Quote
+    </a>
   </header>
 
+  <!-- Why Clients Choose Us -->
   <section>
-    <h2>Why Clients Choose Us</h2>
+    <h2 data-en="Why Clients Choose Us" data-es="Por Qué los Clientes Nos Eligen">
+      Why Clients Choose Us
+    </h2>
     <ul>
-      <li>Round-the-clock global coverage</li>
-      <li>Multilingual, empathetic agents</li>
-      <li>Custom escalation workflows</li>
+      <li data-en="Round-the-clock global coverage" data-es="Cobertura global las 24 horas">
+        Round-the-clock global coverage
+      </li>
+      <li data-en="Multilingual, empathetic agents" data-es="Agentes multilingües y empáticos">
+        Multilingual, empathetic agents
+      </li>
+      <li data-en="Custom escalation workflows" data-es="Flujos de trabajo de escalamiento personalizados">
+        Custom escalation workflows
+      </li>
     </ul>
   </section>
 
+  <!-- Built for Trust and Speed -->
   <section>
-    <h2>Built for Trust and Speed</h2>
-    <p>We address 85% of inquiries in <strong>under 2 minutes</strong> and offer customizable SLAs. Clients trust us because we show up on time, every time — with clarity and care.</p>
+    <h2 data-en="Built for Trust and Speed" data-es="Diseñado para la Confianza y la Velocidad">
+      Built for Trust and Speed
+    </h2>
+    <p data-en="We address 85% of inquiries in under 2 minutes and offer customizable SLAs. Clients trust us because we show up on time, every time — with clarity and care."
+       data-es="Atendemos el 85% de las consultas en menos de 2 minutos y ofrecemos SLA personalizables. Los clientes confían en nosotros porque cumplimos a tiempo, cada vez — con claridad y atención.">
+      We address 85% of inquiries in <strong>under 2 minutes</strong> and offer customizable SLAs. Clients trust us because we show up on time, every time — with clarity and care.
+    </p>
   </section>
 
+  <!-- What Customers Say -->
   <section style="background:#f0f0f0; padding:20px;">
-    <h2>What Customers Say</h2>
-    <blockquote>“Our churn dropped by 18% in 90 days. The emotional intelligence of their reps is unmatched.”<br><strong>– VP CX, HealthTech Firm</strong></blockquote>
-    <img src="client-logos.png" alt="Client logos" style="max-width:100%;">
+    <h2 data-en="What Customers Say" data-es="Lo Que Dicen los Clientes">
+      What Customers Say
+    </h2>
+    <blockquote
+      data-en="“Our churn dropped by 18% in 90 days. The emotional intelligence of their reps is unmatched.”"
+      data-es="“Nuestra tasa de abandono cayó un 18% en 90 días. La inteligencia emocional de sus representantes no tiene igual.”">
+      “Our churn dropped by 18% in 90 days. The emotional intelligence of their reps is unmatched.”
+      <br>
+      <strong data-en="– VP CX, HealthTech Firm" data-es="– VP de Experiencia del Cliente, Empresa HealthTech">
+        – VP CX, HealthTech Firm
+      </strong>
+    </blockquote>
+    <img src="client-logos.png"
+         alt=""
+         data-en="Client logos"
+         data-es="Logotipos de clientes"
+         style="max-width:100%;">
   </section>
 
-  <section id="form">
-    <h2>See What We Can Do for You</h2>
+  <!-- Contact Form -->
+  <section id="form" style="padding-top:20px;">
+    <h2 data-en="See What We Can Do for You" data-es="Vea Lo Que Podemos Hacer por Usted">
+      See What We Can Do for You
+    </h2>
     <form>
-      <input type="text" placeholder="Full Name" required><br>
-      <input type="email" placeholder="Business Email" required><br>
-      <input type="text" placeholder="Company" required><br>
-      <button type="submit" style="background:#007acc; color:white; padding:10px 20px; border:none; border-radius:5px;">Request Quote</button>
+      <input type="text"
+             data-en="Full Name" data-es="Nombre Completo"
+             placeholder="Full Name"
+             required><br>
+      <input type="email"
+             data-en="Business Email" data-es="Correo Electrónico Empresarial"
+             placeholder="Business Email"
+             required><br>
+      <input type="text"
+             data-en="Company" data-es="Empresa"
+             placeholder="Company"
+             required><br>
+      <button type="submit"
+              style="background:#007acc; color:white; padding:10px 20px; border:none; border-radius:5px;"
+              data-en="Request Quote" data-es="Solicitar Cotización">
+        Request Quote
+      </button>
     </form>
   </section>
+
+  <script src="contact.js"></script>
+  <script>
+    (function() {
+      function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        // Update <title>
+        var titleTag = document.querySelector('title');
+        document.title = titleTag.getAttribute('data-' + lang);
+        // Update all translatable elements
+        document.querySelectorAll('[data-en]').forEach(function(el) {
+          var text = el.getAttribute('data-' + lang);
+          if (!text) return;
+          if (el.tagName.toLowerCase() === 'input') {
+            el.placeholder = text;
+          } else if (el.tagName.toLowerCase() === 'img') {
+            el.alt = text;
+          } else {
+            el.textContent = text;
+          }
+        });
+      }
+      document.getElementById('btn-en').addEventListener('click', function() { setLanguage('en'); });
+      document.getElementById('btn-es').addEventListener('click', function() { setLanguage('es'); });
+      // Default to English
+      setLanguage('en');
+    })();
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="contact.css">
-<div class="card" data-modal-target="contactcenter-modal" tabindex="0">
-  <span class="icon">&#128222;</span>
-  <div class="title">Contact Center</div>
-  <div class="content">Mejore la satisfacción del cliente con nuestro soporte experto.</div>
-</div>
-<script src="contact.js"></script>
