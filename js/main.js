@@ -176,11 +176,7 @@
 
     document.documentElement.setAttribute('lang', lang);
 
-    function applyTheme() {
-      document.body.classList.toggle('dark', theme === 'dark');
-    }
-
-    applyTheme();
+    window.applyTheme(theme);
     function renderCards() {
       Object.entries({ops:'ops',cc:'cc',it:'it',pro:'pro'}).forEach(([id, key]) => {
         let c = svc[key][lang];
@@ -295,7 +291,7 @@
     }
     function setTheme(t) {
       theme = t;
-      applyTheme();
+      window.applyTheme(theme);
       localStorage.setItem('ops-theme', t);
       connector.emit('themeChange', t);
     }
@@ -322,10 +318,9 @@
     }
     let themeToggle = document.getElementById('theme-toggle');
     if(themeToggle){
-      themeToggle.textContent = theme==="light" ? "Dark" : "Light";
       themeToggle.onclick = ()=>{
-        setTheme(theme==="light" ? "dark" : "light");
-        themeToggle.textContent = theme==="light" ? "Dark" : "Light";
+        theme = toggleTheme();
+        connector.emit('themeChange', theme);
       };
     }
     let mobileLangToggle = document.getElementById('mobile-lang-toggle');
@@ -338,10 +333,9 @@
     }
     let mobileThemeToggle = document.getElementById('mobile-theme-toggle');
     if(mobileThemeToggle){
-      mobileThemeToggle.textContent = theme==="light" ? "Dark" : "Light";
       mobileThemeToggle.onclick = ()=>{
-        setTheme(theme==="light" ? "dark" : "light");
-        mobileThemeToggle.textContent = theme==="light" ? "Dark" : "Light";
+        theme = toggleTheme();
+        connector.emit('themeChange', theme);
       };
     }
 
@@ -467,8 +461,7 @@ async function loadModal(id) {
 
 // Initialize UI based on stored preferences
 setLang(lang);
-setTheme(theme);
+window.applyTheme(theme);
+connector.emit('themeChange', theme);
 document.getElementById('lang-toggle').textContent = lang === 'en' ? 'ES' : 'EN';
 document.getElementById('mobile-lang-toggle').textContent = lang === 'en' ? 'ES' : 'EN';
-document.getElementById('theme-toggle').textContent = theme === 'light' ? 'Dark' : 'Light';
-document.getElementById('mobile-theme-toggle').textContent = theme === 'light' ? 'Dark' : 'Light';
