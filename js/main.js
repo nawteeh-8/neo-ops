@@ -300,7 +300,7 @@
       connector.emit('themeChange', t);
     }
 
-    connector.on('langChange', l => { if(l !== lang) setLang(l); });
+    connector.on('langChange', setLang);
     connector.on('themeChange', t => { if(t !== theme) setTheme(t); });
 
     // Receive updates from chatbot iframe
