@@ -2,53 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Business Operations Optimization | [Your Company]</title>
+  <title data-en="Business Operations Optimization | [Your Company]" data-es="Optimización de Operaciones Empresariales | [Su Empresa]">
+    Business Operations Optimization | [Your Company]
+  </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="business.css">
-<div class="card" data-modal-target="business-modal" tabindex="0">
-  <span class="icon">&#128188;</span>
-  <div class="title">Business Operations</div>
-  <div class="content">Optimice sus procesos para obtener la máxima eficiencia.</div>
-</div>  
 </head>
-    <span class="icon">&#128188;</span>
-  <div class="title">Business Operations</div>
-  <div class="content">Optimice sus procesos para obtener la máxima eficiencia.</div>
 <body style="font-family:sans-serif; color:#333; line-height:1.6; padding:20px;">
+  <!-- Language Toggle Buttons -->
+  <div style="text-align:right; margin-bottom:20px;">
+    <button id="btn-en" style="margin-right:5px;">EN</button>
+    <button id="btn-es">ES</button>
+  </div>
+
+  <!-- Card -->
+  <div class="card" data-modal-target="business-modal" tabindex="0">
+    <span class="icon">&#128188;</span>
+    <div class="title" data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</div>
+    <div class="content" data-en="Optimize your processes for maximum efficiency." data-es="Optimice sus procesos para obtener la máxima eficiencia.">
+      Optimize your processes for maximum efficiency.
+    </div>
+  </div>
+
+  <!-- Header -->
   <header style="text-align:center; padding-bottom:20px;">
-    <h1>Streamline Your Business Operations</h1>
-    <p>Boost productivity and reduce inefficiencies with custom-tailored operational strategies.</p>
-    <a href="#form" style="display:inline-block; padding:10px 20px; background:#ff6600; color:#fff; text-decoration:none; border-radius:6px;">Get a Free Efficiency Audit</a>
+    <h1 data-en="Streamline Your Business Operations" data-es="Optimice Sus Operaciones Empresariales">
+      Streamline Your Business Operations
+    </h1>
+    <p data-en="Boost productivity and reduce inefficiencies with custom-tailored operational strategies."
+       data-es="Aumente la productividad y reduzca las ineficiencias con estrategias operativas a medida.">
+      Boost productivity and reduce inefficiencies with custom-tailored operational strategies.
+    </p>
+    <a href="#form"
+       style="display:inline-block; padding:10px 20px; background:#ff6600; color:#fff; text-decoration:none; border-radius:6px;"
+       data-en="Get a Free Efficiency Audit" data-es="Obtenga una Auditoría de Eficiencia Gratis">
+      Get a Free Efficiency Audit
+    </a>
   </header>
 
+  <!-- Why It Matters -->
   <section>
-    <h2>Why Operational Optimization Matters</h2>
-    <p>Busy teams waste up to 20% of time due to process friction. Our experts help identify and remove these barriers through strategic analysis, automation, and streamlined workflows.</p>
+    <h2 data-en="Why Operational Optimization Matters" data-es="Por Qué Importa la Optimización Operativa">
+      Why Operational Optimization Matters
+    </h2>
+    <p data-en="Busy teams waste up to 20% of time due to process friction. Our experts help identify and remove these barriers through strategic analysis, automation, and streamlined workflows."
+       data-es="Los equipos ocupados pierden hasta el 20% del tiempo debido a fricciones en los procesos. Nuestros expertos identifican y eliminan esas barreras mediante análisis estratégico, automatización y flujos de trabajo optimizados.">
+      Busy teams waste up to 20% of time due to process friction. Our experts help identify and remove these barriers through strategic analysis, automation, and streamlined workflows.
+    </p>
   </section>
 
+  <!-- What You’ll Gain -->
   <section>
-    <h2>What You’ll Gain</h2>
+    <h2 data-en="What You’ll Gain" data-es="Lo Que Obtendrá">
+      What You’ll Gain
+    </h2>
     <ul>
-      <li>20–40% time savings with automation</li>
-      <li>Real-time reporting dashboards</li>
-      <li>Cross-department collaboration alignment</li>
+      <li data-en="20–40% time savings with automation" data-es="Ahorro de tiempo del 20–40% con automatización">
+        20–40% time savings with automation
+      </li>
+      <li data-en="Real-time reporting dashboards" data-es="Tableros de informes en tiempo real">
+        Real-time reporting dashboards
+      </li>
+      <li data-en="Cross-department collaboration alignment" data-es="Alineación de colaboración entre departamentos">
+        Cross-department collaboration alignment
+      </li>
     </ul>
   </section>
 
+  <!-- Proven Results -->
   <section style="background:#f7f7f7; padding:20px;">
-    <h2>Proven Results</h2>
-    <blockquote>“Within 60 days, we slashed internal admin time by 30%. Their team made our systems smarter, not just faster.”<br><strong>– COO, TechCo</strong></blockquote>
-    <img src="logos-clients.png" alt="Trusted by Siemens, Deloitte, HubSpot" style="max-width:100%;">
+    <h2 data-en="Proven Results" data-es="Resultados Comprobados">
+      Proven Results
+    </h2>
+    <blockquote data-en="“Within 60 days, we slashed internal admin time by 30%. Their team made our systems smarter, not just faster.”"
+                data-es="“En 60 días, redujimos el tiempo administrativo interno en un 30%. Su equipo hizo nuestros sistemas más inteligentes, no solo más rápidos.”">
+      “Within 60 days, we slashed internal admin time by 30%. Their team made our systems smarter, not just faster.”
+    </blockquote>
+    <strong data-en="– COO, TechCo" data-es="– Director de Operaciones, TechCo">– COO, TechCo</strong><br>
+    <img src="logos-clients.png" alt=""
+         data-en="Trusted by Siemens, Deloitte, HubSpot"
+         data-es="Con la confianza de Siemens, Deloitte, HubSpot"
+         style="max-width:100%;">
   </section>
 
+  <!-- Contact Form -->
   <section id="form">
-    <h2>Book Your Free Audit</h2>
+    <h2 data-en="Book Your Free Audit" data-es="Reserve Su Auditoría Gratis">
+      Book Your Free Audit
+    </h2>
     <form>
-      <input type="text" placeholder="Your Name" required><br>
-      <input type="email" placeholder="Your Email" required><br>
-      <button type="submit" style="background:#007acc; color:#fff; padding:10px 20px; border:none; border-radius:5px;">Schedule Now</button>
+      <input type="text"
+             placeholder=""
+             data-en="Your Name" data-es="Su Nombre"
+             required><br>
+      <input type="email"
+             placeholder=""
+             data-en="Your Email" data-es="Su Correo Electrónico"
+             required><br>
+      <button type="submit"
+              style="background:#007acc; color:#fff; padding:10px 20px; border:none; border-radius:5px;"
+              data-en="Schedule Now" data-es="Programar Ahora">
+        Schedule Now
+      </button>
     </form>
   </section>
+
   <script src="business.js"></script>
+  <script>
+    (function() {
+      function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        // Title
+        var titleTag = document.querySelector('title');
+        document.title = titleTag.getAttribute('data-' + lang);
+        // All translatable elements
+        document.querySelectorAll('[data-en]').forEach(function(el) {
+          var key = 'data-' + lang;
+          var text = el.getAttribute(key);
+          if (!text) return;
+          if (el.tagName.toLowerCase() === 'input') {
+            el.placeholder = text;
+          } else if (el.tagName.toLowerCase() === 'img') {
+            el.alt = text;
+          } else {
+            el.textContent = text;
+          }
+        });
+      }
+
+      document.getElementById('btn-en').addEventListener('click', function() { setLanguage('en'); });
+      document.getElementById('btn-es').addEventListener('click', function() { setLanguage('es'); });
+
+      // Initialize default
+      setLanguage('en');
+    })();
+  </script>
 </body>
 </html>
