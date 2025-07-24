@@ -198,7 +198,13 @@
     });
 
     btnAsk.addEventListener('click', () => alert('Integrate with chatbot'));
-    btnContact.addEventListener('click', () => alert('Open contact form or modal'));
+    btnContact.addEventListener('click', () => {
+      if (typeof openContactModal === 'function') {
+        openContactModal();
+      } else {
+        window.location.href = '../fabs/contact.html';
+      }
+    });
 
     function makeDraggable(elem, dragHandle) {
       let isDown = false, startX = 0, startY = 0;
