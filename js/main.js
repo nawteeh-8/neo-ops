@@ -203,42 +203,20 @@
         card.onkeydown = e=>{if(e.key==="Enter"||e.key===" ")openModal(key);};
       }
     });
-    function openModal(key) {
-      let data = svc[key][lang].modal;
-      let m = document.createElement('div');
-      m.className = 'modal-backdrop';
-      m.innerHTML = `
-        <div class="ops-modal" tabindex="-1" role="dialog" aria-modal="true" id="draggable-modal">
-          <button class="modal-x" aria-label="CERRAR" id="modal-x">X</button>
-          <div class="modal-header">
-            <img class="modal-img" src="${data.img}" alt="${data.imgAlt}" />
-            <div><div class="modal-title">${data.title}</div></div>
-          </div>
-          <div class="modal-content-body">${data.content}</div>
-          <div class="modal-video">${data.video}</div>
-          <ul style="margin-bottom:1.2em; margin-left:1.3em;">
-            ${data.features.map(i => `<li>${i}</li>`).join("")}
-          </ul>
-          <div class="modal-actions">
-            <a class="modal-btn" href="${data.learn}" target="_blank" rel="noopener noreferrer">${lang==="en"?"Learn More":"Más Información"}</a>
-            <button class="modal-btn" onclick="alert('Integrate with chatbot')">${lang==="en"?"Ask Chattia":"Preguntar Chattia"}</button>
-            <button class="modal-btn cta" id="modal-contact-btn"><i class="fa fa-envelope" aria-hidden="true"></i> ${lang==="en"?"Contact Us":"Contáctanos"}</button>
-            <button class="modal-btn" id="cancel-btn">${lang==="en"?"Cancel":"Cancelar"}</button>
-          </div>
-        </div>`;
+    async function openModal(key) {
+      const map = {ops:'businessoperations',cc:'contactcenter',it:'itsupport',pro:'professionals'};
       let root = document.getElementById('modal-root');
       if(!root) return;
-      root.innerHTML = '';
-      root.appendChild(m);
-      let modal = m.querySelector('.ops-modal');
-      // Close on X, ESC, Cancel, or outside
-      function close() { root.innerHTML = ''; }
-      m.onclick = e => (e.target === m ? close() : 0);
-      modal.querySelector('.modal-x').onclick = close;
-      modal.querySelector('#cancel-btn').onclick = close;
-      document.addEventListener('keydown', function esc(e) {if(e.key==="Escape"){close();document.removeEventListener('keydown',esc);}}, {once:true});
-      modal.querySelector('#modal-contact-btn').onclick = ()=>{openContactModal();close();}
-      makeDraggable(modal, modal.querySelector('.modal-header'));
+      try {
+        const res = await fetch(`modals/${sanitize(map[key]||key)}.html`);
+        if(!res.ok) throw new Error('modal not found');
+        const text = await res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text,'text/html');
+        root.innerHTML = doc.body.innerHTML;
+        root.querySelectorAll('script').forEach(s=>{const c=document.createElement('script');
+          if(s.src) c.src=s.src; else c.textContent=s.textContent;document.body.appendChild(c);s.remove();});
+      } catch(err){ console.error('Modal load error:',err); }
     }
     // --- FAB HANDLERS ---
     function openContactModal() {
@@ -448,22 +426,6 @@ function sanitize(text) {
   return div.innerHTML;
 }
 
-// Modal handling
-document.addEventListener('click', e => {
-  const btn = e.target.closest('[data-modal-target]');
-  if (!btn) return;
-  loadModal(btn.getAttribute('data-modal-target'));
-});
-
-async function loadModal(id) {
-  try {
-    const res = await fetch(`components/modals/${sanitize(id)}.html`);
-    if (!res.ok) throw new Error('Modal not found');
-    document.getElementById('modal-container').innerHTML = await res.text();
-  } catch (err) {
-    console.error('Modal load error:', err);
-  }
-}
 
 // Initialize UI based on stored preferences
 setLang(lang);
