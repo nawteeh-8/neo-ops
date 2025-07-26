@@ -242,18 +242,28 @@
     function openJoinModal() {
       window.location.href = 'fabs/join.html';
     }
-
-    // --- Chatbot Popup ---
-    async function openChatbot() {
-      try {
-        const res = await fetch('bot/chatbot-template.html');
-        if (!res.ok) throw new Error('Chatbot not found');
-        const html = await res.text();
-        const container = document.getElementById('chatbot-root');
-        if (container) container.innerHTML = sanitizeHTML(html);
-      } catch (err) {
-        console.error('Chatbot load error:', err);
-      }
+    function openChatbot(trigger){
+      let root = document.getElementById('modal-root');
+      root.innerHTML = '';
+      let m = document.createElement('div');
+      m.className = 'modal-backdrop';
+      m.innerHTML = `
+        <div class="chatbot-holder" role="dialog" aria-modal="true">
+          <button class="modal-x" aria-label="Close">&times;</button>
+          <iframe src="bot/chatbot.html" title="Chatbot" id="chatbot-frame"></iframe>
+        </div>`;
+      root.appendChild(m);
+      let dialog = m.querySelector('.chatbot-holder');
+      let frame = dialog.querySelector('iframe');
+      frame.onload = ()=>{
+        let doc = frame.contentDocument || frame.contentWindow.document;
+        let first = doc.querySelector('input,button,textarea,select');
+        if(first) first.focus();
+      };
+      function close(){ root.innerHTML=''; if(trigger) trigger.focus(); }
+      m.onclick = e=>{ if(e.target===m) close(); };
+      dialog.querySelector('.modal-x').onclick = close;
+      document.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ close(); document.removeEventListener('keydown', esc); }}, {once:true});
     }
     // Accordion Services
     let mobileFabServices = document.getElementById('mobile-fab-services');
@@ -311,6 +321,16 @@
       mobileThemeToggle.onclick = ()=>{
         theme = toggleTheme();
       };
+    }
+
+    // Chatbot FABs
+    let fabChat = document.getElementById('fab-chat');
+    if(fabChat){
+      fabChat.onclick = e=>{ e.preventDefault(); openChatbot(fabChat); };
+    }
+    let mobileFabChat = document.getElementById('mobile-fab-chat');
+    if(mobileFabChat){
+      mobileFabChat.onclick = e=>{ e.preventDefault(); openChatbot(mobileFabChat); };
     }
 
     // --- MODALS: JOIN/CONTACT (Basic, Draggable) ---
