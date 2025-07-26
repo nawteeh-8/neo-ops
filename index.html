@@ -121,6 +121,8 @@
       font-size: 0.875rem;
       border-radius: 6px;
       cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
       transition: background-color 0.3s ease;
     }
     .btn-consultation:hover {
@@ -462,9 +464,9 @@
 
   <!-- HERO SECTION -->
   <section class="hero-section" role="banner" aria-label="Scale your business with 24/7 expert support">
-    <h1>Scale your business with<br>24/7 expert support</h1>
-    <p>OPS provides managed services, IT solutions, and remote professionals to drive your growth.</p>
-    <button class="btn-consultation" type="button">BOOK A CONSULTATION</button>
+    <h1 id="hero-title" data-en="Scale your business with&lt;br&gt;24/7 expert support" data-es="Escale su negocio con&lt;br&gt;soporte experto 24/7">Scale your business with<br>24/7 expert support</h1>
+    <p id="hero-desc" data-en="OPS provides managed services, IT solutions, and remote professionals to drive your growth." data-es="OPS ofrece servicios administrados, soluciones IT y profesionales remotos para impulsar su crecimiento.">OPS provides managed services, IT solutions, and remote professionals to drive your growth.</p>
+    <a class="btn-consultation" id="btn-consultation" href="contact/call.html" data-en="BOOK A CONSULTATION" data-es="RESERVAR UNA CONSULTA">BOOK A CONSULTATION</a>
   </section>
 
   <!-- CARDS GRID -->
@@ -834,6 +836,14 @@
     function setLang(l) {
       lang = l;
       renderCards();
+      const h1 = document.getElementById('hero-title');
+      const desc = document.getElementById('hero-desc');
+      const btn = document.getElementById('btn-consultation');
+      if(h1 && desc && btn){
+        h1.innerHTML = lang === 'en' ? h1.dataset.en : h1.dataset.es;
+        desc.textContent = lang === 'en' ? desc.dataset.en : desc.dataset.es;
+        btn.textContent = lang === 'en' ? btn.dataset.en : btn.dataset.es;
+      }
       // propagate open modals/chat
       let cb = document.getElementById('chatbot-modal-backdrop');
       if(cb) cb.querySelector('#chatbot-lang').textContent = lang==="en"?"ES":"EN";
