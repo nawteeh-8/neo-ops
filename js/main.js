@@ -242,6 +242,19 @@
     function openJoinModal() {
       window.location.href = 'fabs/join.html';
     }
+
+    // --- Chatbot Popup ---
+    async function openChatbot() {
+      try {
+        const res = await fetch('bot/chatbot-template.html');
+        if (!res.ok) throw new Error('Chatbot not found');
+        const html = await res.text();
+        const container = document.getElementById('chatbot-root');
+        if (container) container.innerHTML = sanitizeHTML(html);
+      } catch (err) {
+        console.error('Chatbot load error:', err);
+      }
+    }
     // Accordion Services
     let mobileFabServices = document.getElementById('mobile-fab-services');
     let mobilePanelServices = document.getElementById('mobile-panel-services');
@@ -401,6 +414,13 @@ function sanitize(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+function sanitizeHTML(html) {
+  const t = document.createElement('template');
+  t.innerHTML = html;
+  t.content.querySelectorAll('script').forEach(el => el.remove());
+  return t.innerHTML;
 }
 
 // Modal handling
