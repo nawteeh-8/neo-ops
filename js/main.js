@@ -217,7 +217,6 @@
           </ul>
           <div class="modal-actions">
             <a class="modal-btn" href="${data.learn}" target="_blank" rel="noopener noreferrer">${lang==="en"?"Learn More":"Más Información"}</a>
-            <button class="modal-btn" onclick="alert('Integrate with chatbot')">${lang==="en"?"Ask Chattia":"Preguntar Chattia"}</button>
             <button class="modal-btn cta" id="modal-contact-btn"><i class="fa fa-envelope" aria-hidden="true"></i> ${lang==="en"?"Contact Us":"Contáctanos"}</button>
             <button class="modal-btn" id="cancel-btn">${lang==="en"?"Cancel":"Cancelar"}</button>
           </div>
@@ -243,29 +242,6 @@
     function openJoinModal() {
       window.location.href = 'fabs/join.html';
     }
-    function openChatbot() {
-      let existing = document.getElementById('chatbot-container');
-      if(existing){ existing.remove(); return; }
-      let chatbotCont = document.createElement('div');
-      chatbotCont.id = "chatbot-container";
-      chatbotCont.setAttribute('tabindex','-1');
-      chatbotCont.setAttribute('role','dialog');
-      chatbotCont.setAttribute('aria-modal','true');
-      chatbotCont.innerHTML = `<iframe src="bot/chatbot.html" style="width:100%;height:100%;border:none;"></iframe>`;
-      document.body.appendChild(chatbotCont);
-      const iframe = chatbotCont.querySelector('iframe');
-      iframe.addEventListener('load', () => {
-        connector.emit('langChange', lang);
-        connector.emit('themeChange', theme);
-      });
-      document.addEventListener('keydown', function esc(e){if(e.key==="Escape"){chatbotCont.remove();document.removeEventListener('keydown',esc);}}, {once:true});
-      makeDraggable(chatbotCont);
-    }
-
-    let fabChat = document.getElementById('fab-chat');
-    if(fabChat) fabChat.onclick = openChatbot;
-    let mobileFabChat = document.getElementById('mobile-fab-chat');
-    if(mobileFabChat) mobileFabChat.onclick = openChatbot;
     // Accordion Services
     let mobileFabServices = document.getElementById('mobile-fab-services');
     let mobilePanelServices = document.getElementById('mobile-panel-services');
@@ -285,7 +261,6 @@
       if(document.getElementById('card-ops')) renderCards();
       document.documentElement.setAttribute('lang', lang);
       localStorage.setItem('ops-lang', l);
-      connector.emit('langChange', l);
       let modalRoot = document.getElementById('modal-root');
       if(modalRoot) modalRoot.innerHTML='';
     }
@@ -293,21 +268,9 @@
       theme = t;
       window.applyTheme(theme);
       localStorage.setItem('ops-theme', t);
-      connector.emit('themeChange', t);
     }
 
-    connector.on('langChange', l => { if(l !== lang) setLang(l); });
-    connector.on('themeChange', t => { if(t !== theme) setTheme(t); });
 
-    // Receive updates from chatbot iframe
-    window.addEventListener('message', e => {
-      if(!e.data || !e.data.type) return;
-      if(e.data.type === 'langChange' && e.data.lang) {
-        if(e.data.lang !== lang) setLang(e.data.lang);
-      } else if(e.data.type === 'themeChange' && e.data.theme) {
-        if(e.data.theme !== theme) setTheme(e.data.theme);
-      }
-    });
     let langToggle = document.getElementById('lang-toggle');
     if(langToggle){
       langToggle.textContent = lang==="en" ? "ES" : "EN";
@@ -320,7 +283,6 @@
     if(themeToggle){
       themeToggle.onclick = ()=>{
         theme = toggleTheme();
-        connector.emit('themeChange', theme);
       };
     }
     let mobileLangToggle = document.getElementById('mobile-lang-toggle');
@@ -335,7 +297,6 @@
     if(mobileThemeToggle){
       mobileThemeToggle.onclick = ()=>{
         theme = toggleTheme();
-        connector.emit('themeChange', theme);
       };
     }
 
@@ -462,6 +423,5 @@ async function loadModal(id) {
 // Initialize UI based on stored preferences
 setLang(lang);
 window.applyTheme(theme);
-connector.emit('themeChange', theme);
 document.getElementById('lang-toggle').textContent = lang === 'en' ? 'ES' : 'EN';
 document.getElementById('mobile-lang-toggle').textContent = lang === 'en' ? 'ES' : 'EN';

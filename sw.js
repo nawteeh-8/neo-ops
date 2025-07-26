@@ -8,7 +8,6 @@ const PRECACHE_URLS = [
   '/css/global.css',
   '/css/adaptablescreens.css',
   '/js/main.js',
-  '/js/connector.js',
   '/js/langthem.js',
   '/services/business.html',
   '/services/contactcenter.html',
@@ -19,11 +18,7 @@ const PRECACHE_URLS = [
   '/modals/itsupport.html',
   '/modals/professionals.html',
   '/fabs/contact.html',
-  '/fabs/join.html',
-  '/bot/chatbot.html',
-  '/bot/style.css',
-  '/bot/app.js',
-  '/bot/worker.js'
+  '/fabs/join.html'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(
