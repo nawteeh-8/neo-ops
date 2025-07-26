@@ -277,10 +277,11 @@
 <body>
   <!-- Navigation Menu -->
   <nav>
-    <a href="#" data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</a>
-    <a href="#" data-en="Contact Center" data-es="Centro de Contacto">Contact Center</a>
-    <a href="#" data-en="IT Support" data-es="Soporte IT">IT Support</a>
-    <a href="#" data-en="Professionals" data-es="Profesionales">Professionals</a>
+      <a href="../index.html" data-en="Home" data-es="Inicio">Home</a>
+    <a href="gestion.html" data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</a>
+    <a href="center.html" data-en="Contact Center" data-es="Centro de Contacto">Contact Center</a>
+    <a href="it.html" data-en="IT Support" data-es="Soporte IT">IT Support</a>
+    <a href="pros.html" data-en="Professionals" data-es="Profesionales">Professionals</a>
   </nav>
 
   <!-- Toggles for language and theme -->
@@ -404,74 +405,6 @@
       </button>
     </form>
   </section>
-
-  <script>
-    (function() {
-      const btnLang = document.getElementById('btn-lang');
-      const btnTheme = document.getElementById('btn-theme');
-      const html = document.documentElement;
-      const body = document.body;
-
-      // Default states
-      let currentLang = 'en';
-      let isDark = true;
-
-      function setLanguage(lang) {
-        currentLang = lang;
-        html.lang = lang;
-        // Update <title>
-        const titleTag = document.querySelector('title');
-        document.title = titleTag.getAttribute('data-' + lang);
-        // Update all translatable elements
-        document.querySelectorAll('[data-en]').forEach(el => {
-          const text = el.getAttribute('data-' + lang);
-          if (!text) return;
-          if (el.tagName.toLowerCase() === 'input') {
-            el.placeholder = text;
-          } else if (el.tagName.toLowerCase() === 'img') {
-            el.alt = text;
-          } else {
-            el.textContent = text;
-          }
-        });
-        // Update nav links separately for better screen reader experience
-        document.querySelectorAll('nav a').forEach(a => {
-          const text = a.getAttribute('data-' + lang);
-          if (text) a.textContent = text;
-        });
-        // Update toggle language button label and ARIA
-        btnLang.textContent = lang.toUpperCase();
-        btnLang.setAttribute('aria-pressed', lang === 'es');
-      }
-
-      function toggleLanguage() {
-        setLanguage(currentLang === 'en' ? 'es' : 'en');
-      }
-
-      function setTheme(darkMode) {
-        isDark = darkMode;
-        if (darkMode) {
-          body.classList.remove('light');
-          btnTheme.textContent = 'Dark Mode';
-          btnTheme.setAttribute('aria-pressed', 'false');
-        } else {
-          body.classList.add('light');
-          btnTheme.textContent = 'Light Mode';
-          btnTheme.setAttribute('aria-pressed', 'true');
-        }
-      }
-
-      function toggleTheme() {
-        setTheme(!isDark);
-      }
-
-      btnLang.addEventListener('click', toggleLanguage);
-      btnTheme.addEventListener('click', toggleTheme);
-
-      // Initialize default
-      setLanguage(currentLang);
-      setTheme(isDark);
-    })();
-  </script>
+  <script src="../js/langtheme.js"></script>
 </body>
 </html>
