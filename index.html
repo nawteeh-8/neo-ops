@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com">
   <meta name="robots" content="index,follow">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
   <title>OPS Unified Portal</title>
-  <meta name="robots" content="index,follow">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-RXf+QSDCUqpphKAa+WAc3XQ8fE5H1aO/8e2wY+8Q1n8yVwDh1RZTf1TDN8E+u1n7eU5KyY7X2Qo+hqeZZn+UAQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <style>
     :root {
       --clr-primary: #00c4ff;
@@ -121,6 +120,8 @@
       font-size: 0.875rem;
       border-radius: 6px;
       cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
       transition: background-color 0.3s ease;
     }
     .btn-consultation:hover {
@@ -464,7 +465,7 @@
   <section class="hero-section" role="banner" aria-label="Scale your business with 24/7 expert support">
     <h1>Scale your business with<br>24/7 expert support</h1>
     <p>OPS provides managed services, IT solutions, and remote professionals to drive your growth.</p>
-    <button class="btn-consultation" type="button">BOOK A CONSULTATION</button>
+    <a class="btn-consultation" href="contact/call.html">BOOK A CONSULTATION</a>
   </section>
 
   <!-- CARDS GRID -->
@@ -815,12 +816,12 @@
       };
       makeDraggable(chatbotCont, c.querySelector("#chatbot-header"));
     }
-    document.getElementById('fab-chat').onclick = openChatbot;
-    document.getElementById('fab-join').onclick = openJoinModal;
-    document.getElementById('fab-contact').onclick = openContactModal;
-    document.getElementById('mobile-fab-chat').onclick = openChatbot;
-    document.getElementById('mobile-fab-join').onclick = openJoinModal;
-    document.getElementById('mobile-fab-contact').onclick = openContactModal;
+    document.getElementById('fab-chat').onclick = () => location.href = 'chatbot.html';
+    document.getElementById('fab-join').onclick = () => location.href = 'contact/join.html';
+    document.getElementById('fab-contact').onclick = () => location.href = 'contact/call.html';
+    document.getElementById('mobile-fab-chat').onclick = () => location.href = 'chatbot.html';
+    document.getElementById('mobile-fab-join').onclick = () => location.href = 'contact/join.html';
+    document.getElementById('mobile-fab-contact').onclick = () => location.href = 'contact/call.html';
     // Accordion Services
     document.getElementById('mobile-fab-services').onclick = function() {
       document.getElementById('mobile-panel-services').classList.toggle('active');
@@ -834,6 +835,14 @@
     function setLang(l) {
       lang = l;
       renderCards();
+      const h1 = document.getElementById('hero-title');
+      const desc = document.getElementById('hero-desc');
+      const btn = document.getElementById('btn-consultation');
+      if(h1 && desc && btn){
+        h1.innerHTML = lang === 'en' ? h1.dataset.en : h1.dataset.es;
+        desc.textContent = lang === 'en' ? desc.dataset.en : desc.dataset.es;
+        btn.textContent = lang === 'en' ? btn.dataset.en : btn.dataset.es;
+      }
       // propagate open modals/chat
       let cb = document.getElementById('chatbot-modal-backdrop');
       if(cb) cb.querySelector('#chatbot-lang').textContent = lang==="en"?"ES":"EN";
