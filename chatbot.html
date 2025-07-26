@@ -6,7 +6,6 @@
 <title>OPS AI Chatbot</title>
 <meta name="robots" content="index,follow">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-
 <!-- Patched FontAwesome (CSP + SRI + CORS Safe) -->
 <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -91,6 +90,10 @@ body.dark{--clr-bg:var(--clr-bg-dark);--clr-tx:var(--clr-tx-dark)}
 const qs=s=>document.querySelector(s),
       qsa=s=>[...document.querySelectorAll(s)];
 
+// Serverless backend for chatbot messages
+const ENDPOINT = window.CHATBOT_ENDPOINT ||
+  'https://example.netlify.app/.netlify/functions/chat';
+
 /* === Language toggle === */
 const langCtrl   = qs('#langCtrl'),
       transNodes = qsa('[data-en]'),
@@ -146,7 +149,7 @@ form.onsubmit = async e=>{
   addMsg('…','bot');
 
   try{
-    const r = await fetch('https://your-cloudflare-worker.example.com/chat',{
+    const r = await fetch(ENDPOINT,{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({message:msg})
     });

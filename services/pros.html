@@ -257,6 +257,21 @@
       background: #5e35b1;
     }
 
+    section#form input.error {
+      border: 2px solid #e53935;
+    }
+    .form-message {
+      margin-top: 10px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .form-message.success {
+      color: #4caf50;
+    }
+    .form-message.error {
+      color: #e53935;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       header h1 {
@@ -353,7 +368,7 @@
   <!-- Get Started Form -->
   <section id="form">
     <h2 data-en="Get Started Now" data-es="Comience Ahora">Get Started Now</h2>
-    <form>
+    <form class="service-form">
       <input type="text"
              placeholder=""
              data-en="Full Name"
@@ -370,7 +385,9 @@
         Book Session
       </button>
     </form>
+    <div class="form-message" aria-live="polite"></div>
   </section>
   <script src="../js/langtheme.js"></script>
+  <script src="../js/form-handler.js"></script>
 </body>
 </html>
