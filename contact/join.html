@@ -3,10 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'" />
-<meta http-equiv="X-Frame-Options" content="DENY" />
-<meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains" />
-<title>Join Us - OPS • Chattia</title>
+<title data-en="Join Us - OPS • Chattia" data-es="Únete - OPS • Chattia">Join Us - OPS • Chattia</title>
 <style>
   :root {
     --clr-primary: #00c4ff;
@@ -134,23 +131,26 @@
     background: var(--clr-accent-dark);
   }
 </style>
-<title>Join Us Form</title>
+<title data-en="Join Us Form" data-es="Formulario de Ingreso">Join Us Form</title>
 </head>
 <body>
-  <h1>Join Us</h1>
+  <div id="toggles" style="text-align:right;">
+    <button id="btn-lang" aria-label="Toggle language" aria-pressed="false">ES</button>
+  </div>
+  <h1 data-en="Join Us" data-es="Únete a Nosotros">Join Us</h1>
   <form id="joinForm" autocomplete="off" novalidate>
     <div class="form-pairs">
       <div>
-        <label for="name">Name</label>
-        <input id="name" name="name" required placeholder="Enter your name" />
+        <label for="name" data-en="Name" data-es="Nombre">Name</label>
+        <input id="name" name="name" required placeholder="Enter your name" data-en="Enter your name" data-es="Ingresa tu nombre" />
       </div>
       <div>
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" required placeholder="Enter your email" />
+        <label for="email" data-en="Email" data-es="Correo electrónico">Email</label>
+        <input id="email" type="email" name="email" required placeholder="Enter your email" data-en="Enter your email" data-es="Ingresa tu correo electrónico" />
       </div>
       <div>
-        <label for="phone">Phone</label>
-        <input id="phone" type="tel" name="phone" required placeholder="Enter your phone" />
+        <label for="phone" data-en="Phone" data-es="Teléfono">Phone</label>
+        <input id="phone" type="tel" name="phone" required placeholder="Enter your phone" data-en="Enter your phone" data-es="Ingresa tu teléfono" />
       </div>
       <div></div>
     </div>
@@ -158,86 +158,86 @@
     <!-- Dynamic Sections -->
     <div class="form-section" data-section="Skills">
       <div class="section-header">
-        <h2>Skills</h2>
+        <h2 data-en="Skills" data-es="Habilidades">Skills</h2>
         <div>
-          <button type="button" class="circle-btn add" title="Add field">+</button>
-          <button type="button" class="circle-btn remove" title="Remove last field">−</button>
+          <button type="button" class="circle-btn add" title="Add field" data-en="Add field" data-es="Agregar campo">+</button>
+          <button type="button" class="circle-btn remove" title="Remove last field" data-en="Remove last field" data-es="Quitar último campo">−</button>
         </div>
       </div>
       <div class="inputs"></div>
-      <button type="button" class="accept-btn">Accept</button>
-      <button type="button" class="edit-btn" style="display:none;">Edit</button>
+      <button type="button" class="accept-btn" data-en="Accept" data-es="Aceptar">Accept</button>
+      <button type="button" class="edit-btn" style="display:none;" data-en="Edit" data-es="Editar">Edit</button>
     </div>
 
     <div class="form-section" data-section="Education">
       <div class="section-header">
-        <h2>Education</h2>
+        <h2 data-en="Education" data-es="Educación">Education</h2>
         <div>
-          <button type="button" class="circle-btn add" title="Add field">+</button>
-          <button type="button" class="circle-btn remove" title="Remove last field">−</button>
+          <button type="button" class="circle-btn add" title="Add field" data-en="Add field" data-es="Agregar campo">+</button>
+          <button type="button" class="circle-btn remove" title="Remove last field" data-en="Remove last field" data-es="Quitar último campo">−</button>
         </div>
       </div>
       <div class="inputs"></div>
-      <button type="button" class="accept-btn">Accept</button>
-      <button type="button" class="edit-btn" style="display:none;">Edit</button>
+      <button type="button" class="accept-btn" data-en="Accept" data-es="Aceptar">Accept</button>
+      <button type="button" class="edit-btn" style="display:none;" data-en="Edit" data-es="Editar">Edit</button>
     </div>
 
     <div class="form-section" data-section="Certification">
       <div class="section-header">
-        <h2>Certification</h2>
+        <h2 data-en="Certification" data-es="Certificación">Certification</h2>
         <div>
-          <button type="button" class="circle-btn add" title="Add field">+</button>
-          <button type="button" class="circle-btn remove" title="Remove last field">−</button>
+          <button type="button" class="circle-btn add" title="Add field" data-en="Add field" data-es="Agregar campo">+</button>
+          <button type="button" class="circle-btn remove" title="Remove last field" data-en="Remove last field" data-es="Quitar último campo">−</button>
         </div>
       </div>
       <div class="inputs"></div>
-      <button type="button" class="accept-btn">Accept</button>
-      <button type="button" class="edit-btn" style="display:none;">Edit</button>
+      <button type="button" class="accept-btn" data-en="Accept" data-es="Aceptar">Accept</button>
+      <button type="button" class="edit-btn" style="display:none;" data-en="Edit" data-es="Editar">Edit</button>
     </div>
 
     <div class="form-section" data-section="Hobbies">
       <div class="section-header">
-        <h2>Hobbies</h2>
+        <h2 data-en="Hobbies" data-es="Pasatiempos">Hobbies</h2>
         <div>
-          <button type="button" class="circle-btn add" title="Add field">+</button>
-          <button type="button" class="circle-btn remove" title="Remove last field">−</button>
+          <button type="button" class="circle-btn add" title="Add field" data-en="Add field" data-es="Agregar campo">+</button>
+          <button type="button" class="circle-btn remove" title="Remove last field" data-en="Remove last field" data-es="Quitar último campo">−</button>
         </div>
       </div>
       <div class="inputs"></div>
-      <button type="button" class="accept-btn">Accept</button>
-      <button type="button" class="edit-btn" style="display:none;">Edit</button>
+      <button type="button" class="accept-btn" data-en="Accept" data-es="Aceptar">Accept</button>
+      <button type="button" class="edit-btn" style="display:none;" data-en="Edit" data-es="Editar">Edit</button>
     </div>
 
     <div class="form-section">
-      <h2>What are you interested about?</h2>
+      <h2 data-en="What are you interested about?" data-es="¿En qué estás interesado?">What are you interested about?</h2>
       <select id="jn-interest" required>
-        <option value="" disabled selected>Select an option</option>
-        <option>Business Operations</option>
-        <option>Contact Center</option>
-        <option>IT Support</option>
-        <option>Professionals</option>
+        <option value="" disabled selected data-en="Select an option" data-es="Selecciona una opción">Select an option</option>
+        <option data-en="Business Operations" data-es="Operaciones Empresariales">Business Operations</option>
+        <option data-en="Contact Center" data-es="Centro de Contacto">Contact Center</option>
+        <option data-en="IT Support" data-es="Soporte IT">IT Support</option>
+        <option data-en="Professionals" data-es="Profesionales">Professionals</option>
       </select>
     </div>
 
     <div class="form-section">
-      <h2>Continued Education</h2>
+      <h2 data-en="Continued Education" data-es="Educación Continua">Continued Education</h2>
       <div class="inputs"></div>
-      <button type="button" class="circle-btn add" title="Add field">+</button>
+      <button type="button" class="circle-btn add" title="Add field" data-en="Add field" data-es="Agregar campo">+</button>
     </div>
 
     <div class="form-section">
-      <h2>Experience</h2>
+      <h2 data-en="Experience" data-es="Experiencia">Experience</h2>
       <div class="inputs"></div>
-      <button type="button" class="circle-btn add" title="Add field">+</button>
+      <button type="button" class="circle-btn add" title="Add field" data-en="Add field" data-es="Agregar campo">+</button>
     </div>
 
     <div>
-      <label for="about">Tell us about yourself</label>
-      <textarea id="about" rows="4" placeholder="Tell us about yourself..."></textarea>
+      <label for="about" data-en="Tell us about yourself" data-es="Cuéntanos sobre ti">Tell us about yourself</label>
+      <textarea id="about" rows="4" placeholder="Tell us about yourself..." data-en="Tell us about yourself..." data-es="Cuéntanos sobre ti..."></textarea>
     </div>
 
     <div class="modal-footer">
-      <button type="submit" class="submit-btn">Submit</button>
+      <button type="submit" class="submit-btn" data-en="Submit" data-es="Enviar">Submit</button>
     </div>
   </form>
 
@@ -355,5 +355,6 @@
     });
   });
 </script>
+<script src="../js/langtoggle.js"></script>
 </body>
 </html>
