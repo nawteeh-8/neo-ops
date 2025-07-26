@@ -464,7 +464,7 @@
   <section class="hero-section" role="banner" aria-label="Scale your business with 24/7 expert support">
     <h1>Scale your business with<br>24/7 expert support</h1>
     <p>OPS provides managed services, IT solutions, and remote professionals to drive your growth.</p>
-    <button class="btn-consultation" type="button">BOOK A CONSULTATION</button>
+    <a class="btn-consultation" href="contact/call.html">BOOK A CONSULTATION</a>
   </section>
 
   <!-- CARDS GRID -->
@@ -815,12 +815,12 @@
       };
       makeDraggable(chatbotCont, c.querySelector("#chatbot-header"));
     }
-    document.getElementById('fab-chat').onclick = openChatbot;
-    document.getElementById('fab-join').onclick = openJoinModal;
-    document.getElementById('fab-contact').onclick = openContactModal;
-    document.getElementById('mobile-fab-chat').onclick = openChatbot;
-    document.getElementById('mobile-fab-join').onclick = openJoinModal;
-    document.getElementById('mobile-fab-contact').onclick = openContactModal;
+    document.getElementById('fab-chat').onclick = () => location.href = 'chatbot.html';
+    document.getElementById('fab-join').onclick = () => location.href = 'contact/join.html';
+    document.getElementById('fab-contact').onclick = () => location.href = 'contact/call.html';
+    document.getElementById('mobile-fab-chat').onclick = () => location.href = 'chatbot.html';
+    document.getElementById('mobile-fab-join').onclick = () => location.href = 'contact/join.html';
+    document.getElementById('mobile-fab-contact').onclick = () => location.href = 'contact/call.html';
     // Accordion Services
     document.getElementById('mobile-fab-services').onclick = function() {
       document.getElementById('mobile-panel-services').classList.toggle('active');
