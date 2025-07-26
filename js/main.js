@@ -436,6 +436,13 @@ function sanitize(text) {
   return div.innerHTML;
 }
 
+function sanitizeHTML(html) {
+  const t = document.createElement('template');
+  t.innerHTML = html;
+  t.content.querySelectorAll('script').forEach(el => el.remove());
+  return t.innerHTML;
+}
+
 // Modal handling
 document.addEventListener('click', e => {
   const btn = e.target.closest('[data-modal-target]');

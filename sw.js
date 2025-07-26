@@ -7,6 +7,7 @@ const PRECACHE_URLS = [
   '/manifest.json',
   '/css/global.css',
   '/css/adaptablescreens.css',
+  '/css/chatbot.css',
   '/js/main.js',
   '/js/langthem.js',
   '/services/business.html',
@@ -19,7 +20,8 @@ const PRECACHE_URLS = [
   '/modals/professionals.html',
   '/fabs/contact.html',
   '/fabs/join.html',
-  '/bot/chatbot.html'
+  '/bot/chatbot.html',
+  '/bot/chatbot-template.html'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(
