@@ -7,6 +7,7 @@ const PRECACHE_URLS = [
   '/manifest.json',
   '/css/global.css',
   '/css/adaptablescreens.css',
+  '/css/chatbot.css',
   '/js/main.js',
   '/js/langthem.js',
   '/services/business.html',

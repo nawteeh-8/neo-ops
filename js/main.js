@@ -242,6 +242,29 @@
     function openJoinModal() {
       window.location.href = 'fabs/join.html';
     }
+    function openChatbot(trigger){
+      let root = document.getElementById('modal-root');
+      root.innerHTML = '';
+      let m = document.createElement('div');
+      m.className = 'modal-backdrop';
+      m.innerHTML = `
+        <div class="chatbot-holder" role="dialog" aria-modal="true">
+          <button class="modal-x" aria-label="Close">&times;</button>
+          <iframe src="bot/chatbot.html" title="Chatbot" id="chatbot-frame"></iframe>
+        </div>`;
+      root.appendChild(m);
+      let dialog = m.querySelector('.chatbot-holder');
+      let frame = dialog.querySelector('iframe');
+      frame.onload = ()=>{
+        let doc = frame.contentDocument || frame.contentWindow.document;
+        let first = doc.querySelector('input,button,textarea,select');
+        if(first) first.focus();
+      };
+      function close(){ root.innerHTML=''; if(trigger) trigger.focus(); }
+      m.onclick = e=>{ if(e.target===m) close(); };
+      dialog.querySelector('.modal-x').onclick = close;
+      document.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ close(); document.removeEventListener('keydown', esc); }}, {once:true});
+    }
     // Accordion Services
     let mobileFabServices = document.getElementById('mobile-fab-services');
     let mobilePanelServices = document.getElementById('mobile-panel-services');
@@ -298,6 +321,16 @@
       mobileThemeToggle.onclick = ()=>{
         theme = toggleTheme();
       };
+    }
+
+    // Chatbot FABs
+    let fabChat = document.getElementById('fab-chat');
+    if(fabChat){
+      fabChat.onclick = e=>{ e.preventDefault(); openChatbot(fabChat); };
+    }
+    let mobileFabChat = document.getElementById('mobile-fab-chat');
+    if(mobileFabChat){
+      mobileFabChat.onclick = e=>{ e.preventDefault(); openChatbot(mobileFabChat); };
     }
 
     // --- MODALS: JOIN/CONTACT (Basic, Draggable) ---
@@ -401,6 +434,13 @@ function sanitize(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+function sanitizeHTML(html) {
+  const t = document.createElement('template');
+  t.innerHTML = html;
+  t.content.querySelectorAll('script').forEach(el => el.remove());
+  return t.innerHTML;
 }
 
 // Modal handling
