@@ -32,3 +32,15 @@ JavaScript global.
 With the endpoint configured, the chatbot will POST user messages to your
 serverless function and display the returned `reply` text.
 
+## Contact Forms
+
+Service pages contain contact forms handled by `js/form-handler.js`. By default,
+the script submits form data to `https://example.com/api/form`. Set a custom
+target by defining the `FORM_ENDPOINT` global at runtime:
+
+```html
+<script>window.FORM_ENDPOINT = 'https://your-backend.example.com/form';</script>
+```
+
+When present, all service forms will POST their data to this endpoint.
+
