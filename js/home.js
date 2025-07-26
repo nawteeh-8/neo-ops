@@ -41,46 +41,37 @@ const svc = {
         learn: "services/gestion.html"
       }
     }
-  },
-  cc: {
-    en: {
-      title: "CONTACT CENTER",
-      icon: '<i class="fa-thin fa-headset"></i>',
-      desc: "Enhance customer engagement with multilingual, multichannel support—24/7, data-driven, and empathetic.",
-      modal: {
-        title: "CONTACT CENTER",
-        img: "https://placehold.co/96x96?text=CC",
-        imgAlt: "Contact Center",
-        content: "Explore our comprehensive Contact Center solutions to elevate customer satisfaction and engagement at every touchpoint. We offer inbound/outbound calls, multichannel support (email, chat, social), and advanced analytics.",
-        video: "Video placeholder",
-        features: [
-          "24/7 inbound/outbound call management",
-          "Multilingual chat/email support",
-          "CRM integration (e.g., HubSpot, Salesforce)",
-          "Social media engagement & sentiment tracking",
-          "Customer experience analytics & quality monitoring"
-        ],
-        learn: "services/center.html"
+    document.getElementById('fab-chat').onclick = () => location.href = 'chatbot.html';
+    document.getElementById('fab-join').onclick = () => location.href = 'contact/join.html';
+    document.getElementById('fab-contact').onclick = () => location.href = 'contact/call.html';
+
+    document.getElementById('mobile-chatbot-btn').onclick = () => location.href = 'chatbot.html';
+    document.getElementById('mobile-home-btn').onclick = () => location.href = 'index.html';
+
+    const servicesToggleBtn = document.getElementById('services-toggle');
+    const servicesDropdown = document.getElementById('services-dropdown');
+    servicesToggleBtn.addEventListener('click', () => {
+      const expanded = servicesToggleBtn.getAttribute('aria-expanded') === 'true';
+      servicesToggleBtn.setAttribute('aria-expanded', !expanded);
+      servicesDropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+      if(!servicesToggleBtn.contains(e.target) && !servicesDropdown.contains(e.target)) {
+        servicesDropdown.classList.remove('active');
+        servicesToggleBtn.setAttribute('aria-expanded', false);
       }
-    },
-    es: {
-      title: "CENTRO DE CONTACTO",
-      icon: '<i class="fa-thin fa-headset"></i>',
-      desc: "Mejore la experiencia del cliente con soporte multicanal y multilingüe—24/7, datos y empatía.",
-      modal: {
-        title: "SOBRE EL CENTRO DE CONTACTO",
-        img: "https://placehold.co/96x96?text=CC",
-        imgAlt: "Centro de Contacto",
-        content: "Explore nuestras soluciones integrales de Centro de Contacto diseñadas para mejorar la satisfacción y el compromiso del cliente en todos los puntos de contacto. Ofrecemos servicios de llamadas entrantes y salientes, soporte multicanal (correo electrónico, chat, redes sociales) y análisis avanzados.",
-        video: "Video placeholder",
-        features: [
-          "Gestión de llamadas entrantes y salientes 24/7",
-          "Soporte por chat y correo electrónico en varios idiomas",
-          "Integración con plataformas CRM (por ejemplo, HubSpot, Salesforce)",
-          "Interacción en redes sociales y seguimiento de sentimiento",
-          "Análisis de experiencia del cliente y monitoreo de calidad"
-        ],
-        learn: "services/center.html"
+    });
+    // Language/Theme (propagate)
+    function setLang(l) {
+      lang = l;
+      renderCards();
+      const h1 = document.getElementById('hero-title');
+      const desc = document.getElementById('hero-desc');
+      const btn = document.getElementById('btn-consultation');
+      if(h1 && desc && btn){
+        h1.innerHTML = lang === 'en' ? h1.dataset.en : h1.dataset.es;
+        desc.textContent = lang === 'en' ? desc.dataset.en : desc.dataset.es;
+        btn.textContent = lang === 'en' ? btn.dataset.en : btn.dataset.es;
       }
     }
   },

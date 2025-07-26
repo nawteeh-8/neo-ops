@@ -274,7 +274,7 @@
     }
     .modal-x:focus, .close-modal:focus { outline: 2px solid var(--clr-accent); }
     /* --- FABs & Mobile --- */
-    .fab-stack, .mobile-accordion-nav {
+    .fab-stack {
       position: fixed;
       bottom: 15px;
       right: 15px;
@@ -284,7 +284,7 @@
       gap: 1.1rem;
       align-items: flex-end;
     }
-    .fab-btn, .mobile-accordion-btn {
+    .fab-btn {
       width: 58px; height: 58px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--clr-accent), var(--clr-primary));
@@ -297,7 +297,7 @@
       transition: background .19s, box-shadow .19s;
       outline: none;
     }
-    .fab-btn:hover, .mobile-accordion-btn:hover, .mobile-accordion-btn:focus {
+    .fab-btn:hover {
       background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
       box-shadow: 0 6px 28px #ff3bdc44;
     }
@@ -310,45 +310,89 @@
     }
     @media (max-width: 900px) {
       .fab-stack { display: none; }
-      .mobile-accordion-nav { display: block; }
     }
-    @media (min-width: 901px) {
-      .mobile-accordion-nav { display: none; }
-    }
-    .accordion-panel {
+
+    .mobile-bottom-nav {
       display: none;
-      flex-direction: column;
-      gap: 0.65rem;
-      background: rgba(245, 246, 255, 0.97);
-      border-radius: 1.3rem;
-      box-shadow: 0 2px 18px #22124730;
-      margin-bottom: 0.65rem;
-      padding: 0.85rem 0.7rem;
-      min-width: 200px;
-      position: absolute;
-      right: 70px;
-      bottom: 0;
-    }
-    .accordion-panel.active {
+      position: fixed;
+      bottom: 50px;
+      left: 0;
+      width: 100%;
+      background: var(--clr-footer);
+      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-weight: 600;
       display: flex;
-      animation: fadein .22s;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0.4rem 0;
+      gap: 0.5rem;
+      z-index: 120;
+      border-radius: 14px 14px 0 0;
+      box-sizing: border-box;
     }
-    @keyframes fadein { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: none; } }
-    .accordion-panel a, .accordion-panel button {
-      color: #321b53;
+
+    @media (max-width: 900px) {
+      .mobile-bottom-nav { display: flex; }
+    }
+
+    .mobile-bottom-nav button,
+    .mobile-bottom-nav .nav-item {
       background: none;
       border: none;
-      font-size: 1rem;
-      text-align: left;
+      color: #fff;
       cursor: pointer;
-      font-family: inherit;
-      padding: 0.38em 0.6em;
-      border-radius: 6px;
-      transition: background 0.16s;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
+      position: relative;
     }
-    .accordion-panel a:hover, .accordion-panel button:hover {
-      background: #e9e9ff;
-      color: var(--clr-accent);
+
+    .mobile-bottom-nav button:hover,
+    .mobile-bottom-nav .nav-item:hover {
+      background: var(--clr-primary);
+    }
+
+    .services-dropdown {
+      position: absolute;
+      bottom: 40px;
+      background: var(--clr-footer);
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-weight: 400;
+      font-size: 0.85rem;
+      min-width: 180px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 130;
+    }
+
+    .services-dropdown a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.3rem 0.5rem;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .services-dropdown a:hover {
+      background: var(--clr-primary);
+    }
+
+    .services-dropdown.active { display: flex; }
+
+    .hamburger-icon {
+      font-size: 1.3rem;
+      user-select: none;
+      line-height: 1;
     }
     /* --- CHATBOT (floating modal, draggable) --- */
     #chatbot-modal-backdrop {
@@ -484,22 +528,27 @@
     <button class="fab-btn" id="fab-chat" title="Chatbot"><i class="fa-thin fa-comment-alt"></i></button>
   </div>
 
-  <!-- MOBILE ACCORDION NAV -->
-  <div class="mobile-accordion-nav">
-    <button class="mobile-accordion-btn" id="mobile-fab-join" title="Join Us"><i class="fa-thin fa-user-plus"></i></button>
-    <button class="mobile-accordion-btn" id="mobile-fab-contact" title="Contact Us"><i class="fa-thin fa-envelope"></i></button>
-    <button class="mobile-accordion-btn" id="mobile-fab-chat" title="Chatbot"><i class="fa-thin fa-comment-alt"></i></button>
-    <button class="mobile-accordion-btn" id="mobile-fab-services" title="Services"><i class="fa-thin fa-cogs"></i></button>
-    <div class="accordion-panel" id="mobile-panel-services">
-      <a href="#">Business Operations</a>
-      <a href="#">Contact Center</a>
-      <a href="#">IT Support</a>
-      <a href="#">Professionals</a>
-      <button id="mobile-fab-home" style="margin-top:0.8em;"><i class="fa-thin fa-home"></i> Home</button>
-      <button id="mobile-lang-toggle" style="margin-top:0.8em;">ES</button>
-      <button id="mobile-theme-toggle">Dark</button>
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <button id="mobile-home-btn" class="nav-item" title="Home" aria-label="Home" type="button">
+      <i class="fa-thin fa-house"></i> Home
+    </button>
+    <button id="mobile-lang-toggle" class="nav-item" aria-label="Toggle Language" type="button">ES</button>
+    <button id="mobile-theme-toggle" class="nav-item" aria-label="Toggle Theme" type="button">Dark</button>
+    <button id="services-toggle" class="nav-item" aria-haspopup="true" aria-expanded="false" aria-controls="services-dropdown" aria-label="Toggle Services Menu" type="button">
+      <span class="hamburger-icon">&#9776;</span> Services
+    </button>
+    <button id="mobile-chatbot-btn" class="nav-item" aria-label="Chatbot" type="button">
+      <i class="fa-thin fa-comment-alt"></i> Chat
+    </button>
+
+    <div id="services-dropdown" class="services-dropdown" role="menu" aria-label="Services Menu">
+      <a href="services/center.html" role="menuitem">Business Operations</a>
+      <a href="services/gestion.html" role="menuitem">Contact Center</a>
+      <a href="services/it.html" role="menuitem">IT Support</a>
+      <a href="services/pros.html" role="menuitem">Professionals</a>
     </div>
-  </div>
+  </nav>
 
   <div id="modal-root"></div>
 
