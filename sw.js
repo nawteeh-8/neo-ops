@@ -1,5 +1,5 @@
 // Service worker with pre-caching and cache versioning
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const CACHE_NAME = `ops-cache-${CACHE_VERSION}`;
 const PRECACHE_URLS = [
   '/',
@@ -20,8 +20,8 @@ const PRECACHE_URLS = [
   '/modals/professionals.html',
   '/fabs/contact.html',
   '/fabs/join.html',
-  '/bot/chatbot.html',
-  '/bot/chatbot-template.html'
+  '/bot/chatbot-template.html',
+  '/css/chatbot.css'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(
