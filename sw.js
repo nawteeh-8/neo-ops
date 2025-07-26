@@ -20,7 +20,8 @@ const PRECACHE_URLS = [
   '/modals/professionals.html',
   '/fabs/contact.html',
   '/fabs/join.html',
-  '/bot/chatbot.html'
+  '/bot/chatbot.html',
+  '/bot/chatbot-template.html'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(

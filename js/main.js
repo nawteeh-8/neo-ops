@@ -242,32 +242,18 @@
     function openJoinModal() {
       window.location.href = 'fabs/join.html';
     }
+
+    // --- Chatbot Popup ---
     async function openChatbot() {
-      const root = document.getElementById('modal-root') ||
-                    document.getElementById('chatbot-root') ||
-                    (()=>{const r=document.createElement('div');r.id='chatbot-root';document.body.appendChild(r);return r;})();
-      root.innerHTML='';
-      try{
-        const res = await fetch('bot/chatbot.html');
-        if(!res.ok) throw new Error('load fail');
+      try {
+        const res = await fetch('bot/chatbot-template.html');
+        if (!res.ok) throw new Error('Chatbot not found');
         const html = await res.text();
-        const doc  = new DOMParser().parseFromString(html,'text/html');
-        const style = doc.querySelector('style');
-        const bot   = doc.querySelector('#chatbot-container');
-        const script= doc.querySelector('script');
-        if(!bot) throw new Error('bot markup missing');
-        const ctrl = bot.querySelector('#chatbot-header div');
-        if(ctrl) ctrl.insertAdjacentHTML('beforeend',' &nbsp;|&nbsp;<span id="chatbot-close" class="ctrl" aria-label="Close">&times;</span>');
-        const wrap = document.createElement('div');
-        wrap.id = 'chatbot-wrapper';
-        Object.assign(wrap.style,{position:'fixed',top:'50%',left:'50%',transform:'translate(-50%,-50%)',zIndex:1000});
-        if(style) wrap.appendChild(style.cloneNode(true));
-        wrap.appendChild(bot);
-        if(script) wrap.appendChild(script.cloneNode(true));
-        root.appendChild(wrap);
-        makeDraggable(wrap, wrap.querySelector('#chatbot-header'));
-        wrap.querySelector('#chatbot-close').onclick = () => {root.innerHTML='';};
-      }catch(err){console.error('Chatbot load error:',err);}
+        const container = document.getElementById('chatbot-root');
+        if (container) container.innerHTML = sanitizeHTML(html);
+      } catch (err) {
+        console.error('Chatbot load error:', err);
+      }
     }
     // Accordion Services
     let mobileFabServices = document.getElementById('mobile-fab-services');
@@ -428,6 +414,13 @@ function sanitize(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}
+
+function sanitizeHTML(html) {
+  const t = document.createElement('template');
+  t.innerHTML = html;
+  t.content.querySelectorAll('script').forEach(el => el.remove());
+  return t.innerHTML;
 }
 
 // Modal handling
