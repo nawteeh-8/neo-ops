@@ -17,7 +17,9 @@
         el.textContent = text || '';
       }
     });
-    document.title = lang === 'en' ? document.title = document.querySelector('title').getAttribute('data-en') : document.querySelector('title').getAttribute('data-es');
+    document.title = lang === 'en'
+      ? document.querySelector('title').dataset.en
+      : document.querySelector('title').dataset.es;
   }
 
   function setLang(l){
