@@ -296,6 +296,24 @@ body {
       pointer-events: none;
       letter-spacing: 0.04em;
     }
+
+    /* --- Chatbot Modal --- */
+    .chatbot-holder {
+      position: relative;
+    }
+    .chatbot-holder iframe {
+      width: 300px;
+      height: 540px;
+      border: none;
+      border-radius: 18px;
+      display: block;
+    }
+    @media(max-width:480px){
+      .chatbot-holder iframe{
+        width:90vw;
+        height:75vh;
+      }
+    }
     /* --- Centered footer --- */
     footer {
       width: 100%;
