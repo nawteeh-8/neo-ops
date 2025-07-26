@@ -2,9 +2,6 @@
   'use strict';
   window.translations = {
   "en": {
-    "chatbot-1": "OPS AI Chatbot",
-    "chatbot-ph-2": "Type your message...",
-    "chatbot-3": "I am human",
     "contact-1": "Contact Us - OPS • Chattia",
     "contact-2": "Contact Us",
     "contact-3": "Home",
@@ -151,9 +148,6 @@
     "professionals-21": "Book Session"
   },
   "es": {
-    "chatbot-1": "Chatbot OPS AI",
-    "chatbot-ph-2": "Escriba su mensaje...",
-    "chatbot-3": "Soy humano",
     "contact-1": "Contáctanos - OPS • Chattia",
     "contact-2": "Contáctanos",
     "contact-3": "Inicio",
