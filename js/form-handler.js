@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const ENDPOINT = window.FORM_ENDPOINT || 'https://example.com/api/form';
   const forms = document.querySelectorAll('.service-form');
 
   forms.forEach(form => {
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       try {
-        const res = await fetch('https://example.com/api/form', {
+        const res = await fetch(ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
