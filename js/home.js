@@ -310,18 +310,23 @@
     document.getElementById('fab-chat').onclick = () => location.href = 'chatbot.html';
     document.getElementById('fab-join').onclick = () => location.href = 'contact/join.html';
     document.getElementById('fab-contact').onclick = () => location.href = 'contact/call.html';
-    document.getElementById('mobile-fab-chat').onclick = () => location.href = 'chatbot.html';
-    document.getElementById('mobile-fab-join').onclick = () => location.href = 'contact/join.html';
-    document.getElementById('mobile-fab-contact').onclick = () => location.href = 'contact/call.html';
-    // Accordion Services
-    document.getElementById('mobile-fab-services').onclick = function() {
-      document.getElementById('mobile-panel-services').classList.toggle('active');
-    };
-    document.body.addEventListener('click', function(e) {
-      if (!e.target.closest('.mobile-accordion-btn') && !e.target.closest('.accordion-panel')) {
-        document.getElementById('mobile-panel-services').classList.remove('active');
+
+    document.getElementById('mobile-chatbot-btn').onclick = () => location.href = 'chatbot.html';
+    document.getElementById('mobile-home-btn').onclick = () => location.href = 'index.html';
+
+    const servicesToggleBtn = document.getElementById('services-toggle');
+    const servicesDropdown = document.getElementById('services-dropdown');
+    servicesToggleBtn.addEventListener('click', () => {
+      const expanded = servicesToggleBtn.getAttribute('aria-expanded') === 'true';
+      servicesToggleBtn.setAttribute('aria-expanded', !expanded);
+      servicesDropdown.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+      if(!servicesToggleBtn.contains(e.target) && !servicesDropdown.contains(e.target)) {
+        servicesDropdown.classList.remove('active');
+        servicesToggleBtn.setAttribute('aria-expanded', false);
       }
-    }, true);
+    });
     // Language/Theme (propagate)
     function setLang(l) {
       lang = l;
