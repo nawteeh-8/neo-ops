@@ -9,7 +9,14 @@
       if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA'){
         el.placeholder = text || '';
       } else {
-        el.textContent = text || '';
+        const strong = el.querySelector('strong');
+        if(strong){
+          strong.remove();
+          el.textContent = (text || '') + ' ';
+          el.appendChild(strong);
+        } else {
+          el.textContent = text || '';
+        }
       }
     });
     const titleEl = document.querySelector('title');
